@@ -10,7 +10,7 @@ app.config.from_object(__name__)
 
 db = SQLAlchemy(app)
 
-class login(db.Model):
+class Login(db.Model):
     __tablename__ = 'login'
     username = db.Column(db.String(100),primary_key=True)
     password = db.Column(db.String(100))

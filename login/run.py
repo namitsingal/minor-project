@@ -4,7 +4,7 @@ from jinja2 import Template,Environment,FileSystemLoader
 
 sys.path.append('../')
 
-from login import app,login
+from login import app,Login
 app.debug = True;
 #app.run(port=8080)
 
@@ -22,11 +22,14 @@ def login():
     error = None
     uname=request.form['username']
     password=request.form['password']
-
-    k=login.query.filter_by(username=uname).first()
     
-    if(k=='admin'):
-        return 'successfull login' 
+    k=Login.query.filter_by(username=uname).first()
+    
+    if(k):
+        if(k.username==uname and k.password==password):
+	    return 'successfull login' 
+	else:
+	    return 'wrong password'
     else: 
-	return 'unsuccessfull'
+	return 'username does not exist'
 app.run(port=8080)
