@@ -1,0 +1,11 @@
+import sys
+
+sys.path.append('../')
+
+from login import app
+app.debug = True;
+#app.run(port=8080)
+@app.route('/')
+def index():
+    return 'hello world'
+app.run(port=8080)
