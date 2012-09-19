@@ -11,11 +11,13 @@ app.config.from_object(__name__)
 db = SQLAlchemy(app)
 
 class Login(db.Model):
-    __tablename__ = 'login'
-    username = db.Column(db.String(100),primary_key=True)
+    __tablename__ = 'user_info'
+    username = db.Column(db.String(100),unique=True)
     password = db.Column(db.String(100))
-
-    def __init__(self, name, password):
+    email = db.Column(db.String(100),unique=True)
+    id = db.Column(db.Integer(20),primary_key=True)
+    def __init__(self, name, password,email):
         self.username = name
         self.password = password
+	self.email=email
 
