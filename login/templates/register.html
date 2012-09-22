@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>login</title>
+<script type='text/javascript'>
+function check()
+{	alert(document.forms['register']['password'].value);
+	if(document.register.username==null || document.register.username=='')
+	{	alert('Please fill in a username');
+		return false;
+	}
+	if(document.register.password.value!=document.register.cpassword.value)
+	{	alert('both passwords dont match');
+		return false;
+	}
+	return true;
+	
+}
+</script>
+</head>
+<body>
+<h1>Register Here</h1>
+<form action="register" method="POST" name="register">
+username: <input type="text" name="username" ></input>
+<br />
+password: <input type="password" name="password" ></input>
+<br />
+Confirm Password:<input type="password" name="cpassword" ></input>
+<br />
+email id: <input type="text" name="password" ></input>
+<br />
+<input type="submit" name="submit" onclick='return check()'  />
+</form>
+</body>
+</html>
+

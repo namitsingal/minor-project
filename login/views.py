@@ -40,5 +40,12 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('index1'))
 
+@app.route('/register')
+def register():
+	template = env.get_template('register.html')
+        rendered=template.render()
+        return rendered
+
+
 app.secret_key='\xe6m\x897\xeec \x88\x9e\xc8\xdd\x99\xd2\xec\xf0\x0f\x88&\x00\x00psb\x10'
 
