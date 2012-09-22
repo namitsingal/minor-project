@@ -46,8 +46,8 @@ def register():
         rendered=template.render()
         return rendered
 
-@app.route('/register',methods=['POST','GET',''])
-def register():
+@app.route('/register',methods=['POST'])
+def register1():
 	uname=request.form['username']
         password=request.form['passwords']
 	email=request.form['email']
