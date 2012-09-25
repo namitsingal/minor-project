@@ -48,5 +48,14 @@ io.sockets.on('connection', function (socket) {
                 socket.broadcast.emit('updatechat', 'SERVER', username + ' has connected');
                 // update the list of users in chat, all clients(IO)
                io.sockets.emit('updateusers', usernames);
+	socket.on('disconnect', function(){
+                // remove the username from global usernames list
+                delete usernames[socket.username];
+                // update list of users in chat, client-side
+                io.sockets.emit('updateusers', usernames);
+                // echo globally that this client has left
+                socket.broadcast.emit('updatechat', 'SERVER', socket.username + ' has disconnected');
+        });
+
         });
 });
