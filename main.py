@@ -1,10 +1,12 @@
 from flask import Flask
-app = Flask(__name__)
+from werkzeug.serving import run_simple
 
-@app.route('/')
-def index():
-    return 'Welcome to Geonres'
+from werkzeug.wsgi import DispatcherMiddleware
 
-if __name__ == '__main__':
-    app.run()
+from geonres import app as geonres_app
+from api import app as api_app
 
+app = DispatcherMiddleware(geonres_app, {
+    '/api': api_app
+})
+run_simple('localhost', 8080, app, use_reloader=True, use_debugger=True)
