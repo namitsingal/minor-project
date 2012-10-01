@@ -3,7 +3,7 @@ import json
 def encode_xml(obj):
 	'''Encode a dict object to an xml string'''
 	string = ''
-	if type(obj) == str or type(obj) == unicode:
+	if type(obj) != dict and type(obj) != list:
 		return obj
 	if type(obj) == list:
 		for element in obj:

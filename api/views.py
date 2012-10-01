@@ -6,7 +6,6 @@ from flask import request
 import requests
 
 from api import app, api_response
-from api.helpers import encode_xml, encode_json
 from geonres import Artist
 
 PAGE_LENGTH = 5
@@ -48,13 +47,11 @@ def get_videos(artist, page):
     for track in track_items:
         track_title = track.find('name').string
         yt_url = 'https://gdata.youtube.com/feeds/api/videos?'
-        yt_url += 'q=' + artist + ' ' + track_title
+        yt_url += 'q=' + artist + '+' + track_title
         yt_url += '&v=2&max-results=1'
-
         r = requests.get(yt_url)
-        #return r.text
         soup = BeautifulSoup(r.text)
-        entry = soup.find_all('entry')[0]
+        entry = soup.find('entry')
         vid_id = entry.find('id').string.split(':')[-1]
         vid_thumb = entry.find('media:thumbnail')['url']
         vid_result = {'id': vid_id, 'thumb_url': vid_thumb,
