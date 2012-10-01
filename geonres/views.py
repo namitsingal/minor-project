@@ -2,7 +2,7 @@ from jinja2 import Template, Environment, FileSystemLoader
 
 from geonres import app
 
-env = Environment(loader=FileSystemLoader('templates'))
+env = Environment(loader=FileSystemLoader('geonres/templates'))
 
 @app.route('/')
 def index():
