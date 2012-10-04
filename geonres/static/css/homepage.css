@@ -1,0 +1,82 @@
+html, body {
+	min-height: 100%;
+	height: 100%;
+}
+
+#container {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#container > div {
+	padding: 0 220px 0 220px;
+}
+#branding {
+	float: left;
+	width: 50%;
+	height: 100%;
+	position: relative;
+}
+
+#homepage-actions {
+	width: 50%;
+	height: 100%;
+	float: right;
+	position: relative;
+}
+
+#homepage-actions .items {
+	position: absolute;
+	top: 30%;
+}
+
+#homepage-actions .items div {
+	margin-bottom: 25px;
+}
+
+#homepage-actions .items div p {
+	color: #ccc;
+	font-size: 18px;
+}
+
+a.homepage-button {
+	display: block;
+	background-image: -webkit-linear-gradient(top, #FF9900, #FF6600);
+	background-image: -moz-linear-gradient(top, #FF9900, #FF6600);
+	background-image: -o-linear-gradient(top, #FF9900, #FF6600);
+	background-image: -ms-linear-gradient(top, #FF9900, #FF6600);
+	vertical-align: middle;
+	padding: 13px 0 13px 0;
+	width: 250px;
+	text-align: center;	
+	margin-bottom: 5px;
+	font-size: 20px;
+	color: #444;
+
+}
+
+a.homepage-button:hover {
+	background-image: -webkit-linear-gradient(top, #FFAD33, #FF8533);
+	background-image: -moz-linear-gradient(top, #FFAD33, #FF8533);
+	background-image: -o-linear-gradient(top, #FFAD33, #FF8533);
+	background-image: -ms-linear-gradient(top, #FFAD33, #FF8533);
+	background-color: #CC9900;
+}
+
+#main {
+	padding-left: 0px;
+	padding-right: 0 !important;
+	height: 70%;
+}
+
+#logo {
+	margin: 0 0 0 0;
+	position: absolute;
+	top: 40%;
+	right: 30%;
+}
+
+.logo {
+	font-size: 72pt;
+}
