@@ -25,6 +25,13 @@
 
 <body>
 	<input type="hidden" value="{{ STATIC }}" id="static-url"/>
+  <div id="overlay" class="dialogue"></div>
+  <div id="login-box" class="dialogue">
+    <p>Email<br><input type="text" size="30" id="login-email"/></p>
+    <p>Password<br><input type="password" size="30" id="login-passwd"/></p>
+    <p><a href="#" class="btn-login homepage-button">Login</a></p>
+  </div>
+  </div>
   <div id="container">
     <div id="main" class="dark" role="main">
       <div id="branding">
@@ -38,7 +45,7 @@
           </div>
           <div>
             <p>Or, for an amazing music discovery experience</p>
-            <a href="#" class="homepage-button">Login</a>
+            <a href="#" id="btn-homepage-login" class="homepage-button">Login</a>
           </div>
         </div>
       </div>
@@ -54,16 +61,14 @@
 </div> <!--! end of #container -->
 
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="{{ STATIC }}js/libs/jquery-1.6.2.min.js"><\/script>')</script>
-<script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'e6d0924c-7d55-477a-9716-764d75bcdc0d'});</script>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&language=en"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="{{ STATIC }}js/libs/jquery-1.8.2.min.js"><\/script>')</script>
 	<script src="http://www.google.com/jsapi"></script> 
-	<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
   <!-- scripts concatenated and minified via ant build script-->
 	
 	<script defer src="{{ STATIC }}js/plugins.js"></script>
-	<script defer src="{{ STATIC }}js/script.js"></script>
+  <script src="{{ STATIC }}js/home.js"></script>
+
   <!-- end scripts-->
 
 
