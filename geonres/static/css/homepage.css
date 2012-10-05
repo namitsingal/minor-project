@@ -17,6 +17,7 @@ html, body {
 	width: 50%;
 	height: 100%;
 	position: relative;
+
 }
 
 #homepage-actions {
@@ -40,12 +41,15 @@ html, body {
 	font-size: 18px;
 }
 
-a.homepage-button {
+.homepage-button, a.homepage-button {
 	display: block;
 	background-image: -webkit-linear-gradient(top, #FF9900, #FF6600);
 	background-image: -moz-linear-gradient(top, #FF9900, #FF6600);
 	background-image: -o-linear-gradient(top, #FF9900, #FF6600);
 	background-image: -ms-linear-gradient(top, #FF9900, #FF6600);
+	border-radius: 3px;
+	box-shadow: 0 2px 4px #222;
+	border: 1px solid #222;
 	vertical-align: middle;
 	padding: 13px 0 13px 0;
 	width: 250px;
@@ -53,10 +57,9 @@ a.homepage-button {
 	margin-bottom: 5px;
 	font-size: 20px;
 	color: #444;
-
 }
 
-a.homepage-button:hover {
+.homepage-button:hover {
 	background-image: -webkit-linear-gradient(top, #FFAD33, #FF8533);
 	background-image: -moz-linear-gradient(top, #FFAD33, #FF8533);
 	background-image: -o-linear-gradient(top, #FFAD33, #FF8533);
@@ -68,6 +71,7 @@ a.homepage-button:hover {
 	padding-left: 0px;
 	padding-right: 0 !important;
 	height: 70%;
+	background-color: rgba(20%, 20%, 20%, 0.8);
 }
 
 #logo {
@@ -100,7 +104,7 @@ div.dialogue {
 	height: 200px;
 	top: 30%;
 	left: 35%;
-	padding: 10px 40px 0 40px;
+	padding: 10px 40px 20px 40px;
 	background-color: white;
 	border-radius: 2px;
 	z-index: 101;
@@ -113,8 +117,24 @@ div.dialogue {
 	font-size: 14px;
 }
 
-#login-box a.btn-login {
+#login-box #btn-login {
 	width: 100px;
+	border: 1px solid #999;
+	box-shadow: none;
 	font-size: 14px;
 	margin: auto;
+}
+
+#login-box .spinner {
+	display: none;
+	margin: auto;
+	height: 24px;
+}
+
+#image-background {
+	position: absolute;
+	z-index: -4;
+	overflow: hidden;
+	height: 70%;
+	width: 100%;
 }

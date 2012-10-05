@@ -4,7 +4,7 @@ from jinja2 import Template, Environment, FileSystemLoader
 from users import app
 from users.models import *
 
-env = Environment(loader=FileSystemLoader('templates'))
+env = Environment(loader=FileSystemLoader('users/templates'))
 
 @app.route('/login')
 def index():
@@ -21,18 +21,18 @@ def status():
         return 'Logged in as %s' % escape(session['username'])
     return 'You are not logged in'
 
-@app.route('/login',methods=['POST','GET'])
+@app.route('/login', methods=['POST'])
 def login():
         error = None
         uname = request.form['username']
         password = request.form['password']
         k = User.query.filter_by(username=uname).first()
         if k:
-            if k.check_password == True:
+            if k.check_password(password) == True:
     	        session['username'] = uname
     	        return 'successfull login' 
             else:
-    	        return redirect('/login');
+    	        return 'bad password'
         else: 
 	    return 'Username does not exist'
 
