@@ -28,7 +28,7 @@ def login():
         password = request.form['password']
         k = User.query.filter_by(username=uname).first()
         if k:
-            if k.check_password == True:
+            if k.check_password(password) == True:
     	        session['username'] = uname
     	        return 'successfull login' 
             else:
