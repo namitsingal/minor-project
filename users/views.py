@@ -25,6 +25,7 @@ def status():
 
 @app.route('/login', methods=['POST'])
 def login():
+<<<<<<< HEAD
     error = None
     uname = request.form['username']
     password = request.form['password']
