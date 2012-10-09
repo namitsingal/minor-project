@@ -5,4 +5,4 @@ sys.path.append('../')
 from geonres import app
 
 app.debug = True;
-app.run(port=8080)
+app.run(port=8000)

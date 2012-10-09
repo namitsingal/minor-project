@@ -19,15 +19,21 @@ $(document).ready(function() {
 
 	$('#btn-login').click(function() {
 		$('#login-spinner').css({display: 'block'});
+		$('#login-status').html('');
 		var uname = $('#login-email').val();
 		var passwd = $('#login-passwd').val();
 		$.ajax({
-			url: '/users/login',
+			url: '/users/login?ajax=1',
 			type: 'POST',
 			data: {username: uname, password: passwd},
 			success: function(data) {
 				$('#login-spinner').css({display: 'none'});
-				console.log(data);
+				if(data['status'] === 'success') {
+					window.location.href = '/';
+				}
+				else {
+					$('#login-status').html('<span class="login-error">' + data['message'] + '</span>');
+				}
 			}
 		});
 	});

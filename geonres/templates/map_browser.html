@@ -1,0 +1,40 @@
+ <div id="main" role="main">
+		<div id="view-container">
+			<div class="tab" id="map">
+				<div class="tab-head" id="map-tab-head">
+					<p class="tab-head-label">World Map</p><a id="watch-video" href="#" title="Switch to Video Player" class="icon icon69 switch-button"><span>Label</span></a>
+				</div>
+				<div id="maps">
+				</div>
+			</div>
+			<div class="tab" id="player">
+				<div class="tab-head" id="player-tab-head">
+					<p class="tab-head-label" id="player-tab-head-label">Video Player</p><a id="browse-map" title="Switch to World Map" href="#" class="icon icon6 switch-button"><span>Label</span></a>
+				</div>
+				<div id="ytapiplayer">
+				</div>
+			</div>
+		</div>
+
+		
+		<div id="videos"><p class="open-label" id="state">Click on the map for a music travel!</p><div id="videolist"><p class="info">select an artist</p><img src="{{ STATIC }}img/spinner.gif" class="spinner-icon spinner-icon-hidden"/></div>
+		{% if geobrowse %}
+		<div id="sharebox"><span class="info">Share this among your friends </span><br/><span  class='st_sharethis_hcount' displayText='ShareThis'></span><span  class='st_twitter_hcount' displayText='Tweet'></span><span  class='st_fblike_hcount' ></span><span  class='st_plusone_hcount' ></span></div>
+		</div>
+		{% endif %}
+		
+		<div id="artist-container">
+			<div id="artist-tabs-container">
+				<div class="tab" id="top-artists">
+					<div class="tab-head" id="top-artists-tab-head">
+						<p class="tab-head-label" id="top-artists-title">Top Artists</p>
+					</div>
+					<div class="artist-tab" id="top-artists-container"><!--TODO-->
+						<p class="info">select a location</p>
+						<img src="{{ STATIC }}img/spinner.gif" class="spinner-icon spinner-icon-hidden"/>
+					</div>
+				</div>
+			</div>
+			<!--<div id="artist-mode-container">Show Random</div>-->
+		</div>
+	</div>

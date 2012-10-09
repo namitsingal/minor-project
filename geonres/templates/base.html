@@ -14,47 +14,27 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
 	<link href='http://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="{{ STATIC }}buttons/styles.css">
+	<link rel="stylesheet" href="{{ STATIC }}geonres/buttons/styles.css">
   <!-- CSS concatenated and minified via ant build script-->
-	<link rel="stylesheet" href="{{ STATIC }}css/style.css">
+	<link rel="stylesheet" href="{{ STATIC }}geonres/css/style.css">
+  <link rel="stylesheet" href="{{ STATIC }}geonres/css/main.css">
   <!-- end CSS-->
-
-	<script src="{{ STATIC }}js/libs/modernizr-2.0.6.min.js"></script>
-</head>
-
-<body>
-	<input type="hidden" value="{{ STATIC }}" id="static-url"/>
-    <header>
-<div id="logo"><span class="logo normal">Ge</span><span class="logo" id="o">o</span><span class="logo normal">nres</span></div>
-    </header>
-    
-    {% block content %}
-    {% endblock %}
-
-  <div id="powered-by-container">
-    <p class="open-label">Powered by cool services that you might have heard before. That is,</p>
-    <p class="open-label"><a href="http://last.fm">Last.fm</a> + <a href="http://youtube.com">YouTube</a> + <a href="http://maps.google.com">Google Maps</a> + <a href="http://developer.yahoo.com/geo/placemaker/">Yahoo Placemaker</a> = Geonres</p>
-    
-    
-  </div>
-    <footer>
-    <p id="creator">Created By <b><a id="myname" href="http://www.ashishdubey.info">Ashish Dubey</a></b></p>
-    </footer>
-  </div> <!--! end of #container -->
-
-
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="{{ STATIC }}js/libs/jquery-1.6.2.min.js"><\/script>')</script>
-<script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'e6d0924c-7d55-477a-9716-764d75bcdc0d'});</script>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&language=en"></script>
+  <script>window.jQuery || document.write('<script src="{{ STATIC }}geonres/js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+  <script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'e6d0924c-7d55-477a-9716-764d75bcdc0d'});</script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&language=en"></script>
   <script src="http://www.google.com/jsapi"></script> 
   <script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
   <!-- scripts concatenated and minified via ant build script-->
   
-  <script defer src="{{ STATIC }}js/plugins.js"></script>
-  <script defer src="{{ STATIC }}js/script.js"></script>
+  <script defer src="{{ STATIC }}geonres/js/plugins.js"></script>
+  <script defer src="{{ STATIC }}geonres/js/script.js"></script>
   <!-- end scripts-->
 
+  {% block includes %}
+  {% endblock %}
+
+  <script src="{{ STATIC }}geonres/js/libs/modernizr-2.0.6.min.js"></script>
 
   <script> // Change UA-XXXXX-X to be your site's ID
     window._gaq = [['_setAccount','UA-24206813-2'],['_trackPageview'],['_trackPageLoadTime']];
@@ -68,6 +48,24 @@
     <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
     <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
   <![endif]-->
-  
+</head>
+
+<body>
+	<input type="hidden" value="{{ STATIC }}geonres/" id="static-url"/>
+    <header>
+      <div id="logo"><span class="logo normal">Ge</span><span class="logo" id="o">o</span><span class="logo normal">nres</span></div>
+      {% if user %}
+      <div id="user-panel">
+        Logged in as {{ user.username }}
+      </div>
+      {% endif %}
+    </header>
+    <div id="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+    <footer>
+    </footer>
+  </div> <!--! end of #container -->
 </body>
 </html>

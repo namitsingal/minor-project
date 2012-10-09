@@ -1,1 +1,21 @@
 {% extends "base.html" %}
+
+{% block includes %}
+<link rel="stylesheet" href="{{ STATIC }}geonres/css/user_home.css">
+<script src="{{ STATIC }}geonres/js/user_home.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="tab-options">
+	<ul>
+		<li><a href="#" id="activity" class="tab-link pressed">Activity</a></li>
+		<li><a href="#" id="browse" class="tab-link">Browse</a></li>
+	</ul>
+	<div id="tab-browse" class="tab-container">
+		<div id="country-select-container">
+			<input type="text" size="30" class="lookup inactive" id="country-lookup" value="[Enter the country]"/>
+			<div id="country-suggestions"></div>
+		</div>
+	</div>
+</div>
+{% endblock %}

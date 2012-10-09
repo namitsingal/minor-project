@@ -91,7 +91,7 @@ div.dialogue {
 	z-index: 100;
 }
 
-#overlay {	
+#overlay {
 	left: 0;
 	top: 0;
 	height: 100%;
@@ -137,4 +137,12 @@ div.dialogue {
 	overflow: hidden;
 	height: 70%;
 	width: 100%;
+}
+
+.login-error {
+	border: 1px solid #F66;
+	background-color: rgba(100%, 20%, 20%, 0.1);
+	padding: 5px;
+	display: block;
+	text-align: center;
 }

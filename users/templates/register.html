@@ -1,6 +1,7 @@
-<html>
-<head>
-<title>login</title>
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="{{ STATIC }}users/css/registration.css">
 <script type='text/javascript'>
 function check()
 {	//alert(document.forms["registers"]["username"].value);
@@ -16,20 +17,14 @@ function check()
 	
 }
 </script>
-</head>
-<body>
+
 <h1>Register Here</h1>
-<form action="register" method="POST" name="registers">
-username: <input type="text" name="username" ></input>
-<br />
-password: <input type="password" name="passwords" ></input>
-<br />
-Confirm Password:<input type="password" name="cpassword" ></input>
-<br />
-email id: <input type="text" name="email" ></input>
-<br />
-<input type="submit" name="submit" onclick='return check()'  />
+<form class="registration-form" action="register" method="POST" name="registers">
+	<p>username: <input class="input" type="text" name="username"/></input></p>
+	<p>password: <input class="input" type="password" name="passwords"/></input></p>
+	<p>Confirm Password:<input class="input" type="password" name="cpassword"/></input></p>
+	<p>email id: <input type="text" class="input" name="email"/></input></p>
+	<p><input type="submit" class="button" name="submit" onclick='return check()' /></p>
 </form>
-</body>
-</html>
+{% endblock %}
 

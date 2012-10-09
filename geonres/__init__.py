@@ -1,6 +1,8 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 
+from lib import RedisSessionInterface
+
 # Configs
 SQLALCHEMY_DATABASE_URI = 'mysql://root:@localhost/geonres'
 
@@ -9,6 +11,8 @@ app = Flask(__name__)
 from geonres.views import *
 
 app.config.from_object(__name__)
+app.session_interface = RedisSessionInterface.RedisSessionInterface()
+app.debug = True
 
 db = SQLAlchemy(app)
 

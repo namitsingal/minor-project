@@ -180,7 +180,7 @@ footer{clear:both;}
 .spinner-icon-hidden{display:none;}
 #videolist .info{font-size:16pt;color:#aaa;margin-top:100px;margin-left:75px;}
 #top-artists-container .info{font-size:16pt;color:#aaa;margin-top:65px;margin-left:200px;}
-#logo{margin-top:5px;margin-bottom:10px;margin-left:200px;}
+#logo{float: left; margin-top:5px;margin-bottom:10px;margin-left:200px;}
 .logo{font-family: 'Love Ya Like A Sister', cursive;font-size:52pt;}
 #logo .normal{color:orange;}
 #logo #o{color:white;}

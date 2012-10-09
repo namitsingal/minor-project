@@ -1,0 +1,68 @@
+header {
+	margin-bottom: 0;
+}
+
+.tab-options {
+	margin-top: 50px;
+}
+
+.tab-options ul {
+	margin-left: 0;
+	padding: 0;
+}
+
+.tab-options li {
+	display: inline;
+}
+
+a.tab-link {
+	padding: 10px 20px 10px 20px;
+	color: #376899;
+	font-size: 20px;
+	height: 80px;
+}
+
+a.tab-link:hover {
+	color: #7F9EBD;
+}
+
+.tab-container {
+	margin-top: 20px;
+}
+
+.lookup {
+	border: 1px solid black;
+	border-radius: 3px;
+	padding: 6px;
+	font-size: 14pt;
+	color: #666;
+	width: 100%;
+}
+
+.lookup.inactive {
+	color: #aaa;
+}
+
+a.tab-link.pressed {
+	background-color: #333;
+	color: #aaa;
+}
+
+#country-select-container {
+	position: relative;
+	width: 370px;
+}
+
+#country-suggestions {
+	position: absolute;
+	display: none;
+	top: 36px;
+	background-color: white;
+	width: 100%;
+	padding: 5px;
+	box-shadow: 0px 1px 1px #aaa;
+}
+
+#country-suggestions a {
+	display: block;
+}

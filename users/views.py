@@ -1,10 +1,12 @@
-from flask import request, session,redirect, escape, url_for
+import json
+
+from flask import request, Response, session,redirect, escape, url_for
 from jinja2 import Template, Environment, FileSystemLoader
 
 from users import app
 from users.models import *
 
-env = Environment(loader=FileSystemLoader('users/templates'))
+env = Environment(loader=FileSystemLoader(['users/templates', 'geonres/templates']))
 
 @app.route('/login')
 def index():
@@ -23,18 +25,23 @@ def status():
 
 @app.route('/login', methods=['POST'])
 def login():
-        error = None
-        uname = request.form['username']
-        password = request.form['password']
-        k = User.query.filter_by(username=uname).first()
-        if k:
-            if k.check_password(password) == True:
-    	        session['username'] = uname
-    	        return 'successfull login' 
-            else:
-    	        return 'bad password'
-        else: 
-	    return 'Username does not exist'
+    error = None
+    uname = request.form['username']
+    password = request.form['password']
+    k = User.query.filter_by(username=uname).first()
+    if k:
+        if k.check_password(password) == True:
+	        session['username'] = uname
+	        result = {'status': 'success', 'message': 'Logged in as %s.' % uname}
+        else:
+            result = {'status': 'error', 'message': 'You entered an incorrect password.'}
+    else: 
+       result = {'status': 'error', 'message': 'The user does not exist.'}
+
+    if 'ajax' in request.args:
+        return Response(json.dumps(result), mimetype='applications/json')
+    else:
+        return json.dumps(result)
 
 @app.route('/logout')
 def logout():
@@ -43,8 +50,9 @@ def logout():
 
 @app.route('/register')
 def registration_page():
+    ctx = {'STATIC': '/static/'}
     template = env.get_template('register.html')
-    rendered = template.render()
+    rendered = template.render(ctx)
     return rendered
 
 @app.route('/register',methods=['POST'])

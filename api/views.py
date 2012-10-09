@@ -36,7 +36,7 @@ def get_videos(artist, page):
     format = request.args['format']
     lfm_url = 'http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks'
     lfm_url += '&artist=' + artist
-    lfm_url += '&api_key=b25b959554ed76058ac220b7b2e0a026&limit=5'
+    lfm_url += '&api_key=977a73b8d997832303ec0a4bbd516ca7&limit=5'
     lfm_url += '&page=' + str(page)    
 
     r = requests.get(lfm_url)
@@ -60,3 +60,17 @@ def get_videos(artist, page):
         response.append(vid_result)
 
     return api_response({'videos': response}, format)
+
+@app.route('/suggestions/countries/<key>')
+def get_suggestions(key):
+    format = request.args['format']
+    artists = Artist.query.filter(Artist.country.like(key + '%'))
+    countries_list = []
+    for artist in artists:
+        country = artist.country
+        if country not in countries_list:
+            countries_list.append(artist.country)
+        if len(countries_list) == 5:
+            break
+
+    return api_response({'countries': countries_list}, format)
