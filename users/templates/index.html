@@ -1,6 +1,19 @@
-<form action="login" method="POST">
-	<p>Email: <input type="text" name="username"></input></p>
-	<p>Password: <input type="password" name="password"></input></p>
-<br/>
-<input type="submit" name="submit" />
-</form>
+{% extends "base.html" %}
+
+{% block includes %}
+<link rel="stylesheet" href="{{ STATIC }}geonres/css/user_home.css">
+<link rel="stylesheet" href="{{ STATIC }}users/css/registration.css">
+{% endblock %}
+
+{% block content %}
+<div id="main">
+	{% if error %}
+	<p><span class="login-error">{{ error }}</span></p>
+	{% endif %}
+	<form action="login" method="POST" class="registration-form">
+		<p>Email: <input class="input" type="text" name="username"></input></p>
+		<p>Password: <input class="input" type="password" name="password"></input></p>
+		<p><input class="button" type="submit" name="submit" /></p>
+	</form>
+</div>
+{% endblock %}

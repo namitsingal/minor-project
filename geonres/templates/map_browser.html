@@ -1,3 +1,4 @@
+
  <div id="main" role="main">
 		<div id="view-container">
 			<div class="tab" id="map">
@@ -17,12 +18,13 @@
 		</div>
 
 		
-		<div id="videos"><p class="open-label" id="state">Click on the map for a music travel!</p><div id="videolist"><p class="info">select an artist</p><img src="{{ STATIC }}img/spinner.gif" class="spinner-icon spinner-icon-hidden"/></div>
-		{% if geobrowse %}
-		<div id="sharebox"><span class="info">Share this among your friends </span><br/><span  class='st_sharethis_hcount' displayText='ShareThis'></span><span  class='st_twitter_hcount' displayText='Tweet'></span><span  class='st_fblike_hcount' ></span><span  class='st_plusone_hcount' ></span></div>
-		</div>
-		{% endif %}
+		<div id="videos"><p class="open-label" id="state">Click on the map for a music travel!</p><div id="videolist"><p class="info">select an artist</p><img src="{{ STATIC }}geonres/img/spinner.gif" class="spinner-icon spinner-icon-hidden"/></div>
 		
+		{% if geobrowse %}
+		<div id="sharebox"><span class="info">Share this among your friends </span><br/><span class='st_sharethis_hcount' displayText='ShareThis'></span><span  class='st_twitter_hcount' displayText='Tweet'></span><span class='st_fblike_hcount' ></span><span  class='st_plusone_hcount' ></span></div>
+		{% endif %}
+		</div>
+		<div class="clearfix"></div>
 		<div id="artist-container">
 			<div id="artist-tabs-container">
 				<div class="tab" id="top-artists">
@@ -31,10 +33,18 @@
 					</div>
 					<div class="artist-tab" id="top-artists-container"><!--TODO-->
 						<p class="info">select a location</p>
-						<img src="{{ STATIC }}img/spinner.gif" class="spinner-icon spinner-icon-hidden"/>
+						<img src="{{ STATIC }}geonres/img/spinner.gif" class="spinner-icon spinner-icon-hidden"/>
 					</div>
 				</div>
 			</div>
 			<!--<div id="artist-mode-container">Show Random</div>-->
 		</div>
+		{% block override %}
+		<div id="artist-bio-container">
+			<div id="artist-bio">
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		{% endblock %}
 	</div>
+	<div class="clearfix"></div>

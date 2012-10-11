@@ -9,6 +9,7 @@ google.load("swfobject", "2.1");
 params = {allowScriptAccess:"always",wmode:'transparent'};
 atts = {id: "ytplayer"};
 swfobject.embedSWF("http://www.youtube.com/e/JByDbPn6A1o?version=3&enablejsapi=1&autoplay=0","ytapiplayer", "568", "320", "8", null, null, params, atts);
+stateIntro = true;
 
 function setupMap() {
 	var geocoder = new google.maps.Geocoder();
@@ -50,7 +51,7 @@ function init() {
 
 	$('#top-artists-container').scroll(function(event) {
 		position = this.scrollHeight-this.scrollTop;
-		if(position < 145) {
+		if(position < 146) {
 			loadMoreArtists()
 		}
 	});
@@ -105,11 +106,16 @@ function loadArtists(callback) {
 		$('#top-artists-container').scroll(0);
 	
 		$('.artist-link').click(function() {
+			artist = this.id;
+			$.get('/api/details/artist/' + encodeURI(artist) + '?format=json', function(data) {
+				$('#artist-bio').html(('<img class="artist-bio-image vid-thumb" src="' + data['details']['image_large'] + '">' +
+					'<p>' + data['details']['bio'] + '</p>'));
+			});
+		
 			$('#videolist').html('<img src="' + staticUrl + 'img/spinner.gif" class="spinner-icon spinner-icon-hidden"/>');
 			$('#videolist .spinner-icon').removeClass('spinner-icon-hidden');
 			$('#top-artists-container .play-icon').addClass('play-icon-hidden');
 			$(this).children('.artist-item').children('.play-icon').removeClass('play-icon-hidden');
-			artist = this.id;
 			$('#state').html('music by ' + artist);
 			currentTracksPage = 1;
 			loadTracks(function() {

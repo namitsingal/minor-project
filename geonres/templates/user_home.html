@@ -2,20 +2,36 @@
 
 {% block includes %}
 <link rel="stylesheet" href="{{ STATIC }}geonres/css/user_home.css">
+<script defer src="{{ STATIC }}geonres/js/script.js"></script>
 <script src="{{ STATIC }}geonres/js/user_home.js"></script>
 {% endblock %}
 
 {% block content %}
 <div class="tab-options">
 	<ul>
-		<li><a href="#" id="activity" class="tab-link pressed">Activity</a></li>
-		<li><a href="#" id="browse" class="tab-link">Browse</a></li>
+		<li><a href="#" id="browse" class="tab-link pressed">Browse</a></li>
+		<li><a href="#" id="activity" class="tab-link">Activity</a></li>
 	</ul>
 	<div id="tab-browse" class="tab-container">
-		<div id="country-select-container">
-			<input type="text" size="30" class="lookup inactive" id="country-lookup" value="[Enter the country]"/>
+		{% include "map_browser.html" %}
+		<div class="clearfix"></div>
+		<!--<div id="country-select-container">
+			<p id="country-hint">Start by selecting a country</p>
 			<div id="country-suggestions"></div>
 		</div>
+		<div class="select-container" id="artist-select-container">
+			<p>Artists</p>
+			<input type="text" size="30" class="lookup inactive" id="artist-lookup" value="Search" data-default="Search"/>
+			<div id="artist-list"></div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="select-container" id="track-select-container">
+		</div>
+	-->
+		{% block override %}
+		
+		{% endblock %}
+
 	</div>
 </div>
 {% endblock %}

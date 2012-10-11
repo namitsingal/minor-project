@@ -71,7 +71,7 @@ html, body {
 	padding-left: 0px;
 	padding-right: 0 !important;
 	height: 70%;
-	background-color: rgba(20%, 20%, 20%, 0.8);
+	background-color: rgba(20%, 20%, 20%, 0.7);
 }
 
 #logo {
@@ -137,6 +137,7 @@ div.dialogue {
 	overflow: hidden;
 	height: 70%;
 	width: 100%;
+	-webkit-filter: blur(3px);
 }
 
 .login-error {

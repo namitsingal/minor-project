@@ -2,7 +2,7 @@ import json
 import urllib
 
 from bs4 import BeautifulSoup
-from flask import request
+from flask import request, redirect
 import requests
 
 from api import app, api_response
@@ -74,3 +74,32 @@ def get_suggestions(key):
             break
 
     return api_response({'countries': countries_list}, format)
+
+@app.route('/details/artist/<artist>')
+def get_artist_details(artist):
+    format = request.args['format']
+    url = ('http://ws.audioscrobbler.com/2.0/?method=artist.getinfo' +
+           '&artist=' + artist + 
+           '&api_key=977a73b8d997832303ec0a4bbd516ca7&format=json')
+    r = requests.get(url)
+    response = json.loads(r.text)
+
+    bio = response['artist']['bio']['summary']
+    images = response['artist']['image']
+    for image in images:
+        if image['size'] == 'medium':
+            image_small = image['#text']
+        elif image['size'] == 'large':
+            image_large = image['#text']
+
+    if 'arg' in request.args:
+        arg = request.args['arg']
+        if 'image_large' in arg:
+            return redirect(image_large)
+            
+    else:    
+        details = {'image_small': image_small,
+                   'image_large': image_large,
+                   'bio': bio}
+
+        return api_response({'details': details}, format)
