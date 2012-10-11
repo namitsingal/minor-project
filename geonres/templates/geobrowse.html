@@ -3,8 +3,11 @@
 <link rel="stylesheet" href="{{ STATIC }}geonres/css/user_home.css">
 <script defer src="{{ STATIC }}geonres/js/script.js"></script>
 <script src="{{ STATIC }}geonres/js/user_home.js"></script>
+<script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'e6d0924c-7d55-477a-9716-764d75bcdc0d'});</script>
+
 {% endblock %}
 
 {% block content %}
    {% include "map_browser.html" %}
+   <div style="float:left; margin-top: 10px" id="sharebox"><span class="info">Share this among your friends </span><br/><span  class='st_sharethis_hcount' displayText='ShareThis'></span><span  class='st_twitter_hcount' displayText='Tweet'></span><span  class='st_fblike_hcount' ></span><span  class='st_plusone_hcount' ></span></div>
 {% endblock %}
