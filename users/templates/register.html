@@ -3,31 +3,20 @@
 {% block includes %}
 <link rel="stylesheet" href="{{ STATIC }}geonres/css/user_home.css">
 <link rel="stylesheet" href="{{ STATIC }}users/css/registration.css">
+<script src="{{ STATIC }}geonres/js/home.js"></script>
 {% endblock %}
 
 {% block content %}
-<script type='text/javascript'>
-function check()
-{	//alert(document.forms["registers"]["username"].value);
-	if(document.forms["registers"]["username"].value==null || document.forms["registers"]["username"].value=="")
-	{	alert('Please fill in a username');
-		return false;
-	}
-	if(document.forms["registers"]["passwords"].value != document.forms["registers"]["cpassword"].value || (document.forms["registers"]["passwords"].value==null || document.forms["registers"]["passwords"].value==""))
-	{	alert('both passwords dont match or password field empty');
-		return false;
-	}
-	return true;
-	
-}
-</script>
-
 <h1>Register Here</h1>
+{% if error %}
+<p><span class="login-error">{{ error }}</span></p>
+{% endif %}
+<div id="registration-status"></div>
 <form class="registration-form" action="register" method="POST" name="registers">
-	<p>username: <input class="input" type="text" name="username"/></input></p>
-	<p>password: <input class="input" type="password" name="passwords"/></input></p>
+	<p>Username: <input class="input" type="text" name="username"/></input></p>
+	<p>Password: <input class="input" type="password" name="passwords"/></input></p>
 	<p>Confirm Password:<input class="input" type="password" name="cpassword"/></input></p>
-	<p>email id: <input type="text" class="input" name="email"/></input></p>
+	<p>Email id: <input type="text" class="input" name="email"/></input></p>
 	<p><input type="submit" class="button" name="submit" onclick='return check()' /></p>
 </form>
 {% endblock %}

@@ -20,6 +20,16 @@
   <link rel="stylesheet" href="{{ STATIC }}geonres/css/homepage.css">
   <!-- end CSS-->
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="{{ STATIC }}geonres/js/libs/jquery-1.8.2.min.js"><\/script>')</script>
+  <script src="http://www.google.com/jsapi"></script> 
+  <!-- scripts concatenated and minified via ant build script-->
+  
+  <script defer src="{{ STATIC }}geonres/js/plugins.js"></script>
+  <script src="{{ STATIC }}geonres/js/home.js"></script>
+
+  <!-- end scripts-->
+
 	<script src="{{ STATIC }}geonres/js/libs/modernizr-2.0.6.min.js"></script>
 
 </head>
@@ -30,29 +40,30 @@
   <div id="login-box" class="dialogue">
     <p><img class="spinner" id="login-spinner" src="{{ STATIC }}geonres/img/spinner.gif"/></p>
     <div id="login-status"></div>
-    <p>Not on geonres? <a href="#" id="signup">signup now</a></p>
-    <p>Email<br><input class="input" type="text" size="30" name="username" id="login-email"/></p>
+    <p>Don't have an account? <a href="#" id="signup">Signup now</a></p>
+    <p>Username<br><input class="input" type="text" size="30" name="username" id="login-email"/></p>
     <p>Password<br><input class="input" type="password" size="30" name="password" id="login-passwd"/></p>
     <p><a id="btn-login" href="#" class="homepage-button">Login</a></p>
   </div>
 
 <div id="register-box" class="dialogue1">
 <h1>Register Here</h1>
+<div id="registration-status"></div>
 <form class="registration-form" action="users/register" method="POST" name="registers">
-  <p>username: <input class="input" type="text" name="username" style="
+  <p>Username: <input class="input" type="text" name="username" style="
     position: relative;
     left: 47px;
 "></p>
-  <p>password: <input class="input" type="password" name="passwords" style="
+  <p>Password: <input class="input" type="password" name="passwords" style="
     position: relative;
     left: 48px;
 "></p>
-  <p>Confirm Password:<input class="input" type="password" name="cpassword"></p>
-  <p>email id: <input type="text" class="input" name="email" style="
+  <p>Confirm Password: <input class="input" type="password" name="cpassword"></p>
+  <p>Email id: <input type="text" class="input" name="email" style="
     position: relative;
     left: 56px;
 "></p>
-  <p><input id="newbu" type="submit" class="button" name="submit" onclick="return check()" style="
+  <p><input id="newbu" type="submit" class="button" name="submit" onclick="return check();" style="
     display: block;  background-image: -webkit-linear-gradient(top, #FF9900, #FF6600);  background-image: -moz-linear-gradient(top, #FF9900, #FF6600);  background-image: -o-linear-gradient(top, #FF9900, #FF6600);  background-image: -ms-linear-gradient(top, #FF9900, #FF6600);  border-radius: 3px;  vertical-align: middle;  padding: 10px 15px 10px 15px;  text-align: center;   color: #444;  width: 100px;  border: 1px solid #999;  box-shadow: none;  font-size: 14px;  margin: auto;"></p>
 </form></div>
 
@@ -85,16 +96,6 @@
     </div>
 </div> <!--! end of #container -->
 
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="{{ STATIC }}geonres/js/libs/jquery-1.8.2.min.js"><\/script>')</script>
-	<script src="http://www.google.com/jsapi"></script> 
-  <!-- scripts concatenated and minified via ant build script-->
-	
-	<script defer src="{{ STATIC }}geonres/js/plugins.js"></script>
-  <script src="{{ STATIC }}geonres/js/home.js"></script>
-
-  <!-- end scripts-->
 
 
   <script> // Change UA-XXXXX-X to be your site's ID

@@ -77,6 +77,18 @@ def register_user():
     password = request.form['passwords']
     email = request.form['email']
 
+    k = User.query.filter_by(username=uname).first()
+    if k:
+        ctx = {'STATIC': '/static/', 'error': 'Username exists. Please pick another username'}
+        template = env.get_template('register.html')
+        return template.render(ctx)
+
+    k = User.query.filter_by(email=email).first()
+    if k:
+        ctx = {'STATIC': '/static/', 'error': 'A user exists with the same email address. Please pick another email.'}
+        template = env.get_template('register.html')
+        return template.render(ctx)
+
     user = User(uname, password, email)
     db.session.add(user)
     db.session.commit()	
