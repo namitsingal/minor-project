@@ -91,6 +91,11 @@ div.dialogue {
 	z-index: 100;
 }
 
+div.dialogue1 {
+	display: none;
+	position: absolute;
+	z-index: 101;
+}
 #overlay {
 	left: 0;
 	top: 0;
@@ -101,7 +106,7 @@ div.dialogue {
 }
 
 #login-box {
-	height: 200px;
+	height: 220px;
 	top: 30%;
 	left: 35%;
 	padding: 10px 40px 20px 40px;
@@ -110,7 +115,32 @@ div.dialogue {
 	z-index: 101;
 }
 
-#login-box input {
+#register-box {
+	height: 280px;
+	width: 280px;
+	top: 30%;
+	left: 35%;
+	padding: 10px 40px 20px 40px;
+	background-color: white;
+	border-radius: 2px;
+	z-index: 101;
+}
+
+#register-box .input {
+	border: 1px solid #888;
+	padding: 5px 5px 5px 5px;
+	color: #444;
+	font-size: 14px;
+}
+
+#newbu:hover {
+	background-image: -webkit-linear-gradient(top, #FFAD33, #FF8533);
+	background-image: -moz-linear-gradient(top, #FFAD33, #FF8533);
+	background-image: -o-linear-gradient(top, #FFAD33, #FF8533);
+	background-image: -ms-linear-gradient(top, #FFAD33, #FF8533);
+	background-color: #CC9900;
+}
+#login-box .input {
 	border: 1px solid #888;
 	padding: 5px 5px 5px 5px;
 	color: #444;

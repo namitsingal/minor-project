@@ -14,6 +14,11 @@ $(document).ready(function() {
 			$('#login-box').animate({opacity: 0}, 'fast', function() {
 				$('#login-box').hide();
 			});
+			$('#register-box').animate({opacity: 0}, 'fast', function() {
+				$('#register-box').hide();
+
+			});
+
 		}
 	});
 
@@ -33,6 +38,9 @@ $(document).ready(function() {
 				}
 				else {
 					$('#login-status').html('<span class="login-error">' + data['message'] + '</span>');
+					var x=parseInt($('#login-box').css("height"));
+					alert(x);
+					$('#login-box').css("height",x+20);
 				}
 			}
 		});

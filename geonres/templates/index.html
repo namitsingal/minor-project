@@ -14,25 +14,80 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
 	<link href='http://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="{{ STATIC }}buttons/styles.css">
+	<link rel="stylesheet" href="{{ STATIC }}geonres/buttons/styles.css">
   <!-- CSS concatenated and minified via ant build script-->
-	<link rel="stylesheet" href="{{ STATIC }}css/style.css">
-  <link rel="stylesheet" href="{{ STATIC }}css/homepage.css">
+	<link rel="stylesheet" href="{{ STATIC }}geonres/css/style.css">
+  <link rel="stylesheet" href="{{ STATIC }}geonres/css/homepage.css">
   <!-- end CSS-->
 
-	<script src="{{ STATIC }}js/libs/modernizr-2.0.6.min.js"></script>
+	<script src="{{ STATIC }}geonres/js/libs/modernizr-2.0.6.min.js"></script>
+
+<script type='text/javascript'>
+function check()
+{ //alert(document.forms["registers"]["username"].value);
+  if(document.forms["registers"]["username"].value==null || document.forms["registers"]["username"].value=="")
+  { alert('Please fill in a username');
+    return false;
+  }
+  if(document.forms["registers"]["passwords"].value != document.forms["registers"]["cpassword"].value || (document.forms["registers"]["passwords"].value==null || document.forms["registers"]["passwords"].value==""))
+  { alert('both passwords dont match or password field empty');
+    return false;
+  }
+  if(document.forms["registers"]["passwords"].value.length <8)
+  {
+    alert('password length should be greater than 8');
+    return false;
+  }
+  return true;
+  
+}
+function register()
+{
+ 
+
+      $('#login-box').animate({opacity: 0}, 'fast', function() {
+        $('#login-box').hide();
+      });
+
+    $('#register-box').css({opacity: 0}).show().animate({opacity: 1}, 'slow');
+    
+}
+</script>
+
 </head>
 
 <body>
 	<input type="hidden" value="{{ STATIC }}" id="static-url"/>
   <div id="overlay" class="dialogue"></div>
   <div id="login-box" class="dialogue">
-    <p><img class="spinner" id="login-spinner" src="{{ STATIC }}img/spinner.gif"/></p>
+    <p><img class="spinner" id="login-spinner" src="{{ STATIC }}geonres/img/spinner.gif"/></p>
     <div id="login-status"></div>
+    <p>Not on geonres? <a href="#" onclick="register()">signup now</a></p>
     <p>Email<br><input type="text" size="30" name="username" id="login-email"/></p>
     <p>Password<br><input type="password" size="30" name="password" id="login-passwd"/></p>
     <p><a id="btn-login" href="#" class="homepage-button">Login</a></p>
   </div>
+
+<div id="register-box" class="dialogue1">
+<h1>Register Here</h1>
+<form class="registration-form" action="users/register" method="POST" name="registers">
+  <p>username: <input class="input" type="text" name="username" style="
+    position: relative;
+    left: 47px;
+"></p>
+  <p>password: <input class="input" type="password" name="passwords" style="
+    position: relative;
+    left: 48px;
+"></p>
+  <p>Confirm Password:<input class="input" type="password" name="cpassword"></p>
+  <p>email id: <input type="text" class="input" name="email" style="
+    position: relative;
+    left: 56px;
+"></p>
+  <p><input id="newbu" type="submit" class="button" name="submit" onclick="return check()" style="
+    display: block;  background-image: -webkit-linear-gradient(top, #FF9900, #FF6600);  background-image: -moz-linear-gradient(top, #FF9900, #FF6600);  background-image: -o-linear-gradient(top, #FF9900, #FF6600);  background-image: -ms-linear-gradient(top, #FF9900, #FF6600);  border-radius: 3px;  vertical-align: middle;  padding: 10px 15px 10px 15px;  text-align: center;   color: #444;  width: 100px;  border: 1px solid #999;  box-shadow: none;  font-size: 14px;  margin: auto;"></p>
+</form></div>
+
   <div id="container">
     <img id="image-background" src="http://www.tapmusic.net/lastfm/collage.php?user=Fawful-san&type=overall&size=5x5&artistonly=true"/>
     <div id="main" class="dark" role="main">
@@ -64,12 +119,12 @@
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="{{ STATIC }}js/libs/jquery-1.8.2.min.js"><\/script>')</script>
+	<script>window.jQuery || document.write('<script src="{{ STATIC }}geonres/js/libs/jquery-1.8.2.min.js"><\/script>')</script>
 	<script src="http://www.google.com/jsapi"></script> 
   <!-- scripts concatenated and minified via ant build script-->
 	
-	<script defer src="{{ STATIC }}js/plugins.js"></script>
-  <script src="{{ STATIC }}js/home.js"></script>
+	<script defer src="{{ STATIC }}geonres/js/plugins.js"></script>
+  <script src="{{ STATIC }}geonres/js/home.js"></script>
 
   <!-- end scripts-->
 

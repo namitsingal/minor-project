@@ -25,7 +25,7 @@ def status():
 
 @app.route('/login', methods=['POST'])
 def login():
-<<<<<<< HEAD
+#<<<<<<< HEAD
     error = None
     uname = request.form['username']
     password = request.form['password']
@@ -47,7 +47,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    return redirect(url_for('status'))
+    return redirect('/')
 
 @app.route('/register')
 def registration_page():
@@ -64,8 +64,8 @@ def register_user():
 
     user = User(uname, password, email)
     db.session.add(user)
-    db.session.commit();	
+    db.session.commit()	
     session['username'] = uname
-    return redirect(url_for('status'))
+    return redirect('/')
 
 app.secret_key='\xe6m\x897\xeec\x88\x9e\xc8\xdd\x99\xd2\xec\xf0\x0f\x88\x00\x00psb\x10'
