@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+   <div>
+   	{% if message == 'logged_out' %}
+   	<p class="open-label">You've logged out. <a href="/geobrowse">Click to continue discovering</a>.</p>
+   	{% elif message == 'not_logged_in' %}
+   	<p class="open-label">Oops. You don't seem to be logged in. <a href="/users/login">Click to login</a></p>
+   	{% endif %}
+   </div>
+{% endblock %}

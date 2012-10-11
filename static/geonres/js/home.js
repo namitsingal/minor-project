@@ -1,4 +1,47 @@
+
+function check()
+{ //alert(document.forms["registers"]["username"].value);
+  if(document.forms["registers"]["username"].value==null || document.forms["registers"]["username"].value=="")
+  { alert('Please fill in a username');
+    return false;
+  }
+  if(document.forms["registers"]["passwords"].value != document.forms["registers"]["cpassword"].value || (document.forms["registers"]["passwords"].value==null || document.forms["registers"]["passwords"].value==""))
+  { alert('both passwords dont match or password field empty');
+    return false;
+  }
+  if(document.forms["registers"]["passwords"].value.length <8)
+  {
+    alert('password length should be greater than 8');
+    return false;
+  }
+  return true;
+  
+}
+function register()
+{
+ 
+
+      $('#login-box').animate({opacity: 0}, 'fast', function() {
+        $('#login-box').hide();
+      });
+
+    $('#register-box').css({opacity: 0}).show().animate({opacity: 1}, 'slow');
+    
+}
+
+
+
+
 $(document).ready(function() {
+	$('#signup').click(function()	{
+		$('#login-box').animate({opacity: 0}, 'fast', function() {
+        $('#login-box').hide();
+      });
+
+    $('#register-box').css({opacity: 0}).show().animate({opacity: 1}, 'slow');
+	});
+
+
 	$('#btn-homepage-login').click(function() {
 		$('#overlay').css({opacity: 0}).show().animate({opacity: 0.8}, 'fast');
 		$('#login-box').css({opacity: 0}).show().animate({opacity: 1}, 'fast');

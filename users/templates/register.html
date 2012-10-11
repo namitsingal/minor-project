@@ -1,7 +1,11 @@
 {% extends "base.html" %}
-{% block content %}
 
+{% block includes %}
+<link rel="stylesheet" href="{{ STATIC }}geonres/css/user_home.css">
 <link rel="stylesheet" href="{{ STATIC }}users/css/registration.css">
+{% endblock %}
+
+{% block content %}
 <script type='text/javascript'>
 function check()
 {	//alert(document.forms["registers"]["username"].value);

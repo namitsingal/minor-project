@@ -2,6 +2,10 @@ header {
 	margin-bottom: 0;
 }
 
+#main {
+	margin-top: 40px;
+}
+
 .tab-options {
 	margin-top: 50px;
 }
@@ -37,9 +41,10 @@ a.tab-link:hover {
 	font-size: 14pt;
 	color: #666;
 	width: 100%;
+	margin-bottom: 10px;
 }
 
-.lookup.inactive {
+input.lookup.inactive {
 	color: #aaa;
 }
 
@@ -50,7 +55,8 @@ a.tab-link.pressed {
 
 #country-select-container {
 	position: relative;
-	width: 370px;
+	width: 55%;
+	float: left;
 }
 
 #country-suggestions {
@@ -65,4 +71,58 @@ a.tab-link.pressed {
 
 #country-suggestions a {
 	display: block;
+}
+
+.select-container {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.select-container > input {
+	width: 95%;
+	border-radius: 10px;
+	border: 1px solid #aaa;
+}
+
+#artist-select-container {
+	width: 40%;
+	height: 440px;
+	float: right;
+}
+
+#track-select-container {
+	margin-top: 20px;
+	width: 55%;
+	float: left;
+}
+
+#artist-bio-container {
+	width: 35% !important;
+	margin-top: 20px;
+	float: right;
+	margin-left: 20px;
+}
+
+.artist-bio-image.vid-thumb {
+	height: 160px;
+	width: 140px;
+	float: left;
+}
+
+#artist-bio p {
+	line-height: 1.5em;
+	font-size: 14px;
+	color: #222;
+}
+
+#user-panel {
+	font-size: 14px;
+	margin-top: 20px;
+}
+
+#user-panel a {
+	color: #7F9EBD;
+}
+#user-panel a:hover {
+	text-decoration: underline;
 }

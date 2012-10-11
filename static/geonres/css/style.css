@@ -138,12 +138,12 @@ a.switch-button{float:right;margin-top:1px;}
 #maps{width:568px;height:320px;-webkit-transition:opacity 0.5s;-moz-transition:opacity 0.5s;}
 #videos{height:360px;width:340px;float:right;}
 
-footer{clear:both;}
+footer{clear:both; padding: 10px;}
 #creator{padding-top:10px;}
 .vid-thumb{height:60px;width:80px;float:left;border:1px solid white;box-shadow:0px 0px 2px grey;margin-right:5px;margin-bottom:0px;margin-top:0px;}
 .vid-title{padding-top:5px;float:left;width:180px;}
 .vid-item{clear:both;height:62px;margin:0px;}
-#artist-container{clear:both;margin-top:20px;box-shadow: 2px 4px 10px #111;overflow:hidden;height:200px;width:568px;border:1px solid #aaa;}
+#artist-container{clear:both;float:left; margin-top:20px;box-shadow: 2px 4px 10px #111;overflow:hidden;height:200px;width:568px;border:1px solid #aaa;}
 #artist-tabs-container{float:left;overflow:hidden;width:568px;height:100%;}
 .artist-tab{overflow:scroll;height:155px;width:100%;background-color:white;}
 #top-artists .tab-head{background-color:#222;}
@@ -164,7 +164,7 @@ footer{clear:both;}
 .open-label a:hover{color:#ff9;}
 
 
-#videolist{overflow:scroll;height:320px;background-color:white;box-shadow: 2px 4px 10px #111;border:10px solid white;}
+#videolist, .select-container {overflow:scroll;height:320px;background-color:white;box-shadow: 2px 4px 10px #111;border:10px solid white;}
 .vid-item{padding:5px;}
 .vid-item:hover{background-color:#ffa;}
 .artist-link{clear:both;margin:bottom:0px;margin-left:5px;display:block;padding-top:5px;padding-bottom:5px;padding-left:5px;}

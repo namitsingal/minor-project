@@ -25,4 +25,4 @@ else:
 	    '/api': api_app,
 	    '/users': users_app
 	})
-	run_simple('localhost', port, app, use_reloader=True, use_debugger=True)
+	run_simple('0.0.0.0', port, app, use_reloader=True, use_debugger=True)

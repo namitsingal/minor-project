@@ -10,11 +10,12 @@ env = Environment(loader=FileSystemLoader(['users/templates', 'geonres/templates
 
 @app.route('/login')
 def index():
+    ctx = {'STATIC': '/static/'}
     if 'username' in session:
-	   return redirect('/index')
+	   return redirect('/')
     else:
         template = env.get_template('index.html')
-        rendered = template.render()
+        rendered = template.render(ctx)
         return rendered
 
 @app.route('/')
@@ -25,7 +26,6 @@ def status():
 
 @app.route('/login', methods=['POST'])
 def login():
-#<<<<<<< HEAD
     error = None
     uname = request.form['username']
     password = request.form['password']
@@ -42,12 +42,27 @@ def login():
     if 'ajax' in request.args:
         return Response(json.dumps(result), mimetype='applications/json')
     else:
-        return json.dumps(result)
+        ctx = {'STATIC': '/static/'}
+        if result['status'] == 'success':
+            return redirect('/')
+        else:
+            ctx['error'] = result['message']
+
+        template = env.get_template('index.html')
+        return template.render(ctx)
+
 
 @app.route('/logout')
 def logout():
-    session.pop('username', None)
-    return redirect('/')
+    template = env.get_template('message.html')
+    ctx = {'STATIC': '/static/'}
+    if 'username' in session:
+        session.pop('username', None)
+        ctx['message'] = 'logged_out'
+        return template.render(ctx)
+    else:
+        ctx['message'] = 'not_logged_in'
+        return template.render(ctx)
 
 @app.route('/register')
 def registration_page():
