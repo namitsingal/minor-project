@@ -44,7 +44,7 @@ function init() {
 	$('#videolist').scroll(function(event) {
 		position = this.scrollHeight - this.scrollTop;
 
-		if(position < 310) {
+		if(position < 320) {
 			loadMoreTracks();
 		}
 	});
