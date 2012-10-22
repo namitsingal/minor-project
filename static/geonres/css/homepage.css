@@ -94,7 +94,7 @@ div.dialogue {
 div.dialogue1 {
 	display: none;
 	position: absolute;
-	z-index: 101;
+	z-index: 102;
 }
 #overlay {
 	left: 0;
@@ -125,20 +125,26 @@ div.dialogue1 {
 
 #register-box {
 	height: 320px;
-	width: 325px;
+	width: 330px;
 	top: 30%;
 	left: 35%;
 	padding: 10px 40px 20px 40px;
 	background-color: white;
 	border-radius: 2px;
-	z-index: 101;
+	z-index: 103;
+	font-size: 14px;
 }
 
-#register-box .input {
+
+#register-box p {
+	font-size: 12.5px;
+}
+#register-box input {
 	border: 1px solid #888;
 	padding: 5px 5px 5px 5px;
 	color: #444;
 	font-size: 14px;
+	width:180px;
 }
 
 .buttons, a.buttons {
@@ -152,11 +158,14 @@ div.dialogue1 {
 	border: 1px solid #222;
 	vertical-align: middle;
 	padding: 13px 0 13px 0;
-	width: 250px;
+	width: 200px;
 	text-align: center;	
 	margin-bottom: 5px;
-	font-size: 20px;
+	font-size: 14px;
 	color: #444;
+	position: relative;
+	margin-left: 60px;
+	margin-top: 10px;
 }
 
 .buttons:hover {
@@ -174,6 +183,12 @@ div.dialogue1 {
 	color: #444;
 	font-size: 14px;
 }
+
+#login-box p {
+	font-size: 13px;
+
+}
+
 
 #login-box #btn-login {
 	width: 100px;
