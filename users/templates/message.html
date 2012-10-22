@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+   <link rel="stylesheet" href="{{ STATIC }}geonres/css/user_home.css">
    <div>
    	{% if message == 'logged_out' %}
    	<p class="open-label">You've logged out. <a href="/geobrowse">Click to continue discovering</a>.</p>

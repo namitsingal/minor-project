@@ -18,6 +18,7 @@
   <!-- CSS concatenated and minified via ant build script-->
 	<link rel="stylesheet" href="{{ STATIC }}geonres/css/style.css">
   <link rel="stylesheet" href="{{ STATIC }}geonres/css/main.css">
+
   <!-- end CSS-->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="{{ STATIC }}geonres/js/libs/jquery-1.6.2.min.js"><\/script>')</script>
@@ -27,6 +28,7 @@
   <!-- scripts concatenated and minified via ant build script-->
   
   <script defer src="{{ STATIC }}geonres/js/plugins.js"></script>
+  <script src="{{ STATIC }}geonres/js/home.js"></script>
   <!-- end scripts-->
 
   {% block includes %}
@@ -59,6 +61,34 @@
         Logged in as <strong>{{ user.username }}</strong>
         <p><a href="/users/logout">Logout</a></p>
       </div>
+      {% else %}
+        <input type="hidden" value="{{ STATIC }}" id="static-url"/>
+        <div id="overlay" class="dialogue"></div>
+          <div id="login-box" class="dialogue">
+            <p><img class="spinner" id="login-spinner" src="{{ STATIC }}geonres/img/spinner.gif"/></p>
+            <div id="login-status"></div>
+            <p>Don't have an account? <a href="#" id="signup">Signup now</a></p>
+            <p>Username<br><input class="input" type="text" size="30" name="username" id="login-email"/></p>
+            <p>Password<br><input class="input" type="password" size="30" name="password" id="login-passwd"/></p>
+            <p><a id="btn-login" href="#" class="homepage-button">Login</a></p>
+          </div>
+        <div id="register-box" class="dialogue1">
+          <h2>Register Here</h2>
+          <div id="registration-status"></div>
+          <form class="registration-form" action="users/register" method="POST" name="registers">
+            <p>Username: <input class="input" type="text" name="username" ></p>
+            <p>Password: <input class="input" type="password" name="passwords"></p>
+            <p>Confirm Password: <input class="input" type="password" name="cpassword"></p>
+            <p>Email id: <input type="text" class="input" name="email" ></p>
+            <p><input id="newbu" value="Register" type= "submit" class="buttons" name="submit" onclick="return check();" ></input></p>
+          </form>
+        </div>
+
+        <div id="user-panel">
+          <a href="#" id="btn-homepage-login" class="homepage-button" style="z-index:90;">Login/Register</a>
+
+        </div>
+
       {% endif %}
     </header>
     <div id="container">

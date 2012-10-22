@@ -19,6 +19,8 @@ function check() { //alert(document.forms["registers"]["username"].value);
     if(state == true) { return true; }
 	else {
 		$('#registration-status').html('<span class="login-error">' + message + '</span');
+		var x = parseInt($('#register-box').css("height"));
+		$('#register-box').animate({"height": x + 25}, 'fast');
 		return false;
 	}
 }

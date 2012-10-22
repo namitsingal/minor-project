@@ -181,7 +181,7 @@ footer{clear:both; padding: 10px;}
 #videolist .info{font-size:16pt;color:#aaa;margin-top:100px;margin-left:75px;}
 #top-artists-container .info{font-size:16pt;color:#aaa;margin-top:65px;margin-left:200px;}
 #logo{float: left; margin-top:5px;margin-bottom:10px;margin-left:200px;}
-.logo{font-family: 'Love Ya Like A Sister', cursive;font-size:52pt;}
+.logo{font-family: 'Love Ya Like A Sister', cursive;font-size:42pt;}
 #logo .normal{color:orange;}
 #logo #o{color:white;}
 header, div.dark {background-color:#333;box-shadow:0px 2px 5px #444;height:100px;margin-bottom:20px;}
@@ -196,6 +196,172 @@ header, div.dark {background-color:#333;box-shadow:0px 2px 5px #444;height:100px
 .clearfix:before, .clearfix:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
 .clearfix { zoom: 1; }
+
+/* ---- Login and Register CSS ---- */
+.homepage-button, a.homepage-button {
+  display: block;
+  background-image: -webkit-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -moz-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -o-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -ms-linear-gradient(top, #FF9900, #FF6600);
+  border-radius: 3px;
+  box-shadow: 0 2px 4px #222;
+  border: 1px solid #222;
+  vertical-align: middle;
+  padding: 13px 0 13px 0;
+  width: 120px;
+  text-align: center; 
+  margin-bottom: 5px;
+  font-size: 13px;
+  color: #444;
+  fon
+
+}
+
+.homepage-button:hover {
+  background-image: -webkit-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -moz-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -o-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -ms-linear-gradient(top, #FFAD33, #FF8533);
+  background-color: #CC9900;
+}
+
+
+div.dialogue {
+  display: none;
+  position: absolute;
+  z-index: 100;
+}
+
+div.dialogue1 {
+  display: none;
+  position: absolute;
+  z-index: 102;
+}
+#overlay {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.8;
+}
+
+#login-box {
+  height: 220px;
+  top: 30%;
+  left: 35%;
+  padding: 10px 40px 20px 40px;
+  background-color: white;
+  border-radius: 2px;
+  z-index: 101;
+}
+
+
+#login-box  input {
+  border: 1px solid #888;
+  padding: 5px 5px 5px 5px;
+  color: #444;
+  font-size: 14px;
+}
+
+
+
+#login-box .input {
+  border: 1px solid #888;
+  padding: 5px 5px 5px 5px;
+  color: #444;
+  font-size: 14px;
+  width: 220px;
+}
+
+#login-box p {
+  font-size: 13px;
+
+}
+
+
+#login-box #btn-login {
+  width: 100px;
+  border: 1px solid #999;
+  box-shadow: none;
+  font-size: 14px;
+  margin: auto;
+}
+
+#login-box .spinner {
+  display: none;
+  margin: auto;
+  height: 24px;
+}
+
+.login-error {
+  border: 1px solid #F66;
+  background-color: rgba(100%, 20%, 20%, 0.1);
+  padding: 5px;
+  display: block;
+  text-align: center;
+}
+
+#register-box {
+  height: 320px;
+  width: 330px;
+  top: 30%;
+  left: 35%;
+  padding: 10px 40px 20px 40px;
+  background-color: white;
+  border-radius: 2px;
+  z-index: 103;
+  font-size: 14px;
+}
+
+
+#register-box p {
+  font-size: 12.5px;
+  width: 350px;
+  height: 30px;
+}
+#register-box .input {
+  
+  border: 1px solid #888;
+  padding: 5px 5px 5px 5px;
+  color: #444;
+  font-size: 14px;
+  width:180px;
+  position: absolute;
+  right: 10%;
+}
+
+.buttons, input.buttons {
+  display: block;
+  background-image: -webkit-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -moz-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -o-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -ms-linear-gradient(top, #FF9900, #FF6600);
+  border-radius: 3px;
+  box-shadow: 0 2px 4px #222;
+  border: 1px solid #222;
+  vertical-align: middle;
+  padding: 13px 0 13px 0;
+  width: 200px;
+  text-align: center; 
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #444;
+  position: relative;
+  margin-left: 60px;
+  margin-top: 10px;
+}
+
+.buttons:hover {
+  background-image: -webkit-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -moz-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -o-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -ms-linear-gradient(top, #FFAD33, #FF8533);
+  background-color: #CC9900;
+}
+
+
 
 
 /* ==|== media queries ====================================================== */
