@@ -141,7 +141,7 @@ div.dialogue1 {
 	width: 350px;
 	height: 30px;
 }
-#register-box input {
+#register-box .input {
 	
 	border: 1px solid #888;
 	padding: 5px 5px 5px 5px;
@@ -152,7 +152,7 @@ div.dialogue1 {
 	right: 10%;
 }
 
-.buttons, a.buttons {
+.buttons, input.buttons {
 	display: block;
 	background-image: -webkit-linear-gradient(top, #FF9900, #FF6600);
 	background-image: -moz-linear-gradient(top, #FF9900, #FF6600);
@@ -187,6 +187,7 @@ div.dialogue1 {
 	padding: 5px 5px 5px 5px;
 	color: #444;
 	font-size: 14px;
+	width: 220px;
 }
 
 #login-box p {
