@@ -5,10 +5,19 @@ header {
 
 #main {
 	margin-top: 40px;
+
 }
 
+
+
 .tab-options {
-	margin-top: 50px;
+	margin-top: 30px;
+	padding: 1px 0px 0px 20px;
+	width: 97%;
+	background-color: #FFFFFE;
+	background: url('/static/geonres/img/bg-menu.png');
+	height:52px;
+	
 }
 
 .tab-options ul {
@@ -21,18 +30,33 @@ header {
 }
 
 a.tab-link {
-	padding: 10px 20px 10px 20px;
-	color: #376899;
+	padding: 15px 30px 15px 25px;
+	color: #2E2E2F;
+	color: #464653;
 	font-size: 20px;
 	height: 80px;
+	font-family: 'Anton', sans-serif;
+	background: url('/static/geonres/img/star.png');
+	background-repeat: no-repeat;
+	background-position: 5px;
+	text-transform: uppercase;
+	
+	line-height: 26px;
 }
 
 a.tab-link:hover {
 	color: #7F9EBD;
+	color: #E61275;
 }
 
 .tab-container {
 	margin-top: 20px;
+	background: white;
+	background: #E6E6E6;
+	padding: 10px;
+	width:100%;
+	padding-bottom: 30px;
+
 }
 
 .lookup {
@@ -50,8 +74,9 @@ input.lookup.inactive {
 }
 
 a.tab-link.pressed {
-	background-color: #333;
-	color: #aaa;
+	color: red;
+	color: #E61275;
+
 }
 
 #country-select-container {

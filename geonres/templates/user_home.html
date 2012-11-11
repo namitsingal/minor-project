@@ -4,17 +4,19 @@
 <link rel="stylesheet" href="{{ STATIC }}geonres/css/user_home.css">
 <script defer src="{{ STATIC }}geonres/js/script.js"></script>
 <script src="{{ STATIC }}geonres/js/user_home.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
 {% endblock %}
 
 {% block content %}
 <div class="tab-options">
 	<ul>
-		<li><a href="#" id="browse" class="tab-link pressed">Browse</a></li>
-		<li><a href="#" id="Network" class="tab-link">Network</a></li>
-		<li><a href="#" id="Top Artists" class="tab-link">Top Artists</a></li>
-		<li><a href="#" id="Top Tracks" class="tab-link">Top Tracks</a></li>
+		<li><a href="#" id="browse" class="tab-link pressed">BROWSE</a></li>
+		<li><a href="#" id="Network" class="tab-link">PLAYLIST</a></li>
+		<li><a href="#" id="Top Artists" class="tab-link">FRIENDS</a></li>
+		<li><a href="#" id="Top Tracks" class="tab-link">PROFILE</a></li>
 
 	</ul>
+</div>
 	<div id="tab-browse" class="tab-container">
 		{% include "map_browser.html" %}
 		<div class="clearfix"></div>
