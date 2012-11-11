@@ -6,23 +6,52 @@ function check() { //alert(document.forms["registers"]["username"].value);
 		message = 'Please fill in a username';
 		state = false;
 	}
-	if(document.forms["registers"]["passwords"].value != document.forms["registers"]["cpassword"].value || (document.forms["registers"]["passwords"].value==null || document.forms["registers"]["passwords"].value==""))
+	else if(document.forms["registers"]["passwords"].value != document.forms["registers"]["cpassword"].value || (document.forms["registers"]["passwords"].value==null || document.forms["registers"]["passwords"].value==""))
 	{ 
 		message = 'Both passwords dont match or password field empty';
 		state = false;
 	}
-	if(document.forms["registers"]["passwords"].value.length <8) {
+	else if(document.forms["registers"]["passwords"].value.length <8) {
 		message = 'Password length should be greater than 8.';
 		state = false;
 	}
-
-    if(state == true) { return true; }
+	else
+	{
+		var uname = $('#register-uname').val();
+		var passwd = $('#register-passwd').val();
+		var mail = $('#register-email').val();
+		$.ajax({
+				url: '/users/register',
+				type: 'POST',
+				data: {username: uname,passwords:passwd,email:mail},
+				success: function(data) {
+					//$('#login-spinner').css({display: 'none'});
+					if(data['status'] === 'success') {
+						var k=1;
+						//window.location.href = '/';
+					}
+					else {
+						message = data['message'];
+						state = false;
+					}
+				if(state == true) { return true; }
+				else {
+					$('#registration-status').html('<span class="login-error">' + message + '</span');
+					var x = parseInt($('#register-box').css("height"));
+					$('#register-box').animate({"height": x + 25}, 'fast');
+					return false;
+					}
+				}
+			});
+	}
+	if(state == true) { return true; }
 	else {
 		$('#registration-status').html('<span class="login-error">' + message + '</span');
 		var x = parseInt($('#register-box').css("height"));
 		$('#register-box').animate({"height": x + 25}, 'fast');
 		return false;
 	}
+    
 }
 
 function register() {

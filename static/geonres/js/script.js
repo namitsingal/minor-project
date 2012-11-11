@@ -61,6 +61,10 @@ function init() {
 $(document).ready(function() {
 	staticUrl = $('#static-url').val();
 
+	$(document).click(function(){
+		$('.menu').hide();
+	});
+	
 	$( '#browse-map' ).click( function() {
 		//	$("#player" ).css('opacity','0');
 			$( '#ytplayer' ).css( 'opacity', '0' );
@@ -133,7 +137,8 @@ function loadTracks(callback) {
 	$.get(url, function(data) {
 		for(i in data.videos) {
 			var item = data.videos[i];
-			markup += '<a class="vid-links" href="#" id="' + item.id + '">' +
+			markup += '<div style="border: 1px solid rgb(0, 0, 0); padding: 10px; display: none; position: absolute; background-color: rgb(238, 238, 238);" class="menu" id="' + item.id + '">Add to playlist</div>'
+			+'<a class="vid-links" href="#" id="' + item.id + '">' +
 				'<div class="vid-item">' +
 					'<img class="vid-thumb" src="'+ item.thumb_url + '"/>' + 
 					'<p class="vid-title">' + item.title+ '</p>' + 
@@ -141,10 +146,34 @@ function loadTracks(callback) {
 				'</div>' +
 			'</a>';
 		}
-		
 		$('#videolist').append(markup);
 		$('#videolist .spinner-icon').addClass('spinner-icon-hidden');
 		document.getElementById('videolist').scrollTop = 0;
+		$('.vid-links').bind("contextmenu", function(e) {
+
+		$('.menu').click(function(){
+
+			$.get('/users/check', function(data) {
+				if(data=='true')
+					console.log('logged in');
+				else
+				{
+					$('#btn-homepage-login').click();
+				}
+			});
+
+
+		});
+
+    	$('.menu').css({
+        	top: e.pageY+'px',
+        	left: e.pageX+'px'
+    	}).show();
+
+    	return false;
+
+	});
+
 		$('.vid-links').click(function() {
 			$('#videolist .play-icon').addClass('play-icon-hidden');
 			$(this).children('.vid-item').children('.play-icon').removeClass('play-icon-hidden');

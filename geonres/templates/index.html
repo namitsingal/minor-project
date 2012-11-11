@@ -51,11 +51,11 @@
 <h2>Register Here</h2>
 <div id="registration-status"></div>
 <form class="registration-form" action="users/register" method="POST" name="registers">
-  <p>Username: <input class="input" type="text" name="username" ></p>
-  <p>Password: <input class="input" type="password" name="passwords"></p>
+  <p>Username: <input class="input" type="text" name="username" id="register-uname"></p>
+  <p>Password: <input class="input" type="password" name="passwords" id="register-passwd"></p>
   <p>Confirm Password: <input class="input" type="password" name="cpassword"></p>
-  <p>Email id: <input type="text" class="input" name="email" ></p>
-  <p><input id="newbu" value="Register" type= "submit" class="buttons" name="submit" onclick="return check();" ></input></p>
+  <p>Email id: <input type="text" class="input" name="email" id="register-email"></p>
+  <p><a id="newbu" href='#' class="buttons" onclick="check()" >Register</a></p>
 </form>
 </div>
 

@@ -24,6 +24,24 @@ def status():
         return 'Logged in as %s' % escape(session['username'])
     return 'You are not logged in'
 
+@app.route('/check')
+def checklogin():
+    if 'username' in session:
+        return 'true'
+    else:
+        return 'false'
+
+@app.route('/register1',methods=['POST'])
+def check_register():
+    error = None
+    uname = request.form['username']
+    k = User.query.filter_by(username=uname).first()
+    if k:
+        result = {'status': 'error', 'message': 'User Already exists'}
+    else:
+        result = {'status': 'success', 'message': 'username available'}
+    return Response(json.dumps(result), mimetype='applications/json');
+
 @app.route('/login', methods=['POST'])
 def login():
     error = None
@@ -78,21 +96,31 @@ def register_user():
     email = request.form['email']
 
     k = User.query.filter_by(username=uname).first()
-    if k:
-        ctx = {'STATIC': '/static/', 'error': 'Username exists. Please pick another username'}
-        template = env.get_template('register.html')
-        return template.render(ctx)
+    #if k:
+    #    ctx = {'STATIC': '/static/', 'error': 'Username exists. Please pick another username'}
+    #    template = env.get_template('register.html')
+    #    return template.render(ctx)
 
-    k = User.query.filter_by(email=email).first()
     if k:
-        ctx = {'STATIC': '/static/', 'error': 'A user exists with the same email address. Please pick another email.'}
-        template = env.get_template('register.html')
-        return template.render(ctx)
+        result = {'status': 'error', 'message': 'User Already exists'}
+    else:
+        result = {'status': 'success', 'message': 'username available'}
+    
+        k = User.query.filter_by(email=email).first()
+    #if k:
+    #    ctx = {'STATIC': '/static/', 'error': 'A user exists with the same email address. Please pick another email.'}
+    #    template = env.get_template('register.html')
+    #    return template.render(ctx)
 
-    user = User(uname, password, email)
-    db.session.add(user)
-    db.session.commit()	
-    session['username'] = uname
-    return redirect('/')
+        if k:
+            result = {'status': 'error', 'message': 'A user exists with the same email address.'}
+        else:
+            user = User(uname, password, email)
+            db.session.add(user)
+            db.session.commit()	
+            session['username'] = uname
+            return redirect('/')
+    return Response(json.dumps(result), mimetype='applications/json')
+
 
 app.secret_key='\xe6m\x897\xeec\x88\x9e\xc8\xdd\x99\xd2\xec\xf0\x0f\x88\x00\x00psb\x10'

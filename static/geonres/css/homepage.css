@@ -152,7 +152,7 @@ div.dialogue1 {
 	right: 10%;
 }
 
-.buttons, input.buttons {
+.buttons, input.buttons a.buttons {
 	display: block;
 	background-image: -webkit-linear-gradient(top, #FF9900, #FF6600);
 	background-image: -moz-linear-gradient(top, #FF9900, #FF6600);
