@@ -5,6 +5,8 @@ from jinja2 import Template, Environment, FileSystemLoader
 
 from users import app
 from users.models import *
+from sqlalchemy import distinct
+
 
 env = Environment(loader=FileSystemLoader(['users/templates', 'geonres/templates']))
 
@@ -121,6 +123,48 @@ def register_user():
             session['username'] = uname
             return redirect('/')
     return Response(json.dumps(result), mimetype='applications/json')
+
+
+@app.route('/add_song' , methods=['POST'])
+def add_song():
+    user1 = session['username']
+    name1 = request.form['name']
+    song_id = request.form['song_id']
+    thumb_url1 = request.form['thumb_url']
+    title1 = request.form['title1']
+    k = Playlist.query.filter_by(user=user1,name=name1,id=song_id,thumb_url=thumb_url1,title=title1).first()
+    if(k):
+        result = {'status': 'error', 'message': 'Song Already in Playlist'}
+    else:
+        playlist = Playlist(user1,name1.lower(),song_id,thumb_url1,title1)
+        db.session.add(playlist)
+        db.session.commit()
+        result = {'status': 'success', 'message': 'song added'}
+    return Response(json.dumps(result), mimetype='applications/json')
+
+@app.route('/create_playlist' , methods=['POST'])
+def create_playlist():
+    user1 = session['username']
+    name1 = request.form['name']
+    k = Playlist.query.filter_by(user=user1,name=name1).first()
+    if(k):
+        result = {'status': 'error', 'message': 'Playlist Already exists'}
+    else:
+        playlist = Playlist(user1,name1.lower())
+        db.session.add(playlist)
+        db.session.commit()
+        result = {'status': 'success', 'message': 'playlist created'}
+    return Response(json.dumps(result), mimetype='applications/json')     
+
+@app.route('/show_playlist')
+def show_playlist():
+    playlist = Playlist.query.filter_by(user=session['username']).distinct()
+    play=[]
+    for lists in playlist:
+        play.append({'playlist':lists.name})
+    response_obj = {'player': play}
+    return Response(json.dumps(response_obj),mimetype='json')
+
 
 
 app.secret_key='\xe6m\x897\xeec\x88\x9e\xc8\xdd\x99\xd2\xec\xf0\x0f\x88\x00\x00psb\x10'

@@ -13,7 +13,7 @@ header {
 .tab-options {
 	margin-top: 30px;
 	padding: 1px 0px 0px 20px;
-	width: 97%;
+	width: 100%;
 	background-color: #FFFFFE;
 	background: url('/static/geonres/img/bg-menu.png');
 	height:52px;
@@ -44,6 +44,57 @@ a.tab-link {
 	line-height: 26px;
 }
 
+#list-container {
+	border-bottom: 1px;
+	border-bottom-style: dotted;
+	padding-bottom: 0px;
+	
+}
+.lists {
+	display: block;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	padding: 0px 30px 0px 25px;
+	color: #2E2E2F;
+	color: #464653;
+	color: #0909C4;
+	font-size: 28px;
+	
+	font-family: 'Anton', sans-serif;
+	font-family: 'spirax',cursive;
+	background: url('/static/geonres/img/star.png');
+	background-repeat: no-repeat;
+	background-position: 5px;
+	text-transform: capitalize;
+	
+	line-height: 10px;
+
+}
+
+
+.lists-add {
+	
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	padding: 0px 30px 0px 25px;
+	color: #2E2E2F;
+	color: #464653;
+	color: #0909C4;
+	font-size: 16px;
+	
+	font-family: 'Anton', sans-serif;
+	font-family: 'spirax',cursive;
+	text-transform: capitalize;
+	
+	line-height: 10px;
+
+}
+
+
 a.tab-link:hover {
 	color: #7F9EBD;
 	color: #E61275;
@@ -58,6 +109,20 @@ a.tab-link:hover {
 	padding-bottom: 30px;
 
 }
+
+
+.playlist-container {
+	margin-top: 20px;
+	background: white;
+	background: #E6E6E6;
+	padding: 10px;
+	width:100%;
+	padding-bottom: 30px;
+	padding-bottom: 10px;
+	
+
+}
+
 
 .lookup {
 	border: 1px solid black;

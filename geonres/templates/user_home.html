@@ -5,18 +5,29 @@
 <script defer src="{{ STATIC }}geonres/js/script.js"></script>
 <script src="{{ STATIC }}geonres/js/user_home.js"></script>
 <link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Spirax' rel='stylesheet' type='text/css'>
 {% endblock %}
 
 {% block content %}
 <div class="tab-options">
 	<ul>
 		<li><a href="#" id="browse" class="tab-link pressed">BROWSE</a></li>
-		<li><a href="#" id="Network" class="tab-link">PLAYLIST</a></li>
+		<li><a href="#" id="playlist" class="tab-link">PLAYLIST</a></li>
 		<li><a href="#" id="Top Artists" class="tab-link">FRIENDS</a></li>
 		<li><a href="#" id="Top Tracks" class="tab-link">PROFILE</a></li>
 
 	</ul>
 </div>
+	<div id="overlay" class="dialogue"></div>
+	<div id="playlist-box" class="dialogue">
+		<h2>Playlist</h2>
+    <p><img class="spinner" id="playlist-spinner" src="{{ STATIC }}geonres/img/spinner.gif"/></p>
+    <div id="playlist-status"></div>
+    <p>Playlist Name: <input class="input" type="text" size="30" name="playlist-name" id="playlist-name"/></p>
+    <p><a id="btn-playlist" href="#" class="homepage-button">Create Playlist</a></p>
+    </div>
+    <div id="add-song-box" class="dialogue"></div>
+	<div id='playlist1' class='playlist-container'></div>
 	<div id="tab-browse" class="tab-container">
 		{% include "map_browser.html" %}
 		<div class="clearfix"></div>
@@ -39,4 +50,5 @@
 
 	</div>
 </div>
+
 {% endblock %}

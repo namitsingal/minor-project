@@ -91,7 +91,12 @@ $(document).ready(function() {
 				$('#register-box').hide();
 
 			});
-
+			$('#playlist-box').animate({opacity: 0}, 'fast', function() {
+				$('#playlist-box').hide();
+			});
+			$('#add-song-box').animate({opacity: 0}, 'fast', function() {
+				$('#add-song-box').hide();
+			});
 		}
 	});
 

@@ -10,6 +10,10 @@ params = {allowScriptAccess:"always",wmode:'transparent'};
 atts = {id: "ytplayer"};
 swfobject.embedSWF("http://www.youtube.com/e/JByDbPn6A1o?version=3&enablejsapi=1&autoplay=0","ytapiplayer", "568", "320", "8", null, null, params, atts);
 stateIntro = true;
+add_url = '';
+add_title = '';
+add_id = '';
+
 
 function setupMap() {
 	var geocoder = new google.maps.Geocoder();
@@ -57,9 +61,101 @@ function init() {
 	});
 }
 
+
+function getplaylist(){
+	var url='/users/show_playlist';
+	$('#playlist1').html('');
+	$.get(url,function(data){
+		for (i in data.player){
+			var playlist_name = data.player[i].playlist;
+			//alert(playlist_name);
+			markup = "<div id='list-container'><a href='#' id='"+playlist_name+"' class='lists'>"+ playlist_name + "</a></div>";
+			$('#playlist1').append(markup);
+			$('#'+playlist_name).click(function(){
+				$('#playlist1').html('');
+				markup = '<a id="'+this.id+'" href="#" class="addsong" >Add Song</a>'
+				markup = '<a class="vid-links" href="#" id="xscB9Jq-ZMA"><div class="vid-item"><img class="vid-thumb" src="http://i.ytimg.com/vi/xscB9Jq-ZMA/default.jpg"><p class="vid-title">Kajra Re</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>'
+				$('#playlist1').append(markup);
+			});
+			}
+		markup = '<a id="newbutton1" href="#" class="buttons1" >Create Playlist</a>'
+		$('#playlist1').append(markup);
+		$('#newbutton1').click(function(){
+			$('#overlay').css({opacity: 0}).show().animate({opacity: 0.8}, 'fast');
+			$('#playlist-box').css({opacity: 0}).show().animate({opacity: 1}, 'fast');		
+		});
+
+	});
+
+}
 /* Document Init */
 $(document).ready(function() {
+	
+	/*$('#logout').click(function(){
+		window.location.replace('/users/logout1');
+	})*/
+
+	
+
+	$('#btn-playlist').click(function(){
+		$('#login-spinner').css({display: 'block'});
+		$('#playlist-status').html('');
+		var k=$('#playlist-name').val();
+		if(k==''||k==null)
+		{	alert('Playlist Name cannot be empty');
+			return;
+		}
+		else{
+			
+			$.ajax({
+				url: '/users/create_playlist',
+				type: 'POST',
+				data: {name: k},
+				success: function(data) {
+					$('#playlist-spinner').css({display: 'none'});
+					if(data['status'] === 'success') {
+						
+						$('#playlist-box').animate({opacity: 0}, 'fast', function() {
+						$('#playlist-box').hide();
+						});
+						$('#overlay').animate({opacity: 0}, 'fast', function() {
+						$('#overlay').hide();
+						});
+						getplaylist();
+					}
+					else {
+						$('#playlist-status').html('<span class="login-error">' + data['message'] + '</span>');
+						var x = parseInt($('#playlist-box').css("height"));
+						if(x<221)
+						$('#playlist-box').animate({"height": x + 20}, 'fast');
+					}
+				}
+			});
+		}
+	});
+
+
 	staticUrl = $('#static-url').val();
+	
+	$('#playlist1').animate({opacity:0},1);
+	$('#playlist1').hide();
+	$('#playlist-spinner').hide();
+
+	$('#playlist').click(function(){
+		$('#tab-browse').animate({opacity:0},1)
+		$('#playlist1').animate({opacity:1},1);
+		$('#playlist1').show();
+		getplaylist();
+
+	});
+
+	$('#browse').click(function(){
+		$('#tab-browse').animate({opacity:1},1)
+		$('#playlist1').animate({opacity:0});
+		$('#playlist1').hide();
+
+	});
+
 
 	$(document).click(function(){
 		$('.menu').hide();
@@ -131,7 +227,134 @@ function loadArtists(callback) {
 	});
 }
 
+
+function getplaylist1() {
+	var url='/users/show_playlist';
+	$('#add-song-box').html('');
+
+	$.get(url,function(data){
+		for (i in data.player){
+			
+			var x = parseInt($('#add-song-box').css("height"));
+			$('#add-song-box').animate({"height": x + 50}, 'fast');
+			var playlist_name = data.player[i].playlist;
+			//alert(playlist_name);
+			markup = "<div id='list-container' class='lists-add'><input name='play-list' type='radio' id='"+playlist_name+"' class='lists-add' value='"+playlist_name+"'>"+ playlist_name + "</input></div>";
+			$('#add-song-box').append(markup);
+			}
+		markup = '<a id="addsong" href="#" class="addsong" >Add to Playlist</a>';
+		$('#add-song-box').append(markup);
+		$('#addsong').click(function(){
+			var k= $('.lists-add:checked').val();
+			if(k){
+				
+				$.ajax({
+				url: '/users/add_song',
+				type: 'POST',
+				data: {name: k, song_id: add_id, thumb_url:add_url, title1: add_title},
+				success: function(data) {
+					if(data['status'] === 'success') {
+						alert('Song added').fadeOut('slow');
+						
+					}
+					else {
+						alert('Song  could not be added').fadeOut('slow');
+					}
+					}
+				});
+				}
+			else{
+				alert('Select 1 playlist');
+				}
+		});
+});
+}
+
+
 function loadTracks(callback) {
+	var markup = '';
+	var markup1 = '';
+	var url = '/api/videos/' + encodeURI(artist) + '/' + currentTracksPage + '?format=json';
+	$.get(url, function(data) {
+		for(i in data.videos) {
+			var item = data.videos[i];
+			markup1 = '<div style="border: 1px solid rgb(0, 0, 0); padding: 10px; display: none; position: absolute; background-color: rgb(238, 238, 238);" class="menu" id="' + item.id + '">Add to playlist</div>';
+			markup = '<a class="vid-links" href="#" id="' + item.id + '">' +
+				'<div class="vid-item">' +
+					'<img class="vid-thumb" src="'+ item.thumb_url + '" id="'+item.id+'" />' + 
+					'<p class="vid-title" id="'+item.id+'">' + item.title+ '</p>' + 
+					'<img class="play-icon play-icon-hidden" src="' + staticUrl + 'img/play.png"/>' +
+				'</div>' +
+			'</a>';
+
+					$('#videolist').append(markup);
+		$('#videolist').append(markup1);
+
+		$('#'+item.id+'.menu').click(function(){
+
+
+
+			var k = this;
+			//alert(k.id);
+			$.get('/users/check', function(data) {
+				if(data=='true')
+					{	
+						console.log('logged in');
+						add_url = $('#'+k.id+'.vid-thumb').attr("src");
+						add_title  = $('#'+k.id +'.vid-title').html();
+						add_id = k.id;
+						$('#add-song-box').html('');
+						$('#overlay').css({opacity: 0}).show().animate({opacity: 0.8}, 'fast');
+						
+						$('#add-song-box').css({opacity: 0}).show().animate({opacity: 1}, 'fast');
+						getplaylist1();
+						
+						//alert(title);
+						//alert(this.id);
+						//alert($("#"+this.id+".vid-links").children('.vid-item').children('.vid-thumb')['src']);
+					}
+				else
+				{
+					$('#btn-homepage-login').click();
+				}
+			});
+
+
+		});
+
+		}
+		$('#videolist .spinner-icon').addClass('spinner-icon-hidden');
+		document.getElementById('videolist').scrollTop = 0;
+		$('.vid-links').bind("contextmenu", function(e) {
+			$('.menu').hide();
+			add_id=this.id;
+			$('#add-song-box').animate({"height": parseInt(250)}, 'fast');
+		
+    	$('#'+this.id+'.menu').css({
+        	top: e.pageY+'px',
+        	left: e.pageX+'px'
+    	}).show();
+
+    	return false;
+
+	});
+
+
+		$('.vid-links').click(function() {
+			$('#videolist .play-icon').addClass('play-icon-hidden');
+			$(this).children('.vid-item').children('.play-icon').removeClass('play-icon-hidden');
+			nowplayingid = this.id;
+			ytplayer.loadVideoById(nowplayingid);
+			$('#watch-video').click();
+		});
+
+		if(callback) callback();
+	});
+}
+
+
+/*
+function loadTracks1(callback) {
 	var markup = '';
 	var url = '/api/videos/' + encodeURI(artist) + '/' + currentTracksPage + '?format=json';
 	$.get(url, function(data) {
@@ -185,6 +408,12 @@ function loadTracks(callback) {
 		if(callback) callback();
 	});
 }
+
+
+*/
+
+
+
 
 function loadMoreTracks() {
 	currentTracksPage++;

@@ -59,7 +59,7 @@
       {% if user %}
       <div id="user-panel">
         Logged in as <strong>{{ user.username }}</strong>
-        <p><a href="/users/logout">Logout</a></p>
+        <p><a href="/users/logout" id='logout'>Logout</a></p>
       </div>
       {% else %}
         <input type="hidden" value="{{ STATIC }}" id="static-url"/>

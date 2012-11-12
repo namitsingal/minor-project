@@ -29,3 +29,22 @@ class UserProfile(db.Model):
 	user = db.Column(db.Integer, db.ForeignKey(User.id), unique=True)
 	photo = db.Column(db.String(200))
 	about = db.Column(db.String(200))
+    
+
+class Playlist(db.Model):
+    __tablename__ = 'playlist'
+    user = db.Column(db.String(100), db.ForeignKey(User.username), primary_key=True)
+    name = db.Column(db.String(100), primary_key=True)
+    id = db.Column(db.String(100), primary_key=True)
+    thumb_url = db.Column(db.String(100))
+    title = db.Column(db.String(100))
+    
+    def __init__(self, user, name, song_id='default',thumb_url='default',title='default'):
+        self.user = user
+        self.name = name
+        self.id = song_id
+        self.thumb_url = thumb_url
+        self.title = title
+
+    def __repr__(self):
+        return '<User %s>' % self.user
