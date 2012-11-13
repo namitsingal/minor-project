@@ -73,9 +73,23 @@ function getplaylist(){
 			$('#playlist1').append(markup);
 			$('#'+playlist_name).click(function(){
 				$('#playlist1').html('');
-				markup = '<a id="'+this.id+'" href="#" class="addsong" >Add Song</a>'
-				markup = '<a class="vid-links" href="#" id="xscB9Jq-ZMA"><div class="vid-item"><img class="vid-thumb" src="http://i.ytimg.com/vi/xscB9Jq-ZMA/default.jpg"><p class="vid-title">Kajra Re</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>'
-				$('#playlist1').append(markup);
+				$.ajax({
+				url: '/users/show_songs',
+				type: 'POST',
+				data: {name: playlist_name},
+				success: function(data) {
+					
+					for(i in data.player){
+						markup = '<a class="vid-links1" href="#" id="'+data.player[i].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[i].thumb_url+'"><p class="vid-title">'+data.player[i].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
+						$('#playlist1').append(markup);
+					}		
+				$('.vid-links1').click(function() {		
+							loadTracks1(playlist_name,this.id);
+						});
+				//alert('link added');
+				}
+			});
+				
 			});
 			}
 		markup = '<a id="newbutton1" href="#" class="buttons1" >Create Playlist</a>'
@@ -254,11 +268,11 @@ function getplaylist1() {
 				data: {name: k, song_id: add_id, thumb_url:add_url, title1: add_title},
 				success: function(data) {
 					if(data['status'] === 'success') {
-						alert('Song added').fadeOut('slow');
+						alert('Song added');
 						
 					}
 					else {
-						alert('Song  could not be added').fadeOut('slow');
+						alert('Song  could not be added');
 					}
 					}
 				});
@@ -353,13 +367,20 @@ function loadTracks(callback) {
 }
 
 
-/*
-function loadTracks1(callback) {
+
+function loadTracks1(name11,idd) {
 	var markup = '';
-	var url = '/api/videos/' + encodeURI(artist) + '/' + currentTracksPage + '?format=json';
-	$.get(url, function(data) {
-		for(i in data.videos) {
-			var item = data.videos[i];
+	var url = '/users/show_songs';
+	//alert('I am in');
+$.ajax({
+				url: '/users/show_songs',
+				type: 'POST',
+				data: {name: name11},
+				success: function(data) {
+			$('#videolist').html('');
+					
+		for(i in data.player) {
+			var item = data.player[i];
 			markup += '<div style="border: 1px solid rgb(0, 0, 0); padding: 10px; display: none; position: absolute; background-color: rgb(238, 238, 238);" class="menu" id="' + item.id + '">Add to playlist</div>'
 			+'<a class="vid-links" href="#" id="' + item.id + '">' +
 				'<div class="vid-item">' +
@@ -373,12 +394,24 @@ function loadTracks1(callback) {
 		$('#videolist .spinner-icon').addClass('spinner-icon-hidden');
 		document.getElementById('videolist').scrollTop = 0;
 		$('.vid-links').bind("contextmenu", function(e) {
+		var k = this;
+
 
 		$('.menu').click(function(){
 
 			$.get('/users/check', function(data) {
-				if(data=='true')
+				if(data=='true'){
 					console.log('logged in');
+						add_url = $('#'+k.id+'.vid-thumb').attr("src");
+						add_title  = $('#'+k.id +'.vid-title').html();
+						add_id = k.id;
+						$('#add-song-box').html('');
+						$('#overlay').css({opacity: 0}).show().animate({opacity: 0.8}, 'fast');
+						
+						$('#add-song-box').css({opacity: 0}).show().animate({opacity: 1}, 'fast');
+						getplaylist1();
+				}
+					
 				else
 				{
 					$('#btn-homepage-login').click();
@@ -405,12 +438,14 @@ function loadTracks1(callback) {
 			$('#watch-video').click();
 		});
 
-		if(callback) callback();
-	});
+		$('#'+idd+'.vid-links').click()
+		//if(callback) callback();
+	}
+});
 }
 
 
-*/
+
 
 
 
@@ -456,7 +491,7 @@ function loadMoreArtists() {
 }
 
 function playnextvideo() {
-	next = $( '#' + nowplayingid ).next();
+	next = $( '#' + nowplayingid ).next().next();
 	if( next ) next.click();
 }
 

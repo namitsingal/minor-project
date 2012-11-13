@@ -159,11 +159,29 @@ def create_playlist():
 @app.route('/show_playlist')
 def show_playlist():
     playlist = Playlist.query.filter_by(user=session['username']).distinct()
+    n=[]
     play=[]
-    for lists in playlist:
-        play.append({'playlist':lists.name})
+    for k in playlist:
+        n.append(k.name)
+    n=set(n)
+    for lists in n:
+        play.append({'playlist':lists})
     response_obj = {'player': play}
     return Response(json.dumps(response_obj),mimetype='json')
+
+
+@app.route('/show_songs',methods=['POST'])
+def show_songs():
+    k=request.form['name']
+    playlist = Playlist.query.filter_by(user=session['username'],name=k).distinct()
+    play=[]
+    for lists in playlist:
+        if(lists.id!='default'):
+            play.append({'id':lists.id,'thumb_url':lists.thumb_url,'title':lists.title})
+            #play.append({'thumb_url':lists.thumb_url})
+            #play.append({'title':lists.title})
+    response_obj = {'player': play}
+    return Response(json.dumps(response_obj),mimetype='json')    
 
 
 
