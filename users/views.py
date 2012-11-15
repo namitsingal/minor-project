@@ -144,8 +144,8 @@ def add_song():
 
 @app.route('/create_playlist' , methods=['POST'])
 def create_playlist():
-    user1 = session['username']
-    name1 = request.form['name']
+    user1 = session['username'].lower()
+    name1 = request.form['name'].lower()
     k = Playlist.query.filter_by(user=user1,name=name1).first()
     if(k):
         result = {'status': 'error', 'message': 'Playlist Already exists'}
@@ -195,7 +195,7 @@ def show_friends():
 
 @app.route('/show_people',methods=['POST'])
 def show_people():
-    s=request.form['name']
+    s=request.form['name'].lower()
     playlist = User.query.filter_by().all()
     n=[]
     play=[]
@@ -239,7 +239,7 @@ def show_requests():
 
 @app.route('/show_songs',methods=['POST'])
 def show_songs():
-    k=request.form['name']
+    k=request.form['name'].lower()
     playlist = Playlist.query.filter_by(user=session['username'],name=k).distinct()
     play=[]
     for lists in playlist:
@@ -254,7 +254,7 @@ def show_songs():
 
 @app.route('/add_as_friend',methods=['POST'])
 def add_as_friend():
-    k = request.form['name']
+    k = request.form['name'].lower()
     v = session['username']
     #s = Request(k,v)
     ss = Request(k,v)
@@ -268,7 +268,7 @@ def add_as_friend():
 
 @app.route('/addfriend',methods=['POST'])
 def addfriend():
-    k = request.form['name']
+    k = request.form['name'].lower()
     v = session['username']
     ss = Request.query.filter_by(user=v,friend_name=k).first()
     db.session.delete(ss)
@@ -286,7 +286,7 @@ def addfriend():
 
 @app.route('/rejectfriend',methods=['POST'])
 def rejectfriend():
-    k = request.form['name']
+    k = request.form['name'].lower()
     v = session['username']
     ss = Request.query.filter_by(user=v,friend_name=k).first()
     db.session.delete(ss)
