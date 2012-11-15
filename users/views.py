@@ -121,7 +121,7 @@ def register_user():
             db.session.add(user)
             db.session.commit()	
             session['username'] = uname
-            return redirect('/')
+            return Response(json.dumps(result), mimetype='applications/json')
     return Response(json.dumps(result), mimetype='applications/json')
 
 
@@ -170,6 +170,73 @@ def show_playlist():
     return Response(json.dumps(response_obj),mimetype='json')
 
 
+@app.route('/show_profile',methods=['POST'])
+def show_profile():
+    return request.form['name'];
+
+@app.route('/show_profile')
+def show_my_profile():
+    return session['username'];
+
+@app.route('/show_friends')
+def show_friends():
+    playlist = Friends.query.filter_by(user=session['username']).distinct()
+    n=[]
+    play=[]
+    for k in playlist:
+        n.append(k.friend_name)
+    n=set(n)
+    for lists in n:
+        play.append({'playlist':lists})
+    response_obj = {'player': play}
+    return Response(json.dumps(response_obj),mimetype='json')
+
+
+
+@app.route('/show_people',methods=['POST'])
+def show_people():
+    s=request.form['name']
+    playlist = User.query.filter_by().all()
+    n=[]
+    play=[]
+    for k in playlist:
+        n.append(k.username)
+    n=set(n)
+    for lists in n:
+        if(lists!=session['username'] and lists.startswith(s)):
+            fr = Request.query.filter_by(user=session['username'],friend_name=lists).first()
+            fr11 = Request.query.filter_by(user=lists,friend_name=session['username']).first()
+            if fr:
+                request1 = 1
+            else:
+                request1 = 0
+            if(fr11):
+                request1 = 1
+            fr1 = Friends.query.filter_by(user=session['username'],friend_name=lists).first()
+            if fr1:
+                friend = 1
+            else:
+                friend = 0
+            play.append({'playlist':lists,'request':request1,'friend':friend})
+    response_obj = {'player': play}
+    return Response(json.dumps(response_obj),mimetype='json')
+
+
+@app.route('/show_requests')
+def show_requests():
+    playlist = Request.query.filter_by(user=session['username']).distinct()
+    n=[]
+    play=[]
+    for k in playlist:
+        n.append(k.friend_name)
+    n=set(n)
+    for lists in n:
+        play.append({'playlist':lists})
+    response_obj = {'player': play}
+    return Response(json.dumps(response_obj),mimetype='json')
+
+
+
 @app.route('/show_songs',methods=['POST'])
 def show_songs():
     k=request.form['name']
@@ -182,6 +249,52 @@ def show_songs():
             #play.append({'title':lists.title})
     response_obj = {'player': play}
     return Response(json.dumps(response_obj),mimetype='json')    
+
+
+
+@app.route('/add_as_friend',methods=['POST'])
+def add_as_friend():
+    k = request.form['name']
+    v = session['username']
+    #s = Request(k,v)
+    ss = Request(k,v)
+    #db.session.add(s)
+    #db.session.commit()
+    db.session.add(ss)
+    db.session.commit()
+    result = {'status': 'success', 'message': 'friend request sent'}
+    return Response(json.dumps(result),mimetype='json')    
+
+
+@app.route('/addfriend',methods=['POST'])
+def addfriend():
+    k = request.form['name']
+    v = session['username']
+    ss = Request.query.filter_by(user=v,friend_name=k).first()
+    db.session.delete(ss)
+    db.session.commit()
+    kk = Friends(k,v)
+    kk1 = Friends(v,k)
+    db.session.add(kk)
+    db.session.commit()
+    db.session.add(kk1)
+    db.session.commit()
+    result = {'status': 'success', 'message': 'friend request rejected'}
+    return Response(json.dumps(result),mimetype='json')    
+
+
+
+@app.route('/rejectfriend',methods=['POST'])
+def rejectfriend():
+    k = request.form['name']
+    v = session['username']
+    ss = Request.query.filter_by(user=v,friend_name=k).first()
+    db.session.delete(ss)
+    db.session.commit()
+    result = {'status': 'success', 'message': 'friend request rejected'}
+    return Response(json.dumps(result),mimetype='json')    
+
+
 
 
 

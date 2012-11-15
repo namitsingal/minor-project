@@ -47,15 +47,23 @@ a.tab-link {
 #list-container {
 	border-bottom: 1px;
 	border-bottom-style: dotted;
-	padding-bottom: 0px;
+	padding-bottom: 10px;
+	margin-top: 30px;
 	
 }
+
+#list-container1 {
+	border-bottom: 1px;
+	border-bottom-style: dotted;
+	padding-bottom: 0px;
+	margin-top: 30px;
+	
+}
+
 .lists {
 	display: block;
-	-webkit-margin-before: 1em;
-	-webkit-margin-after: 1em;
-	-webkit-margin-start: 0px;
-	-webkit-margin-end: 0px;
+	margin-top: 25px;
+	margin-bottom: 25px;
 	padding: 0px 30px 0px 25px;
 	color: #2E2E2F;
 	color: #464653;
@@ -73,6 +81,51 @@ a.tab-link {
 
 }
 
+
+.lists1 {
+	
+	padding: 0px 30px 0px 25px;
+	color: #2E2E2F;
+	color: #464653;
+	color: #0909C4;
+	font-size: 20px;
+	
+	font-family: 'Anton', sans-serif;
+	font-family: 'spirax',cursive;
+	background: url('/static/geonres/img/star.png');
+	background-repeat: no-repeat;
+	background-position: 5px;
+	text-transform: capitalize;
+	
+	line-height: 10px;
+
+}
+
+#header-friend {
+	background: yellow;
+	height :30px;
+	padding-top: 20px;
+	margin-bottom: 50px;
+}
+
+a:visited.lists1 {
+	color: #0909C4;
+}
+
+
+a:hover.lists1  {
+	color: #FE57A1;
+}
+
+
+a:visited.lists {
+	color: #0909C4;
+}
+
+
+a:hover.lists  {
+	color: #FE57A1;
+}
 
 .lists-add {
 	
@@ -94,6 +147,29 @@ a.tab-link {
 
 }
 
+a:visited.friend-head  {
+	color: #0909C4;
+}
+
+a:hover.friend-head  {
+	color: #FE57A1;
+}
+
+
+.friend-head{
+	padding: 0px 30px 0px 25px;
+	color: #0909C4;
+	font-size: 28px;
+	
+	font-family: 'Anton', sans-serif;
+	font-family: 'spirax',cursive;
+	background: url('/static/geonres/img/star.png');
+	background-repeat: no-repeat;
+	background-position: 5px;
+	text-transform: capitalize;
+	
+	line-height: 10px;	
+}
 
 a.tab-link:hover {
 	color: #7F9EBD;

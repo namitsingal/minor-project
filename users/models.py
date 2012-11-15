@@ -48,3 +48,29 @@ class Playlist(db.Model):
 
     def __repr__(self):
         return '<User %s>' % self.user
+
+
+
+class Friends(db.Model):
+    __tablename__ = 'user_friends'
+    user = db.Column(db.String(100), db.ForeignKey(User.username), primary_key=True)
+    friend_name = db.Column(db.String(100), db.ForeignKey(User.username), primary_key=True)
+    def __init__(self, user, friend_name):
+        self.user = user
+        self.friend_name = friend_name
+    def __repr__(self):
+        return '<User %s>' % self.user
+
+
+
+class Request(db.Model):
+    __tablename__ = 'friend_request'
+    user = db.Column(db.String(100), db.ForeignKey(User.username), primary_key=True)
+    friend_name = db.Column(db.String(100), db.ForeignKey(User.username), primary_key=True)    
+    def __init__(self, user, friend_name):
+        self.user = user
+        self.friend_name = friend_name
+    def __repr__(self):
+        return '<User %s>' % self.user
+
+    

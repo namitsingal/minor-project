@@ -109,6 +109,313 @@ function getplaylist(){
 	});
 
 }
+
+function getfriends(){
+	var url='/users/show_friends';
+	$('#playlist1').html("<div id='header-friend'><a id= 'friend-container' class = 'friend-head' href='#'>Friends</a><a id='request-container' class = 'friend-head' href='#'>Requests</a><a id='finder-container' class = 'friend-head' href='#'>Find people</a></div>");
+
+	$('#friend-container').click(function(){
+		getfriends();
+	});
+	
+	$('#request-container').click(function(){
+		getrequests();
+	});
+	
+	$('#finder-container').click(function(){
+		getfind();
+	});
+
+
+	$.get(url,function(data){
+		var j=1;
+		for (i in data.player){
+			j=j+1;
+			var playlist_name = data.player[i].playlist;
+			//alert(playlist_name);
+			markup = "<div id='list-container'><a href='#' id='"+playlist_name+"' class='lists1'>"+ playlist_name + "</a></div>";
+			$('#playlist1').append(markup);
+
+			}
+			if(j==1){
+			markup = "<div id='list-container1'><p>No Friends</p></div>";
+			$('#playlist1').append(markup);
+			}
+
+			$('.lists1').click(function(){
+				//alert('I am here');
+				$('#playlist1').html('');
+				var kk=this.id;
+				//alert(kk);
+				$.ajax({
+				url: '/users/show_profile',
+				type: 'POST',
+				data: {name: kk},
+				success: function(data) {
+					
+					//for(ii in data.player){
+					//	markup = '<a class="vid-links1" name="'+kk+'" href="#" id="'+data.player[ii].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
+					//	$('#playlist1').append(markup);
+					$('#playlist1').html(data);
+					//}		
+				/*$('.vid-links1').click(function() {		
+							loadTracks1(this.name,this.id);
+							$('#browse').click();
+						});*/
+				//alert('link added');
+				}//loadTracks1
+			});
+				
+			});
+		/*markup = '<a id="newbutton1" href="#" class="buttons1" >Create Playlist</a>'
+		$('#playlist1').append(markup);
+		$('#newbutton1').click(function(){
+			$('#overlay').css({opacity: 0}).show().animate({opacity: 0.8}, 'fast');
+			$('#playlist-box').css({opacity: 0}).show().animate({opacity: 1}, 'fast');		
+		});
+*/
+	});
+
+}
+
+
+
+function getrequests(){
+	var url='/users/show_requests';
+	$('#playlist1').html("<div id='header-friend'><a id= 'friend-container' class = 'friend-head' href='#'>Friends</a><a id='request-container' class = 'friend-head' href='#'>Requests</a><a id='finder-container' class = 'friend-head' href='#'>Find people</a></div>");
+
+	$('#friend-container').click(function(){
+		getfriends();
+	});
+	
+	$('#request-container').click(function(){
+		getrequests();
+	});
+	
+	$('#finder-container').click(function(){
+		getfind();
+	});
+
+
+	$.get(url,function(data){
+		var j=1;
+		for (i in data.player){
+			j=j+1;
+			var playlist_name = data.player[i].playlist;
+			//alert(playlist_name);
+			markup = "<div id='list-container'><a href='#' id='"+playlist_name+"' class='lists1'>"+ playlist_name + "</a><a href='#' class='friend-request11' name='" + playlist_name + "'>Accept</a><a href='#' class='friend-request12' name='" + playlist_name + "'>Reject</a></div>";
+			$('#playlist1').append(markup);
+
+			}
+		if(j==1){
+			markup = "<div id='list-container1'><p>No Friend Requests</p></div>";
+			$('#playlist1').append(markup);
+		}
+		$('.friend-request11').click(function(){
+			var k=this;
+			//alert(k.name);
+			$.ajax({ url: '/users/addfriend',
+					 type: 'POST', 
+					 data:{name:k.name},
+					 success: function(data){
+					 	alert('Successfully added');
+					 	$('#request-container').click();
+					 }
+
+			});
+		});
+
+
+		$('.friend-request12').click(function(){
+			var k=this;
+			$.ajax({ url: '/users/rejectfriend',
+					 type: 'POST', 
+					 data:{name:k.name},
+					 success: function(data){
+					 	alert('Request declined');
+					 	$('#request-container').click();
+					 }
+
+			});
+		});
+
+
+		$('.lists1').click(function(){
+				//alert('I am here');
+				$('#playlist1').html('');
+				var kk=this.id;
+				//alert(kk);
+				$.ajax({
+				url: '/users/show_profile',
+				type: 'POST',
+				data: {name: kk},
+				success: function(data) {
+					
+					//for(ii in data.player){
+					//	markup = '<a class="vid-links1" name="'+kk+'" href="#" id="'+data.player[ii].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
+					//	$('#playlist1').append(markup);
+					$('#playlist1').html(data);
+					//}		
+				/*$('.vid-links1').click(function() {		
+							loadTracks1(this.name,this.id);
+							$('#browse').click();
+						});*/
+				//alert('link added');
+				}//loadTracks1
+			});
+				
+			});
+		
+
+			/*$('.lists').click(function(){
+				//alert('I am here');
+				$('#playlist1').html('');
+				var kk=this.id;
+				//alert(kk);
+				$.ajax({
+				url: '/users/show_songs',
+				type: 'POST',
+				data: {name: kk},
+				success: function(data) {
+					
+					for(ii in data.player){
+						markup = '<a class="vid-links1" name="'+kk+'" href="#" id="'+data.player[ii].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
+						$('#playlist1').append(markup);
+					}		
+				$('.vid-links1').click(function() {		
+							loadTracks1(this.name,this.id);
+							$('#browse').click();
+						});
+				//alert('link added');
+				}//loadTracks1
+			});
+				
+			});*/
+		/*markup = '<a id="newbutton1" href="#" class="buttons1" >Create Playlist</a>'
+		$('#playlist1').append(markup);
+		$('#newbutton1').click(function(){
+			$('#overlay').css({opacity: 0}).show().animate({opacity: 0.8}, 'fast');
+			$('#playlist-box').css({opacity: 0}).show().animate({opacity: 1}, 'fast');		
+		});
+*/
+	});
+
+}
+
+
+
+function getfind(){
+	var url='/users/show_people';
+	$('#playlist1').html("<div id='header-friend'><a id= 'friend-container' class = 'friend-head' href='#'>Friends</a><a id='request-container' class = 'friend-head' href='#'>Requests</a><a id='finder-container' class = 'friend-head' href='#'>Find people</a></div><div id='found'></div><div id='found1'></div>");
+
+	$('#friend-container').click(function(){
+		getfriends();
+	});
+	
+	$('#request-container').click(function(){
+		getrequests();
+	});
+	
+	$('#finder-container').click(function(){
+		getfind();
+	});
+
+	$('#found').append("<p>Enter Name: <input type='text' id='search_name'></input>")
+	markup = "<div id='list-container1'><p>(Please Enter Name)</p></div>";
+	$('#found1').html(markup);
+	$('#search_name').keyup(function(){
+		kk=$(this).val();
+		if(kk=="")
+		{
+			markup = "<div id='list-container1'><p>(Please Enter Name)</p></div>";
+			$('#found1').html(markup);
+		}
+		else{
+	$.ajax({
+				url: '/users/show_people',
+				type: 'POST',
+				data: {name: kk},
+				success: function(data){
+			markup="";
+			var j=1;
+		for (i in data.player){
+			j=j+1;
+			var playlist_name = data.player[i].playlist;
+			//alert(playlist_name);
+			markup += "<div id='list-container1'><a href='#' id='"+playlist_name+"' class='lists1'>"+ playlist_name + "</a>";
+			if(data.player[i].request==1)
+				markup += "<a class='friend-request1' name='" +playlist_name+ "'>Request sent</a></div>";
+			else if(data.player[i].friend==1)
+				markup += "<a class='friend-request1' name='" +playlist_name+ "'>Already a Friend</a></div>";
+			else
+				markup+= "<a href='#' class='friend-request' name='" +playlist_name+ "'>Add as Friend</a></div>";
+
+			
+
+			}
+			$('#found1').html(markup);
+
+			$('.friend-request').click(function(){
+				k=this.name;
+				kk=this;
+				//alert($(this).html());
+				//alert(k);
+			$.ajax({
+							url:'/users/add_as_friend',
+							type: 'POST',
+							data: {name:k},
+							success: function(data){
+								$(kk).html('Request sent');
+								alert('friend request sent');
+							}
+
+				});	
+			});
+		if(j==1){
+			markup = "<div id='list-container1'><p>No Person Found</p></div>";
+			$('#found1').html(markup);
+		}
+		$('.lists1').click(function(){
+				//alert('I am here');
+				$('#playlist1').html('');
+				var kk=this.id;
+				//alert(kk);
+				$.ajax({
+				url: '/users/show_profile',
+				type: 'POST',
+				data: {name: kk},
+				success: function(data) {
+										//for(ii in data.player){
+					//	markup = '<a class="vid-links1" name="'+kk+'" href="#" id="'+data.player[ii].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
+					//	$('#playlist1').append(markup);
+					$('#playlist1').html(data);
+					//}		
+				/*$('.vid-links1').click(function() {		
+							loadTracks1(this.name,this.id);
+							$('#browse').click();
+						});*/
+				//alert('link added');
+				}//loadTracks1
+			});
+				
+			});
+		
+		}
+	});
+	}
+});
+}
+
+
+
+function getprofile(){
+	$.get('/users/show_profile',function(data){
+		$('#playlist1').html(data);
+	});
+}
+
+
+
 /* Document Init */
 $(document).ready(function() {
 	
@@ -170,6 +477,13 @@ $(document).ready(function() {
 
 	});
 
+	$('#friend').click(function(){
+		$('#tab-browse').animate({opacity:0},1)
+		$('#playlist1').animate({opacity:1},1);
+		$('#playlist1').show();
+		getfriends();
+	});
+
 	$('#browse').click(function(){
 		$('#tab-browse').animate({opacity:1},1)
 		$('#playlist1').animate({opacity:0});
@@ -177,6 +491,20 @@ $(document).ready(function() {
 
 	});
 
+
+	$('#profile').click(function(){
+		$('#tab-browse').animate({opacity:0},1)
+		$('#playlist1').animate({opacity:1},1);
+		$('#playlist1').show();
+		getprofile();
+	});
+
+	$('#message').click(function(){
+		$('#tab-browse').animate({opacity:0},1)
+		$('#playlist1').animate({opacity:1},1);
+		$('#playlist1').show();
+		getmessage();
+	});
 
 	$(document).click(function(){
 		$('.menu').hide();
@@ -275,11 +603,14 @@ function getplaylist1() {
 				data: {name: k, song_id: add_id, thumb_url:add_url, title1: add_title},
 				success: function(data) {
 					if(data['status'] === 'success') {
+						songadded();
 						alert('Song added');
+
 						
 					}
 					else {
-						alert('Song  could not be added');
+						songadded();
+						alert('Song  already in playlist');
 					}
 					}
 				});

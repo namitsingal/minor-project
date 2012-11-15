@@ -1,4 +1,25 @@
 
+function songadded(){
+	$('#overlay').animate({opacity: 0}, 'fast', function() {
+				$('#overlay').hide();
+			});
+
+			$('#login-box').animate({opacity: 0}, 'fast', function() {
+				$('#login-box').hide();
+			});
+			$('#register-box').animate({opacity: 0}, 'fast', function() {
+				$('#register-box').hide();
+
+			});
+			$('#playlist-box').animate({opacity: 0}, 'fast', function() {
+				$('#playlist-box').hide();
+			});
+			$('#add-song-box').animate({opacity: 0}, 'fast', function() {
+				$('#add-song-box').hide();
+			});
+}
+
+
 function check() { //alert(document.forms["registers"]["username"].value);
 	var message = '';
 	var state = true;
@@ -28,7 +49,11 @@ function check() { //alert(document.forms["registers"]["username"].value);
 					//$('#login-spinner').css({display: 'none'});
 					if(data['status'] === 'success') {
 						var k=1;
-						//window.location.href = '/';
+						alert('registered successfully');
+						window.location.href='/'
+						//window.location.reload(forceGet);
+						return true;
+						state=true;
 					}
 					else {
 						message = data['message'];

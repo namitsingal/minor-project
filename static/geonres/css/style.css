@@ -228,6 +228,130 @@ header, div.dark {background-color:#333;box-shadow:0px 2px 5px #444;height:100px
 }
 
 
+.friend-request, a.friend-request {
+  display: block;
+  background-image: -webkit-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -moz-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -o-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -ms-linear-gradient(top, #FF9900, #FF6600);
+  border-radius: 3px;
+  box-shadow: 0 2px 4px #222;
+  border: 1px solid #222;
+  vertical-align: middle;
+  padding: 7px 0 13px 0;
+  width: 120px;
+  text-align: center; 
+  margin-bottom: 0px;
+  font-size: 13px;
+  color: #444;
+  height: 10px;
+  margin-left: 200px;
+  position: relative;
+  bottom: 25px;
+}
+
+.friend-request:hover {
+  background-image: -webkit-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -moz-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -o-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -ms-linear-gradient(top, #FFAD33, #FF8533);
+  background-color: #CC9900;
+}
+
+.friend-request1, a.friend-request1 {
+  display: block;
+  background-image: -webkit-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -moz-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -o-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -ms-linear-gradient(top, #FF9900, #FF6600);
+  border-radius: 3px;
+  box-shadow: 0 2px 4px #222;
+  border: 1px solid #222;
+  vertical-align: middle;
+  padding: 7px 0 13px 0;
+  width: 120px;
+  text-align: center; 
+  margin-bottom: 0px;
+  font-size: 13px;
+  color: #444;
+  height: 10px;
+  margin-left: 200px;
+  position: relative;
+  bottom: 25px;
+
+}
+
+.friend-request1:hover {
+  background-image: -webkit-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -moz-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -o-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -ms-linear-gradient(top, #FFAD33, #FF8533);
+  background-color: #CC9900;
+}
+
+.friend-request11, a.friend-request11 {
+  display: inline-block;
+  background-image: -webkit-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -moz-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -o-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -ms-linear-gradient(top, #FF9900, #FF6600);
+  border-radius: 3px;
+  box-shadow: 0 2px 4px #222;
+  border: 1px solid #222;
+  vertical-align: middle;
+  padding: 7px 0 13px 0;
+  width: 120px;
+  text-align: center; 
+  margin-bottom: 0px;
+  font-size: 13px;
+  color: #444;
+  height: 10px;
+  margin-left: 40px;
+  position: relative;
+  bottom: 5px;
+}
+
+.friend-request11:hover {
+  background-image: -webkit-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -moz-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -o-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -ms-linear-gradient(top, #FFAD33, #FF8533);
+  background-color: #CC9900;
+}
+
+
+.friend-request12, a.friend-request12 {
+  display: inline-block;
+  background-image: -webkit-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -moz-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -o-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -ms-linear-gradient(top, #FF9900, #FF6600);
+  border-radius: 3px;
+  box-shadow: 0 2px 4px #222;
+  border: 1px solid #222;
+  vertical-align: middle;
+  padding: 7px 0 13px 0;
+  width: 120px;
+  text-align: center; 
+  margin-bottom: 0px;
+  font-size: 13px;
+  color: #444;
+  height: 10px;
+  margin-left: 10px;
+  position: relative;
+  bottom: 5px;
+}
+
+.friend-request12:hover {
+  background-image: -webkit-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -moz-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -o-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -ms-linear-gradient(top, #FFAD33, #FF8533);
+  background-color: #CC9900;
+}
+
+
+
 div.dialogue {
   display: none;
   position: absolute;
