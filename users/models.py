@@ -1,5 +1,6 @@
 from flask.ext.sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 from users import app
 
@@ -29,7 +30,29 @@ class UserProfile(db.Model):
 	user = db.Column(db.Integer, db.ForeignKey(User.id), unique=True)
 	photo = db.Column(db.String(200))
 	about = db.Column(db.String(200))
+    interest = db.Column(db.String(200))
+    name = db.Column(db.String(200))
     
+class Discussion(db.Model):
+    __tablename__ = 'discussions'
+    id = db.Column(db.Integer(20), primary_key=True, autoincrement=True)
+    genre = db.Column(db.String(100))
+    name = db.Column(db.String(100))
+    user_name = db.Column(db.String(100))
+    comment = db.Column(db.String(100))
+    date = db.Column(db.DateTime)
+
+    def __init__(self, genre, name = 'default', user_name = 'default', comment = 'default'):
+        self.genre = genre
+        self.name = name
+        self.user_name = user_name
+        self.comment = comment
+        self.date = datetime.utcnow()
+    
+    def __repr__(self):
+        return '<genre - '+self.genre+'> <user - '+self.user_name+'>'
+
+
 
 class Playlist(db.Model):
     __tablename__ = 'playlist'

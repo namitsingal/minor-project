@@ -82,6 +82,130 @@ a.tab-link {
 }
 
 
+.lists_discussions {
+	display: block;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	padding: 0px 30px 0px 25px;
+	color: #2E2E2F;
+	color: #464653;
+	color: #0909C4;
+	font-size: 28px;
+	
+	font-family: 'Anton', sans-serif;
+	font-family: 'spirax',cursive;
+	background: url('/static/geonres/img/star.png');
+	background-repeat: no-repeat;
+	background-position: 5px;
+	text-transform: capitalize;
+	
+	line-height: 10px;
+
+}
+
+
+#topic-list {
+	display: inline;
+	position: relative;
+	font-size: 18px;
+	left:30%;
+
+}
+
+
+#topic-width {
+	display: inline;
+}
+
+.lists_discussions1 {
+	display: block;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	padding: 0px 30px 0px 25px;
+	color: #2E2E2F;
+	color: #464653;
+	color: #0909C4;
+	font-size: 28px;
+	font-family: 'Anton', sans-serif;
+	font-family: 'spirax',cursive;
+	background: url('/static/geonres/img/star.png');
+	background-repeat: no-repeat;
+	background-position: 5px;
+	text-transform: capitalize;
+	
+	line-height: 10px;
+
+}
+
+
+.lists_discussions111 {
+	display: block;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	padding: 0px 30px 0px 25px;
+	color: #2E2E2F;
+	color: #464653;
+	color: #0909C4;
+	font-size: 28px;
+	font-family: 'Anton', sans-serif;
+	font-family: 'spirax',cursive;
+	background: url('/static/geonres/img/star.png');
+	background-repeat: no-repeat;
+	background-position: 5px;
+	text-transform: capitalize;
+	
+	line-height: 10px;
+
+}
+
+a.lists_discussions111:hover {
+	display: block;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	padding: 0px 30px 0px 25px;
+	color: #2E2E2F;
+	color: #464653;
+	color: #0909C4;
+	font-size: 28px;
+	font-family: 'Anton', sans-serif;
+	font-family: 'spirax',cursive;
+	background: url('/static/geonres/img/star.png');
+	background-repeat: no-repeat;
+	background-position: 5px;
+	text-transform: capitalize;
+	
+	line-height: 10px;
+
+}
+
+.comment-box {
+	width:50%;
+	height: 80px;
+	position: relative;
+	left : 25%;
+
+}
+a.lists_discussions111:visited {
+	display: block;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	padding: 0px 30px 0px 25px;
+	color: #2E2E2F;
+	color: #464653;
+	color: #0909C4;
+	font-size: 28px;
+	font-family: 'Anton', sans-serif;
+	font-family: 'spirax',cursive;
+	background: url('/static/geonres/img/star.png');
+	background-repeat: no-repeat;
+	background-position: 5px;
+	text-transform: capitalize;
+	
+	line-height: 10px;
+
+}
+
+
 .lists1 {
 	
 	padding: 0px 30px 0px 25px;

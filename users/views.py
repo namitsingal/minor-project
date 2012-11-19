@@ -170,6 +170,83 @@ def show_playlist():
     return Response(json.dumps(response_obj),mimetype='json')
 
 
+
+@app.route('/show_discussion')
+def show_discussion():
+    playlist = Discussion.query.filter_by(name='default').distinct()
+    n=[]
+    play=[]
+    for k in playlist:
+        n.append(k.genre)
+    n=set(n)
+    for lists in n:
+        play.append({'playlist':lists})
+    response_obj = {'player': play}
+    return Response(json.dumps(response_obj),mimetype='json')
+
+
+
+@app.route('/show_topics',methods=['POST'])
+def show_topics():
+    k=request.form['name'].lower()
+    playlist = Discussion.query.filter_by(comment='default',genre=k).distinct()
+    play=[]
+    for lists in playlist:
+        if(lists.user_name!='default'):
+            play.append({'by':lists.user_name,'title':lists.name})
+            #play.append({'thumb_url':lists.thumb_url})
+            #play.append({'title':lists.title})
+    response_obj = {'player': play}
+    return Response(json.dumps(response_obj),mimetype='json')    
+
+
+@app.route('/create_topic',methods=['POST'])
+def create_topic():
+    k = request.form['name'].lower()
+    user1 = session['username'].lower()
+    k1 = request.form['play']
+    k2 = Discussion.query.filter_by(genre=k1,name=k).first()
+    if(k2):
+        result = {'status': 'error', 'message': 'Playlist Already exists'}
+    else:
+        playlist = Discussion(k1,k,user1)
+        db.session.add(playlist)
+        db.session.commit()
+        result = {'status': 'success', 'message': 'topic created'}
+    return Response(json.dumps(result), mimetype='applications/json')     
+
+
+
+@app.route('/show_topics1',methods=['POST'])
+def show_topics1():
+    k=request.form['name'].lower()
+    k1 = request.form['play']
+
+    k2 = Discussion.query.filter_by(genre=k1,name=k).order_by('date').all()
+    play=[]
+    for lists in k2:
+        if(lists.comment!='default'):
+            play.append({'by':lists.user_name,'title':lists.name,'comment':lists.comment})
+            #play.append({'thumb_url':lists.thumb_url})
+            #play.append({'title':lists.title})
+    response_obj = {'player': play}
+    return Response(json.dumps(response_obj),mimetype='json')    
+
+
+
+@app.route('/add_comment',methods=['POST'])
+def add_comment():
+    k=request.form['name'].lower()
+    k1 = request.form['play']
+    k2 = request.form['comment']
+    user1 = session['username'].lower()
+    comment = Discussion(k1,k,user1,k2)
+    db.session.add(comment)
+    db.session.commit()
+    response_obj = {'user': {'name':user1}}
+    return Response(json.dumps(response_obj),mimetype='json')    
+
+
 @app.route('/show_profile',methods=['POST'])
 def show_profile():
     return request.form['name'];
@@ -249,6 +326,9 @@ def show_songs():
             #play.append({'title':lists.title})
     response_obj = {'player': play}
     return Response(json.dumps(response_obj),mimetype='json')    
+
+
+
 
 
 

@@ -110,6 +110,121 @@ function getplaylist(){
 
 }
 
+
+
+function loadDiscussion(genre,name1){
+
+	$('#playlist1').html('');
+	$.ajax({
+		url: '/users/show_topics1',
+		type: 'POST',
+		data: {name: name1, play:genre},
+		success: function(data) {
+			markup = "<div id = 'list-container'><a class='lists_discussions111'>"+name1+"</a></div><div id = 'all-comments'>";
+			$('#playlist1').append(markup);
+			for (ii in data.player){
+				markup = "<div id='list-container'>"+ data.player[ii].comment + "</div>";
+			$('#all-comments').append(markup);
+			}
+			markup = "</div><textarea id = 'comment-discussion' class= 'comment-box'></textarea>"
+			markup += "<a href='#' class='comment-submit' name='"+name1+"' id='"+genre+"'>Comment</a>";
+			$('#playlist1').append(markup);
+			$('.comment-submit').click(function(){
+				var genre=this.id;
+				var name1=this.name;
+				var comment1=$('#comment-discussion').val();
+				if(comment1=='')
+					alert('comment cannot be empty');
+				else
+				{	//var markup = "<div id='list-container'>"+ comment1 + "</div>";
+					//$('#all-comments').append(markup);
+					$.ajax({
+						url:'/users/add_comment',
+						type:'POST',
+						data:{name:name1,play:genre,comment:comment1},
+						success: function(data) {
+							//alert(data.user.name);
+							var markup = "<div id='list-container'>"+ comment1 + "</div>";
+							$('#all-comments').append(markup);
+						}
+				});
+				}
+
+			});
+		}
+
+	});
+
+
+
+}
+
+
+
+
+function getdiscussions(){
+	var url='/users/show_discussion';
+	$('#playlist1').html('');
+
+	$.get(url,function(data){
+		for (i in data.player){
+			var playlist_name = data.player[i].playlist;
+			//alert(playlist_name);
+			markup = "<div id='list-container'><a href='#' id='"+playlist_name+"' class='lists_discussions'>"+ playlist_name + "</a></div>";
+			$('#playlist1').append(markup);
+
+			}
+
+			$('.lists_discussions').click(function(){
+				//alert('I am here');
+				$('#playlist1').html('');
+				var kk=this.id;
+				//alert(kk);
+				$.ajax({
+				url: '/users/show_topics',
+				type: 'POST',
+				data: {name: kk},
+				success: function(data) {
+					
+					for(ii in data.player){
+						markup="<div id='list-container'>"
+						markup += '<a class="lists_discussions1" name="'+kk+'" href="#" id="'+data.player[ii].title+'"><span id="topic-width">'+data.player[ii].title+'</span><p id="topic-list">started by '+data.player[ii].by+'</p></a></div>';
+						$('#playlist1').append(markup);
+					}		
+					markup = '<a id="newbutton2" href="#" class="buttons1" name="'+kk+'">Create Topic</a>'
+					$('#playlist1').append(markup);
+					$('#newbutton2').click(function(){
+						$('#overlay').css({opacity: 0}).show().animate({opacity: 0.8}, 'fast');
+						$('#discussion-box').css({opacity: 0}).show().animate({opacity: 1}, 'fast');		
+					});
+
+
+
+
+				$('.lists_discussions1').click(function() {		
+							loadDiscussion(this.name,this.id);
+							
+						});
+				//alert('link added');
+				}//loadTracks1
+			});
+				
+			});
+		markup = '<a id="newbutton1" href="#" class="buttons1" >Create Playlist</a>'
+		$('#playlist1').append(markup);
+		$('#newbutton1').click(function(){
+			$('#overlay').css({opacity: 0}).show().animate({opacity: 0.8}, 'fast');
+			$('#playlist-box').css({opacity: 0}).show().animate({opacity: 1}, 'fast');		
+		});
+
+	});
+
+}
+
+
+
+
+
 function getfriends(){
 	var url='/users/show_friends';
 	$('#playlist1').html("<div id='header-friend'><a id= 'friend-container' class = 'friend-head' href='#'>Friends</a><a id='request-container' class = 'friend-head' href='#'>Requests</a><a id='finder-container' class = 'friend-head' href='#'>Find people</a></div>");
@@ -426,7 +541,7 @@ $(document).ready(function() {
 	
 
 	$('#btn-playlist').click(function(){
-		$('#login-spinner').css({display: 'block'});
+		$('#playlist-spinner').css({display: 'block'});
 		$('#playlist-status').html('');
 		var k=$('#playlist-name').val();
 		if(k==''||k==null)
@@ -461,6 +576,49 @@ $(document).ready(function() {
 			});
 		}
 	});
+
+
+
+$('#btn-discussion').click(function(){
+		//$('#discussion-spinner').css({display: 'block'});
+		$('#discussion-status').html('');
+		var k=$('#discussion-name').val();
+		if(k==''||k==null)
+		{	alert('Topic cannot be empty');
+			return;
+		}
+		else{
+		$('#discussion-spinner').css({display: 'block'});
+
+		var na=$('#newbutton2').attr('name');
+		//alert(na);	
+			$.ajax({
+				url: '/users/create_topic',
+				type: 'POST',
+				data: {name: k,play: na},
+				success: function(data) {
+					$('#discussion-spinner').css({display: 'none'});
+					if(data['status'] === 'success') {
+						
+						$('#discussion-box').animate({opacity: 0}, 'fast', function() {
+						$('#discussion-box').hide();
+						});
+						$('#overlay').animate({opacity: 0}, 'fast', function() {
+						$('#overlay').hide();
+						});
+						getdiscussions();
+					}
+					else {
+						$('#discussion-status').html('<span class="login-error">' + data['message'] + '</span>');
+						var x = parseInt($('#discussion-box').css("height"));
+						if(x<221)
+						$('#discussion-box').animate({"height": x + 20}, 'fast');
+					}
+				}
+			});
+		}
+	});
+
 
 
 	staticUrl = $('#static-url').val();
@@ -499,11 +657,11 @@ $(document).ready(function() {
 		getprofile();
 	});
 
-	$('#message').click(function(){
+	$('#discussion').click(function(){
 		$('#tab-browse').animate({opacity:0},1)
 		$('#playlist1').animate({opacity:1},1);
 		$('#playlist1').show();
-		getmessage();
+		getdiscussions();
 	});
 
 	$(document).click(function(){

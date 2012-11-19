@@ -119,6 +119,9 @@ $(document).ready(function() {
 			$('#playlist-box').animate({opacity: 0}, 'fast', function() {
 				$('#playlist-box').hide();
 			});
+			$('#discussion-box').animate({opacity: 0}, 'fast', function() {
+				$('#discussion-box').hide();
+			});
 			$('#add-song-box').animate({opacity: 0}, 'fast', function() {
 				$('#add-song-box').hide();
 			});

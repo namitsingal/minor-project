@@ -16,18 +16,30 @@
 		<li><a href="#" id="playlist" class="tab-link">PLAYLIST</a></li>
 		<li><a href="#" id="friend" class="tab-link">FRIENDS</a></li>
 		<li><a href="#" id="profile" class="tab-link">PROFILE</a></li>
-		<li><a href="#" id="message" class="tab-link">Message</a></li>
+		<li><a href="#" id="discussion" class="tab-link">Discussions</a></li>
 
 	</ul>
 </div>
 	<div id="overlay" class="dialogue"></div>
 	<div id="playlist-box" class="dialogue">
 		<h2>Playlist</h2>
-    <p><img class="spinner" id="playlist-spinner" src="{{ STATIC }}geonres/img/spinner.gif"/></p>
+    
     <div id="playlist-status"></div>
     <p>Playlist Name: <input class="input" type="text" size="30" name="playlist-name" id="playlist-name"/></p>
+    <p><img class="spinner" id="playlist-spinner" src="{{ STATIC }}geonres/img/spinner.gif"/></p>
+   
     <p><a id="btn-playlist" href="#" class="homepage-button">Create Playlist</a></p>
     </div>
+
+    <div id="discussion-box" class="dialogue">
+		<h2>Topic</h2>
+        <div id="discussion-status"></div>
+    <p>Discussion Name: <input class="input" type="text" size="30" name="discussion-name" id="discussion-name"/></p>
+    <p><img class="spinner" id="discussion-spinner" src="{{ STATIC }}geonres/img/spinner.gif"/></p>
+    <p><a id="btn-discussion" href="#" class="homepage-button">Create Topic</a></p>
+    
+    </div>
+
     <div id="add-song-box" class="dialogue"></div>
 	<div id='playlist1' class='playlist-container'></div>
 	<div id="tab-browse" class="tab-container">

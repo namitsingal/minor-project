@@ -490,6 +490,67 @@ div.dialogue1 {
 
 
 
+
+#discussion-box {
+  height: 220px;
+  top: 30%;
+  left: 35%;
+  padding: 10px 40px 20px 40px;
+  background-color: white;
+  border-radius: 2px;
+  z-index: 101;
+}
+
+
+#discussion-box  input {
+  border: 1px solid #888;
+  padding: 5px 5px 5px 5px;
+  color: #444;
+  font-size: 14px;
+}
+
+
+
+#discussion-box .input {
+  border: 1px solid #888;
+  padding: 5px 5px 5px 5px;
+  color: #444;
+  font-size: 14px;
+  width: 220px;
+}
+
+#discussion-box p {
+  font-size: 13px;
+
+}
+
+
+#discussion-box #btn-discussion {
+  width: 100px;
+  border: 1px solid #999;
+  box-shadow: none;
+  font-size: 14px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+#discussion-box .spinner {
+  display: none;
+  margin: auto;
+  height: 24px;
+}
+
+.discussion-error {
+  border: 1px solid #F66;
+  background-color: rgba(100%, 20%, 20%, 0.1);
+  padding: 5px;
+  display: block;
+  text-align: center;
+}
+
+
+
+
 #add-song-box {
   height: 200px;
   top: 30%;
@@ -619,6 +680,40 @@ div.dialogue1 {
   background-image: -ms-linear-gradient(top, #FFAD33, #FF8533);
   background-color: #CC9900;
 }
+
+
+
+.comment-submit, input.buttons {
+  display: block;
+  background-image: -webkit-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -moz-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -o-linear-gradient(top, #FF9900, #FF6600);
+  background-image: -ms-linear-gradient(top, #FF9900, #FF6600);
+  border-radius: 3px;
+  box-shadow: 0 2px 4px #222;
+  border: 1px solid #222;
+  vertical-align: middle;
+  padding: 13px 0 13px 0;
+  width: 150px;
+  text-align: center; 
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #444;
+  position: relative;
+  left: 43%;
+  margin-left: 0px;
+  margin-top: 10px;
+}
+
+.comment-submit:hover {
+  background-image: -webkit-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -moz-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -o-linear-gradient(top, #FFAD33, #FF8533);
+  background-image: -ms-linear-gradient(top, #FFAD33, #FF8533);
+  background-color: #CC9900;
+}
+
+
 
 .addsong, input.addsong {
   display: block;
