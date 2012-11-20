@@ -6,6 +6,14 @@ from jinja2 import Template, Environment, FileSystemLoader
 from users import app
 from users.models import *
 from sqlalchemy import distinct
+from werkzeug import secure_filename
+import os
+
+
+UPLOAD_FOLDER = '/home/namit/.repo/minor1/static/dp'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 
 
 env = Environment(loader=FileSystemLoader(['users/templates', 'geonres/templates']))
@@ -70,6 +78,35 @@ def login():
 
         template = env.get_template('index.html')
         return template.render(ctx)
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+
+
+@app.route('/save_profile',methods=['POST'])
+def save_profile():
+    #return 'aaaaa'
+    file = request.files['photo']
+    if file and allowed_file(file.filename):
+        filename=secure_filename(session['username'])+ '.'+ file.filename.rsplit('.', 1)[1]
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    name = request.form['name']
+    aboutme = request.form['aboutme']
+    interest = request.form['interest']
+    age = request.form['age']
+    photo = '/static/dp/'+filename 
+    user1=session['username']
+    k=UserProfile(user1,photo,interest,name,aboutme)
+    s=UserProfile.query.filter_by(user=user1).first()
+    if(s):
+        db.session.delete(s)
+        db.session.commit()
+    db.session.add(k)
+    db.session.commit()
+    return redirect('/')
 
 
 @app.route('/logout')
@@ -249,11 +286,19 @@ def add_comment():
 
 @app.route('/show_profile',methods=['POST'])
 def show_profile():
-    return request.form['name'];
+    user1=request.form['name'];
+    s=UserProfile.query.filter_by(user=user1).first()
+    return '<image src="'+s.photo+'">';
 
 @app.route('/show_profile')
 def show_my_profile():
-    return session['username'];
+    user1=   session['username'];
+    s=UserProfile.query.filter_by(user=user1).first()
+    response = '<image src="'+s.photo+'" height = "350px" width="266px"> '
+    response = response + '<p> Name: ' + s.name + '</p>'
+    response = response + '<p> Interest: ' + s.interest + '</p>'
+    response = response + '<p> About Me: ' + s.about + '</p>'
+    return response;
 
 @app.route('/show_friends')
 def show_friends():

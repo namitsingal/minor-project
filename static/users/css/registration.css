@@ -10,15 +10,51 @@
 	width: 300px;
 }
 
+
+.registration-form > p.interest {
+	position: relative;
+	margin-bottom: 10px;
+	height: 60px;
+	width: 300px;
+}
+
 .input {
 	position: absolute;
 	left: 150px;
-	bottom: 8px;
+	bottom: 0px;
 	border: 1px solid #aaa;
 	padding: 5px;
 	font-size: 12pt;
 	color: #555;
 }
+
+
+.input1 {
+	position: absolute;
+	left: 150px;
+	bottom: 3px;
+	margin-top:5px;
+	padding: 5px;
+	padding-top: 5px;
+	font-size: 12pt;
+	color: #555;
+
+}
+
+.input2 {
+	position: absolute;
+	width:184px;
+	height: 50px;
+	left: 150px;
+	
+	
+	
+	padding-top: 5px;
+	font-size: 12pt;
+	color: #555;
+
+}
+
 
 .button {
 	display: block;
