@@ -14,6 +14,11 @@ add_url = '';
 add_title = '';
 add_id = '';
 
+var friendHeader = "<div id='header-friend'><ul>" +
+		"<li><a id= 'friend-container' class = 'friend-head' href='#'>Friends</a></li>" +
+		"<li><a id='request-container' class = 'friend-head' href='#'>Requests</a></li>" +
+		"<li><a id='finder-container' class = 'friend-head' href='#'>Find people</a></li>" +
+		"</li></div>";
 
 function setupMap() {
 	var geocoder = new google.maps.Geocoder();
@@ -227,7 +232,7 @@ function getdiscussions(){
 
 function getfriends(){
 	var url='/users/show_friends';
-	$('#playlist1').html("<div id='header-friend'><a id= 'friend-container' class = 'friend-head' href='#'>Friends</a><a id='request-container' class = 'friend-head' href='#'>Requests</a><a id='finder-container' class = 'friend-head' href='#'>Find people</a></div>");
+	$('#playlist1').html(friendHeader);
 
 	$('#friend-container').click(function(){
 		getfriends();
@@ -297,7 +302,7 @@ function getfriends(){
 
 function getrequests(){
 	var url='/users/show_requests';
-	$('#playlist1').html("<div id='header-friend'><a id= 'friend-container' class = 'friend-head' href='#'>Friends</a><a id='request-container' class = 'friend-head' href='#'>Requests</a><a id='finder-container' class = 'friend-head' href='#'>Find people</a></div>");
+	$('#playlist1').html(friendHeader);
 
 	$('#friend-container').click(function(){
 		getfriends();
@@ -421,7 +426,7 @@ function getrequests(){
 
 function getfind(){
 	var url='/users/show_people';
-	$('#playlist1').html("<div id='header-friend'><a id= 'friend-container' class = 'friend-head' href='#'>Friends</a><a id='request-container' class = 'friend-head' href='#'>Requests</a><a id='finder-container' class = 'friend-head' href='#'>Find people</a></div><div id='found'></div><div id='found1'></div>");
+	$('#playlist1').html(friendHeader);
 
 	$('#friend-container').click(function(){
 		getfriends();
@@ -628,7 +633,7 @@ $('#btn-discussion').click(function(){
 	$('#playlist-spinner').hide();
 
 	$('#playlist').click(function(){
-		$('#tab-browse').animate({opacity:0},1)
+		$('#tab-browse').css({visibility: 'hidden'});
 		$('#playlist1').animate({opacity:1},1);
 		$('#playlist1').show();
 		getplaylist();
@@ -636,14 +641,14 @@ $('#btn-discussion').click(function(){
 	});
 
 	$('#friend').click(function(){
-		$('#tab-browse').animate({opacity:0},1)
+		$('#tab-browse').css({visibility: 'hidden'});
 		$('#playlist1').animate({opacity:1},1);
 		$('#playlist1').show();
 		getfriends();
 	});
 
 	$('#browse').click(function(){
-		$('#tab-browse').animate({opacity:1},1)
+		$('#tab-browse').css({visibility: 'visible'});
 		$('#playlist1').animate({opacity:0});
 		$('#playlist1').hide();
 
@@ -651,14 +656,14 @@ $('#btn-discussion').click(function(){
 
 
 	$('#profile').click(function(){
-		$('#tab-browse').animate({opacity:0},1)
+		$('#tab-browse').css({visibility: 'hidden'});
 		$('#playlist1').animate({opacity:1},1);
 		$('#playlist1').show();
 		getprofile();
 	});
 
 	$('#discussion').click(function(){
-		$('#tab-browse').animate({opacity:0},1)
+		$('#tab-browse').css({visibility: 'hidden'});
 		$('#playlist1').animate({opacity:1},1);
 		$('#playlist1').show();
 		getdiscussions();

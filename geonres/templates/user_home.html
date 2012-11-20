@@ -6,7 +6,7 @@
 <script src="{{ STATIC }}geonres/js/user_home.js"></script>
 <link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Spirax' rel='stylesheet' type='text/css'>
-<script language="javaScript" src="{{ STATIC }}geonres/js/salajax.js"></script>
+<script src="{{ STATIC }}geonres/js/salajax.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -21,27 +21,27 @@
 	</ul>
 </div>
 	<div id="overlay" class="dialogue"></div>
+
 	<div id="playlist-box" class="dialogue">
 		<h2>Playlist</h2>
     
-    <div id="playlist-status"></div>
-    <p>Playlist Name: <input class="input" type="text" size="30" name="playlist-name" id="playlist-name"/></p>
-    <p><img class="spinner" id="playlist-spinner" src="{{ STATIC }}geonres/img/spinner.gif"/></p>
-   
-    <p><a id="btn-playlist" href="#" class="homepage-button">Create Playlist</a></p>
+	    <div id="playlist-status"></div>
+	    <p>Playlist Name: <input class="input" type="text" size="30" name="playlist-name" id="playlist-name"/></p>
+	    <p><img class="spinner" id="playlist-spinner" src="{{ STATIC }}geonres/img/spinner.gif"/></p>
+	   
+	    <p><a id="btn-playlist" href="#" class="homepage-button">Create Playlist</a></p>
     </div>
 
     <div id="discussion-box" class="dialogue">
 		<h2>Topic</h2>
         <div id="discussion-status"></div>
-    <p>Discussion Name: <input class="input" type="text" size="30" name="discussion-name" id="discussion-name"/></p>
-    <p><img class="spinner" id="discussion-spinner" src="{{ STATIC }}geonres/img/spinner.gif"/></p>
-    <p><a id="btn-discussion" href="#" class="homepage-button">Create Topic</a></p>
-    
+	    <p>Discussion Name: <input class="input" type="text" size="30" name="discussion-name" id="discussion-name"/></p>
+	    <p><img class="spinner" id="discussion-spinner" src="{{ STATIC }}geonres/img/spinner.gif"/></p>
+	    <p><a id="btn-discussion" href="#" class="homepage-button">Create Topic</a></p>
     </div>
 
     <div id="add-song-box" class="dialogue"></div>
-	<div id='playlist1' class='playlist-container'></div>
+	<div id='playlist1' class='playlist-container home-tab'></div>
 	<div id="tab-browse" class="tab-container">
 		{% include "map_browser.html" %}
 		<div class="clearfix"></div>
