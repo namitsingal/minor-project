@@ -24,15 +24,31 @@ class User(db.Model):
     def __repr__(self):
     	return '<User %s' % self.username
 
+#class UserProfile(db.Model):
+#	__tablename__ = 'user_profiles'
+#	id = db.Column(db.Integer(20), primary_key=True)
+#	user = db.Column(db.Integer, db.ForeignKey(User.id), unique=True)
+#	photo = db.Column(db.String(200))
+#	about = db.Column(db.String(200))
+
+
+
 class UserProfile(db.Model):
     __tablename__ = 'user_profiles'
-    id = db.Column(db.Integer(20), primary_key=True)
-    user = db.Column(db.Integer, db.ForeignKey(User.id), unique=True)
-    photo = db.Column(db.String(200))
-    about = db.Column(db.String(200))
-    interest = db.Column(db.String(200))
-    name = db.Column(db.String(200))
-    
+    id=db.Column(db.Integer(20),primary_key=True,autoincrement=True)
+    user= db.Column(db.String(100),db.ForeignKey(User.username),unique=True)
+    photo= db.Column(db.String(200))
+    interest=db.Column(db.String(200))
+    name=db.Column(db.String(200))
+    about=db.Column(db.String(200))
+    def __init__(self,user,photo,interest,name,about):
+        self.user = user
+        self.photo = photo
+        self.interest = interest
+        self.name = name
+        self.about = about
+
+
 class Discussion(db.Model):
     __tablename__ = 'discussions'
     id = db.Column(db.Integer(20), primary_key=True, autoincrement=True)
