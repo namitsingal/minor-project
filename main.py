@@ -1,4 +1,5 @@
 import sys
+import os.path
 
 from werkzeug.serving import run_simple
 from werkzeug.wsgi import DispatcherMiddleware
@@ -9,6 +10,9 @@ from users import app as users_app
 
 cmd = sys.argv[1]
 port = int(sys.argv[2])
+
+users_app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__),
+	'static/dp/')
 
 if cmd == 'geonres':
 	print 'running geonres'

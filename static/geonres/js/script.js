@@ -20,6 +20,14 @@ var friendHeader = "<div id='header-friend'><ul>" +
 		"<li><a id='finder-container' class = 'friend-head' href='#'>Find people</a></li>" +
 		"</li></div>";
 
+function requestStart() {
+	$('#loading').show();
+}
+
+function requestComplete() {
+	$('#loading').hide();
+}
+
 function setupMap() {
 	var geocoder = new google.maps.Geocoder();
 	var marker = 0;
@@ -71,7 +79,9 @@ function getplaylist(){
 	var url='/users/show_playlist';
 	$('#playlist1').html('');
 
+	requestStart();
 	$.get(url,function(data){
+		requestComplete();
 		markup="";
 		for (i in data.player){
 			var playlist_name = data.player[i].playlist;
@@ -86,11 +96,13 @@ function getplaylist(){
 				$('#playlist1').html('');
 				var kk=this.id;
 				//alert(kk);
+				requestStart();
 				$.ajax({
 				url: '/users/show_songs',
 				type: 'POST',
 				data: {name: kk},
 				success: function(data) {
+					requestComplete();
 					var k=0;
 					for(ii in data.player){
 						k++;
@@ -127,11 +139,13 @@ function getplaylist(){
 function loadDiscussion(genre,name1){
 
 	$('#playlist1').html('');
+	requestStart();
 	$.ajax({
 		url: '/users/show_topics1',
 		type: 'POST',
 		data: {name: name1, play:genre},
 		success: function(data) {
+			requestComplete();
 			markup = "<div id = 'list-container'><a class='lists_discussions111'>"+name1+"</a></div><div id = 'all-comments'>";
 			$('#playlist1').append(markup);
 			for (ii in data.player){
@@ -150,11 +164,13 @@ function loadDiscussion(genre,name1){
 				else
 				{	//var markup = "<div id='list-container'>"+ comment1 + "</div>";
 					//$('#all-comments').append(markup);
+					requestStart();
 					$.ajax({
 						url:'/users/add_comment',
 						type:'POST',
 						data:{name:name1,play:genre,comment:comment1},
 						success: function(data) {
+							requestComplete();
 							//alert(data.user.name);
 							var markup = "<div id='list-container'>"+ comment1 + "</div>";
 							$('#all-comments').append(markup);
@@ -166,19 +182,15 @@ function loadDiscussion(genre,name1){
 		}
 
 	});
-
-
-
 }
-
-
-
 
 function getdiscussions(){
 	var url='/users/show_discussion';
 	$('#playlist1').html('');
 
+	requestStart();
 	$.get(url,function(data){
+		requestComplete();
 		for (i in data.player){
 			var playlist_name = data.player[i].playlist;
 			//alert(playlist_name);
@@ -192,11 +204,13 @@ function getdiscussions(){
 				$('#playlist1').html('');
 				var kk=this.id;
 				//alert(kk);
+				requestStart();
 				$.ajax({
 				url: '/users/show_topics',
 				type: 'POST',
 				data: {name: kk},
 				success: function(data) {
+					requestComplete();
 					var temp=0;
 					for(ii in data.player){
 						temp++;
@@ -258,8 +272,9 @@ function getfriends(){
 		getfind();
 	});
 
-
+	requestStart();
 	$.get(url,function(data){
+		requestComplete();
 		var j=1;
 		for (i in data.player){
 			j=j+1;
@@ -279,11 +294,12 @@ function getfriends(){
 				$('#playlist1').html('');
 				var kk=this.id;
 				//alert(kk);
+				requestStart();
 				$.ajax({
 				url: '/users/show_profile?id='+kk,
 				type: 'GET',
 				success: function(data) {
-					
+					requestComplete();
 					//for(ii in data.player){
 					//	markup = '<a class="vid-links1" name="'+kk+'" href="#" id="'+data.player[ii].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
 					//	$('#playlist1').append(markup);
@@ -361,8 +377,9 @@ function getrequests(){
 		getfind();
 	});
 
-
+	requestStart();
 	$.get(url,function(data){
+		requestComplete();
 		var j=1;
 		for (i in data.player){
 			j=j+1;
@@ -379,10 +396,12 @@ function getrequests(){
 		$('.friend-request11').click(function(){
 			var k=this;
 			//alert(k.name);
+			requestStart();
 			$.ajax({ url: '/users/addfriend',
 					 type: 'POST', 
 					 data:{name:k.name},
 					 success: function(data){
+					 	requestComplete();
 					 	alert('Successfully added');
 					 	$('#request-container').click();
 					 }
@@ -393,10 +412,12 @@ function getrequests(){
 
 		$('.friend-request12').click(function(){
 			var k=this;
+			requestStart();
 			$.ajax({ url: '/users/rejectfriend',
 					 type: 'POST', 
 					 data:{name:k.name},
 					 success: function(data){
+					 	requestComplete();
 					 	alert('Request declined');
 					 	$('#request-container').click();
 					 }
@@ -410,13 +431,14 @@ function getrequests(){
 				$('#playlist1').html('');
 				var kk=this.id;
 				//alert(kk);
+				requestStart();
 				$.ajax({
 				url: '/users/show_profile',
 				type: 'POST',
 				data: {name: kk},
 				success: function(data) {
-					
-					//for(ii in data.player){
+					requestComplete();
+						//for(ii in data.player){
 					//	markup = '<a class="vid-links1" name="'+kk+'" href="#" id="'+data.player[ii].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
 					//	$('#playlist1').append(markup);
 					$('#playlist1').html(data);
@@ -485,7 +507,7 @@ function getfind(){
 		getfind();
 	});
 
-	$('#playlist1').append("<p>Enter Name: <input type='text' id='search_name'></input><div id = 'found1'></div>")
+	$('#playlist1').append("<p><input placeholder='Search by name' class='input' type='text' id='search_name'></input><div id = 'found1'></div>")
 	markup = "<div id='list-container1'><p>(Please Enter Name)</p></div>";
 	$('#found1').html(markup);
 	$('#search_name').keyup(function(){
@@ -496,11 +518,13 @@ function getfind(){
 			$('#found1').html(markup);
 		}
 		else{
+			requestStart();
 	$.ajax({
 				url: '/users/show_people',
 				type: 'POST',
 				data: {name: kk},
 				success: function(data){
+					requestComplete();
 			markup="";
 			var j=1;
 		for (i in data.player){
@@ -525,11 +549,13 @@ function getfind(){
 				kk=this;
 				//alert($(this).html());
 				//alert(k);
+				requestStart();
 			$.ajax({
 							url:'/users/add_as_friend',
 							type: 'POST',
 							data: {name:k},
 							success: function(data){
+								requestComplete();
 								$(kk).html('Request sent');
 								alert('friend request sent');
 							}
@@ -545,11 +571,13 @@ function getfind(){
 				$('#playlist1').html('');
 				var kk=this.id;
 				//alert(kk);
+				requestStart();
 				$.ajax({
 				url: '/users/show_profile?id='+kk,
 				type: 'GET',
 				
 				success: function(data) {
+					requestComplete();
 										//for(ii in data.player){
 					//	markup = '<a class="vid-links1" name="'+kk+'" href="#" id="'+data.player[ii].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
 					//	$('#playlist1').append(markup);
@@ -609,7 +637,9 @@ function getfind(){
 }
 
 function getprofile(){
+	requestStart();
 	$.get('/users/show_profile?id=',function(data){
+		requestComplete();
 		$('#playlist1').html(data);
 		$('.lists').click(function(){
 
@@ -654,7 +684,7 @@ $(document).ready(function() {
 		window.location.replace('/users/logout1');
 	})*/
 
-
+	//$('#loading').show();
 	$('#btn-playlist').click(function(){
 		$('#playlist-spinner').css({display: 'block'});
 		$('#playlist-status').html('');
@@ -664,12 +694,13 @@ $(document).ready(function() {
 			return;
 		}
 		else{
-			
+			requestStart();
 			$.ajax({
 				url: '/users/create_playlist',
 				type: 'POST',
 				data: {name: k},
 				success: function(data) {
+					requestComplete();
 					$('#playlist-spinner').css({display: 'none'});
 					if(data['status'] === 'success') {
 						
@@ -704,12 +735,14 @@ $('#btn-discussion').click(function(){
 		$('#discussion-spinner').css({display: 'block'});
 
 		var na=$('#newbutton2').attr('name');
-		//alert(na);	
+		//alert(na);
+			requestStart();
 			$.ajax({
 				url: '/users/create_topic',
 				type: 'POST',
 				data: {name: k,play: na},
 				success: function(data) {
+					requestComplete();
 					$('#discussion-spinner').css({display: 'none'});
 					if(data['status'] === 'success') {
 						
@@ -854,7 +887,9 @@ $('#btn-discussion').click(function(){
 function loadArtists(callback) {
 	var markup = '';
 	var url = '/api/artists/' + encodeURI(country) + '/' + currentArtistsPage + '?format=json';
+	requestStart();
 	$.get(url, function(data) {
+		requestComplete();
 		for(i in data.artists) {
 			var artist_name = data.artists[i].name;
 			markup += '<a href=#" id="' + artist_name +'" class="artist-link">' +
@@ -872,7 +907,9 @@ function loadArtists(callback) {
 	
 		$('.artist-link').click(function() {
 			artist = this.id;
+			requestStart();
 			$.get('/api/details/artist/' + encodeURI(artist) + '?format=json', function(data) {
+				requestComplete();
 				$('#artist-bio').html(('<img class="artist-bio-image vid-thumb" src="' + data['details']['image_large'] + '">' +
 					'<p>' + data['details']['bio'] + '</p>'));
 			});
@@ -896,7 +933,9 @@ function getplaylist1() {
 	var url='/users/show_playlist';
 	$('#add-song-box').html('');
 
+	requestStart();
 	$.get(url,function(data){
+		requestComplete();
 		for (i in data.player){
 			
 			var x = parseInt($('#add-song-box').css("height"));
@@ -911,12 +950,13 @@ function getplaylist1() {
 		$('#addsong').click(function(){
 			var k= $('.lists-add:checked').val();
 			if(k){
-				
+				requestStart();
 				$.ajax({
 				url: '/users/add_song',
 				type: 'POST',
 				data: {name: k, song_id: add_id, thumb_url:add_url, title1: add_title},
 				success: function(data) {
+					requestComplete();
 					if(data['status'] === 'success') {
 						songadded();
 						alert('Song added');
@@ -941,7 +981,9 @@ function loadTracks(callback) {
 	var markup = '';
 	var markup1 = '';
 	var url = '/api/videos/' + encodeURI(artist) + '/' + currentTracksPage + '?format=json';
+	requestStart();
 	$.get(url, function(data) {
+		requestComplete();
 		for(i in data.videos) {
 			var item = data.videos[i];
 			markup1 = '<div style="border: 1px solid rgb(0, 0, 0); padding: 10px; display: none; position: absolute; background-color: rgb(238, 238, 238);" class="menu" id="' + item.id + '">Add to playlist</div>';
@@ -962,7 +1004,9 @@ function loadTracks(callback) {
 
 			var k = this;
 			//alert(k.id);
+			requestStart();
 			$.get('/users/check', function(data) {
+				requestComplete();
 				if(data=='true')
 					{	
 						console.log('logged in');
@@ -1021,12 +1065,13 @@ function loadTracks(callback) {
 function loadTracks1(name11,idd) {
 	var markup = '';
 	var markup1 = '';
-	
+	requestStart();
 	$.ajax({
 				url: '/users/show_songs',
 				type: 'POST',
 				data: {name: name11},
 				success: function(data) {
+					requestComplete();
 					$('#videolist').html('');
 		for(i in data.player) {
 			var item = data.player[i];
@@ -1048,7 +1093,9 @@ function loadTracks1(name11,idd) {
 
 			var k = this;
 			//alert(k.id);
+			requestStart();
 			$.get('/users/check', function(data) {
+				requestComplete();
 				if(data=='true')
 					{	
 						console.log('logged in');

@@ -9,7 +9,6 @@ from sqlalchemy import distinct
 from werkzeug import secure_filename
 import os
 
-
 UPLOAD_FOLDER = '/home/namit/.repo/minor1/static/dp'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -85,18 +84,17 @@ def allowed_file(filename):
 
 @app.route('/save_profile',methods=['POST'])
 def save_profile():
-    #return 'aaaaa'
     file = request.files['photo']
     if file and allowed_file(file.filename):
         filename=secure_filename(session['username'])+ '.'+ file.filename.rsplit('.', 1)[1]
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
     name = request.form['name']
     aboutme = request.form['aboutme']
     interest = request.form['interest']
-    age = request.form['age']
-    photo = '/static/dp/'+filename 
+    photo = '/static/dp/' + filename 
     user1=session['username']
-    k=UserProfile(user1,photo,interest,name,aboutme)
+    k=UserProfile(user1, name, aboutme, photo, interest)
     s=UserProfile.query.filter_by(user=user1).first()
     if(s):
         db.session.delete(s)
