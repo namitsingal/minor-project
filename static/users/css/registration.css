@@ -19,9 +19,6 @@
 }
 
 .input {
-	position: absolute;
-	left: 150px;
-	bottom: 0px;
 	border: 1px solid #aaa;
 	padding: 5px;
 	font-size: 12pt;
@@ -71,7 +68,6 @@
 	border: 1px solid #999;
 	box-shadow: none;
 	font-size: 14px;
-	margin: auto;
 }
 
 .button:hover {

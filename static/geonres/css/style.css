@@ -793,6 +793,11 @@ div.dialogue1 {
   left: 45%;
 }
 
+.profile-edit-form .profile-image {
+  float: none;
+}
+
+
 /* ==|== media queries ====================================================== */
 
 @media only screen and (min-width: 480px) {

@@ -7,17 +7,24 @@
 {% endblock %}
 
 {% block content %}
-<h1>Profile Details</h1>
+<h1>Edit Your Profile</h1>
 {% if error %}
 <p><span class="login-error">{{ error }}</span></p>
 {% endif %}
 <div id="registration-status"></div>
-<form class="registration-form" enctype='multipart/form-data' action="save_profile" method="POST" >
-	<p>Name:<input class="input" type="text" name="name" placeholder="Full name"/></input></p>
-	<p class='interest'>About me: <textarea name = "aboutme" class='input2'></textarea></p>
-	<p class='interest'>Interest:<textarea name = "interest" class='input2'></textarea></p>
-	<p>Profile Pic: <input type="file" class="input1" name="photo"/></input></p>
-	<p><input type="submit" class="button" name="submit" /></p>
+<form class="registration-form" enctype='multipart/form-data' action="save_profile" method="POST">
+	<p><input {% if profile.name %}value="{{ profile.name }}"{% endif %} type="text"  class="input" name="name" placeholder="Full name"/></input></p>
+	<p class='interest'><textarea placeholder="Something brief about you" name = "aboutme" class='input'>{% if profile.about %}{{ profile.about }}{% endif %}</textarea></p>
+	<p class='interest'><textarea placeholder="Your interests(like Rock, Pop, etc)" name = "interest" class='input'>{% if profile.interest %}{{ profile.interest }}{% endif %}</textarea></p>
+	<div class="profile-edit-form">Profile Pic <br>
+		{% if profile.photo %}
+		<img class="profile-image" src="{{ profile.photo }}">
+		{% else %}
+		<img class="profile-image" src="{{ STATIC }}dp/unknown.jpg">
+		{% endif %}
+		<br>
+		<input type="file" name="photo"/>
+	<p><input type="submit" class="button" name="submit" value="Save"/></p>
 </form>
 {% endblock %}
 

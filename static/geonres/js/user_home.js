@@ -109,6 +109,10 @@ $(document).ready(function() {
 		$(this).addClass('pressed');
 	});
 
+	$('body').delegate('#btn-edit-profile', 'click', function() {
+		window.location = '/users/register';
+	});
+
 	$('.lookup.inactive').click(function() {
 		$(this).removeClass('inactive');
 		var val = this.value;

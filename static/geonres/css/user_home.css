@@ -46,7 +46,6 @@ a.tab-link {
 	border-bottom: 1px;
 	padding-bottom: 10px;
 	margin-top: 30px;
-	
 }
 
 #list-container1 {
@@ -85,9 +84,6 @@ a.tab-link {
 	color: #464653;
 	color: #0909C4;
 	font-size: 28px;
-	
-	font-family: 'Anton', sans-serif;
-	font-family: 'spirax',cursive;
 	background: url('/static/geonres/img/star.png');
 	background-repeat: no-repeat;
 	background-position: 5px;
@@ -124,8 +120,6 @@ a.tab-link {
 	color: #464653;
 	color: #0909C4;
 	font-size: 28px;
-	font-family: 'Anton', sans-serif;
-	font-family: 'spirax',cursive;
 	background: url('/static/geonres/img/star.png');
 	background-repeat: no-repeat;
 	background-position: 5px;
@@ -144,8 +138,6 @@ a.tab-link {
 	color: #464653;
 	color: #0909C4;
 	font-size: 28px;
-	font-family: 'Anton', sans-serif;
-	font-family: 'spirax',cursive;
 	background: url('/static/geonres/img/star.png');
 	background-repeat: no-repeat;
 	background-position: 5px;
@@ -165,8 +157,6 @@ a.lists_discussions111:hover {
 	color: #0909C4;
 	font-size: 28px;
 	font-family: 'Anton', sans-serif;
-	font-family: 'spirax',cursive;
-	background: url('/static/geonres/img/star.png');
 	background-repeat: no-repeat;
 	background-position: 5px;
 	text-transform: capitalize;
@@ -191,8 +181,6 @@ a.lists_discussions111:visited {
 	color: #464653;
 	color: #0909C4;
 	font-size: 28px;
-	font-family: 'Anton', sans-serif;
-	font-family: 'spirax',cursive;
 	background: url('/static/geonres/img/star.png');
 	background-repeat: no-repeat;
 	background-position: 5px;
@@ -210,9 +198,6 @@ a.lists_discussions111:visited {
 	color: #464653;
 	color: #0909C4;
 	font-size: 20px;
-	
-	font-family: 'Anton', sans-serif;
-	font-family: 'spirax',cursive;
 	background: url('/static/geonres/img/star.png');
 	background-repeat: no-repeat;
 	background-position: 5px;
@@ -259,9 +244,6 @@ a:hover.lists  {
 	color: #464653;
 	color: #0909C4;
 	font-size: 16px;
-	
-	font-family: 'Anton', sans-serif;
-	font-family: 'spirax',cursive;
 	text-transform: capitalize;
 	
 	line-height: 10px;
@@ -451,7 +433,7 @@ a.tab-link.pressed {
 	margin-left: 10px;
 }
 
-.profile-container #btn-add-friend {
+.profile-container .profile-button {
 	float: right;
 	margin: 20px 150px 0 0;
 }
@@ -485,4 +467,14 @@ a.tab-link.pressed {
 
 .profile-details > div > p {
 	display: inline;
+}
+
+a {
+	cursor: pointer;
+}
+
+.list-container.expanded {
+	background: white;
+	padding: 10px;
+	border: 1px solid #CCC;
 }

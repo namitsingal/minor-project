@@ -76,15 +76,14 @@ def login():
         template = env.get_template('index.html')
         return template.render(ctx)
 
-
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
-
 @app.route('/save_profile',methods=['POST'])
 def save_profile():
     file = request.files['photo']
+    filename = 'unknown.jpg'
     if file and allowed_file(file.filename):
         filename=secure_filename(session['username'])+ '.'+ file.filename.rsplit('.', 1)[1]
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -92,7 +91,7 @@ def save_profile():
     name = request.form['name']
     aboutme = request.form['aboutme']
     interest = request.form['interest']
-    photo = '/static/dp/' + filename 
+    photo = '/static/dp/' + filename
     user1=session['username']
     k=UserProfile(user1, name, aboutme, photo, interest)
     s=UserProfile.query.filter_by(user=user1).first()
@@ -119,6 +118,11 @@ def logout():
 def registration_page():
     ctx = {'STATIC': '/static/'}
     template = env.get_template('register.html')
+    profile = UserProfile.query.filter_by(user=session['username']).first()
+
+    if profile != None:
+        ctx['profile'] = profile
+
     rendered = template.render(ctx)
     return rendered
 
@@ -240,7 +244,6 @@ def create_topic():
         result = {'status': 'success', 'message': 'topic created'}
     return Response(json.dumps(result), mimetype='applications/json')
 
-
 @app.route('/create_genre',methods=['POST'])
 def create_genre():
     k1 = request.form['name'].lower()
@@ -253,10 +256,6 @@ def create_genre():
         db.session.commit()
         result = {'status': 'success', 'message': 'Discussion created'}
     return Response(json.dumps(result), mimetype='applications/json')
-
-
-
-
 
 @app.route('/show_topics1',methods=['POST'])
 def show_topics1():
@@ -295,15 +294,18 @@ def show_profile():
 
     if user1 == None:
         user1 = session['username']
-        ctx['own'] = 1
-
+        tempp=2
+        ctx['is_self'] = True
     elif len(user1) == 0:
         user1 = session['username']
-        ctx['own'] = 1
         tempp=2
+        ctx['is_self'] = True
+    
     if(tempp!=2):
         ctx['user1']=user1
+    
     ff=session['username']
+
     profile_user = User.query.filter_by(username=user1).first()
     profile = UserProfile.query.filter_by(user=user1).first()
     friends = Friends.query.filter_by(user=user1).distinct().all()
@@ -416,11 +418,6 @@ def show_songs1():
     response_obj = {'player': play}
     return Response(json.dumps(response_obj),mimetype='json')
 
-
-
-
-
-
 @app.route('/show_songs1',methods=['POST'])
 def show_songs1():
     k=request.form['name'].lower()
@@ -434,9 +431,6 @@ def show_songs1():
             #play.append({'title':lists.title})
     response_obj = {'player': play}
     return Response(json.dumps(response_obj),mimetype='json')
-
-
-
 
 @app.route('/add_as_friend',methods=['POST'])
 def add_as_friend():
