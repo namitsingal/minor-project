@@ -74,7 +74,6 @@ function init() {
 	});
 }
 
-
 function getplaylist(){
 	var url='/users/show_playlist';
 	$('#playlist1').html('');
@@ -133,8 +132,6 @@ function getplaylist(){
 	});
 
 }
-
-
 
 function loadDiscussion(genre,name1){
 
@@ -229,9 +226,6 @@ function getdiscussions(){
 						$('#discussion-box').css({opacity: 0}).show().animate({opacity: 1}, 'fast');		
 					});
 
-
-
-
 				$('.lists_discussions1').click(function() {		
 							loadDiscussion(this.name,this.id);
 							
@@ -251,10 +245,6 @@ function getdiscussions(){
 	});
 
 }
-
-
-
-
 
 function getfriends(){
 	var url='/users/show_friends';
@@ -315,7 +305,7 @@ function getfriends(){
 				type: 'POST',
 				data: {name: kk.id, user1:kk.name},
 				success: function(data) {
-					$("#hideall").html('');
+					$(".hideall").html('');
 					var k=0;
 					for(ii in data.player){
 						k++;
@@ -358,8 +348,6 @@ function getfriends(){
 	});
 
 }
-
-
 
 function getrequests(){
 	var url='/users/show_requests';
@@ -489,8 +477,6 @@ function getrequests(){
 
 }
 
-
-
 function getfind(){
 	var url='/users/show_people';
 	$('#playlist1').html(friendHeader);
@@ -593,7 +579,7 @@ function getfind(){
 				type: 'POST',
 				data: {name: kk.id, user1:kk.name},
 				success: function(data) {
-					$("#hideall").html('');
+					$(".hideall").html('');
 					var k=0;
 					for(ii in data.player){
 						k++;
@@ -652,7 +638,7 @@ function getprofile(){
 				type: 'POST',
 				data: {name: kk.id},
 				success: function(data) {
-					$("#hideall").html('');
+					$(".hideall").html('');
 					var k=0;
 					for(ii in data.player){
 						k++;
@@ -765,9 +751,6 @@ $('#btn-discussion').click(function(){
 		}
 	});
 
-	
-
-
 	$('#btn-discussion1').click(function(){
 		//$('#discussion-spinner').css({display: 'block'});
 		$('#discussion1-status').html('');
@@ -808,9 +791,6 @@ $('#btn-discussion').click(function(){
 			});
 		}
 	});
-
-
-
 
 	staticUrl = $('#static-url').val();
 	
@@ -887,9 +867,7 @@ $('#btn-discussion').click(function(){
 function loadArtists(callback) {
 	var markup = '';
 	var url = '/api/artists/' + encodeURI(country) + '/' + currentArtistsPage + '?format=json';
-	requestStart();
 	$.get(url, function(data) {
-		requestComplete();
 		for(i in data.artists) {
 			var artist_name = data.artists[i].name;
 			markup += '<a href=#" id="' + artist_name +'" class="artist-link">' +
@@ -907,9 +885,7 @@ function loadArtists(callback) {
 	
 		$('.artist-link').click(function() {
 			artist = this.id;
-			requestStart();
 			$.get('/api/details/artist/' + encodeURI(artist) + '?format=json', function(data) {
-				requestComplete();
 				$('#artist-bio').html(('<img class="artist-bio-image vid-thumb" src="' + data['details']['image_large'] + '">' +
 					'<p>' + data['details']['bio'] + '</p>'));
 			});
@@ -981,9 +957,7 @@ function loadTracks(callback) {
 	var markup = '';
 	var markup1 = '';
 	var url = '/api/videos/' + encodeURI(artist) + '/' + currentTracksPage + '?format=json';
-	requestStart();
 	$.get(url, function(data) {
-		requestComplete();
 		for(i in data.videos) {
 			var item = data.videos[i];
 			markup1 = '<div style="border: 1px solid rgb(0, 0, 0); padding: 10px; display: none; position: absolute; background-color: rgb(238, 238, 238);" class="menu" id="' + item.id + '">Add to playlist</div>';
@@ -999,8 +973,6 @@ function loadTracks(callback) {
 		$('#videolist').append(markup1);
 
 		$('#'+item.id+'.menu').click(function(){
-
-
 
 			var k = this;
 			//alert(k.id);
@@ -1048,7 +1020,6 @@ function loadTracks(callback) {
     	return false;
 
 	});
-
 
 		$('.vid-links').click(function() {
 			$('#videolist .play-icon').addClass('play-icon-hidden');
@@ -1089,8 +1060,6 @@ function loadTracks1(name11,idd) {
 
 		$('#'+item.id+'.menu').click(function(){
 
-
-
 			var k = this;
 			//alert(k.id);
 			requestStart();
@@ -1137,7 +1106,6 @@ function loadTracks1(name11,idd) {
     	return false;
 
 	});
-
 
 		$('.vid-links').click(function() {
 			$('#videolist .play-icon').addClass('play-icon-hidden');
@@ -1179,8 +1147,6 @@ function loadTracks111(name11,idd,user) {
 
 		$('#'+item.id+'.menu').click(function(){
 
-
-
 			var k = this;
 			//alert(k.id);
 			$.get('/users/check', function(data) {
@@ -1226,7 +1192,6 @@ function loadTracks111(name11,idd,user) {
 
 	});
 
-
 		$('.vid-links').click(function() {
 			$('#videolist .play-icon').addClass('play-icon-hidden');
 			$(this).children('.vid-item').children('.play-icon').removeClass('play-icon-hidden');
@@ -1240,9 +1205,6 @@ function loadTracks111(name11,idd,user) {
 	}
 });
 }
-
-
-
 
 function loadMoreTracks() {
 	currentTracksPage++;

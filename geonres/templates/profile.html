@@ -1,11 +1,19 @@
 <div class="profile-container" data-id="{{ profile_user.id }}">
-	<a id="btn-add-friend" href="#" class="homepage-button">Add as Friend</a>
+	{% if is_self %}
+	<a id="btn-edit-profile" class="profile-button homepage-button">Edit</a>
+	{% else %}
+	<a id="btn-add-friend" class="profile-button homepage-button">Add as Friend</a>
+	{% endif %}
 	<div class="profile">
+		{% if profile.photo %}
 		<img class="profile-image" src="{{ profile.photo }}">
+		{% else %}
+		<img class="profile-image" src="{{ STATIC }}dp/unknown.jpg">
+		{% endif %}
 		<div class="profile-details">
 			{% if profile.name %}
 			<div class="profile-name">
-				<a href="#" id="link-profile-name">{{ profile.name }}</a>
+				<a id="link-profile-name">{{ profile.name }}</a>
 			</div>
 			{% endif %}
 			{% if profile_user.email %}
@@ -39,10 +47,11 @@
 		<h2>Playlists</h2>
 		<div class="playlists-list list">
 			{% for playlist in playlists %}
-				<div id='list-container'>
-					<a href="#" id="{{ playlist.name }}" class="lists" name="{{ profile.user }}">
+				<div class='list-container'>
+					<a id="{{ playlist.name }}" class="lists" name="{{ profile.user }}">
 						{{ playlist.name }}
-					</a><div class="{{ playlist.name }}" id="hideall"></div>
+					</a>
+					<div class="{{ playlist.name }} hideall"></div>
 				</div>
 			{% else %}
 			<div>User has no playlists.</div>
