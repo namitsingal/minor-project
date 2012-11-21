@@ -270,7 +270,7 @@ function getfriends(){
 			j=j+1;
 			var playlist_name = data.player[i].playlist;
 			//alert(playlist_name);
-			markup = "<div id='list-container'><a href='#' id='"+playlist_name+"' class='lists1'>"+ playlist_name + "</a></div>";
+			markup = "<div id='list-container11'><a href='#' id='"+playlist_name+"' class='lists1'>"+ playlist_name + "</a></div>";
 			$('#playlist1').append(markup);
 
 			}
