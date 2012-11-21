@@ -43,13 +43,14 @@ a.tab-link {
 }
 
 #list-container {
+	margin-left: 220px;
 	border-bottom: 1px;
 	padding-bottom: 10px;
 	margin-top: 30px;
 }
 
 #list-container1 {
-	float: left;
+	margin-left: 220px;
 	border-bottom: 1px;
 	padding-bottom: 0px;
 	margin-top: 30px;	
