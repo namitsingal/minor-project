@@ -101,9 +101,14 @@ a.tab-link {
 #topic-list {
 	display: inline;
 	position: relative;
-	font-size: 18px;
-	left:30%;
+	
+	float:right;
 
+}
+#topic-list1 {
+	display: block;
+	position: relative;
+	
 }
 
 #topic-width {

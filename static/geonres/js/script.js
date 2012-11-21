@@ -149,7 +149,7 @@ function loadDiscussion(genre,name1){
 			markup = "<div id = 'list-container'><a class='lists_discussions111'>"+name1+"</a></div><div id = 'all-comments'>";
 			$('#playlist1').append(markup);
 			for (ii in data.player){
-				markup = "<div id='list-container'>"+ data.player[ii].comment + "</div>";
+				markup = "<div id='list-container'>"+ data.player[ii].comment + '<p id="topic-list1">------comment by '+data.player[ii].by+'--------</p></div>';
 			$('#all-comments').append(markup);
 			}
 			markup = "</div><textarea id = 'comment-discussion' class= 'comment-box'></textarea>"
@@ -211,11 +211,17 @@ function getdiscussions(){
 				data: {name: kk},
 				success: function(data) {
 					requestComplete();
+					var temp=0;
 					for(ii in data.player){
+						temp++;
 						markup="<div id='list-container'>"
 						markup += '<a class="lists_discussions1" name="'+kk+'" href="#" id="'+data.player[ii].title+'"><span id="topic-width">'+data.player[ii].title+'</span><p id="topic-list">started by '+data.player[ii].by+'</p></a></div>';
 						$('#playlist1').append(markup);
 					}		
+					if(temp==0)
+					{	markup= "<p>No Topics Created, Be the First one to create</p>";
+						$('#playlist1').append(markup);
+					}
 					markup = '<a id="newbutton2" href="#" class="buttons1" name="'+kk+'">Create Topic</a>'
 					$('#playlist1').append(markup);
 					$('#newbutton2').click(function(){
@@ -235,11 +241,11 @@ function getdiscussions(){
 			});
 				
 			});
-		markup = '<a id="newbutton1" href="#" class="buttons1" >Create Playlist</a>'
+		markup = '<a id="newbutton1" href="#" class="buttons1" >Create Genre</a>'
 		$('#playlist1').append(markup);
 		$('#newbutton1').click(function(){
 			$('#overlay').css({opacity: 0}).show().animate({opacity: 0.8}, 'fast');
-			$('#playlist-box').css({opacity: 0}).show().animate({opacity: 1}, 'fast');		
+			$('#discussion1-box').css({opacity: 0}).show().animate({opacity: 1}, 'fast');		
 		});
 
 	});
@@ -654,6 +660,51 @@ $('#btn-discussion').click(function(){
 			});
 		}
 	});
+
+	
+
+
+	$('#btn-discussion1').click(function(){
+		//$('#discussion-spinner').css({display: 'block'});
+		$('#discussion1-status').html('');
+		var k=$('#discussion1-name').val();
+		if(k==''||k==null)
+		{	alert('Discussion cannot be empty');
+			return;
+		}
+		else{
+		$('#discussion1-spinner').css({display: 'block'});
+
+		//var na=$('#newbutton2').attr('name');
+		//alert(na);	
+			$.ajax({
+				url: '/users/create_genre',
+				type: 'POST',
+				data: {name: k},
+				success: function(data) {
+					$('#discussion1-spinner').css({display: 'none'});
+					if(data['status'] === 'success') {
+						
+						$('#discussion1-box').animate({opacity: 0}, 'fast', function() {
+						$('#discussion1-box').hide();
+						});
+						$('#overlay').animate({opacity: 0}, 'fast', function() {
+						$('#overlay').hide();
+						});
+						getdiscussions();
+						alert('Genre Created');
+					}
+					else {
+						$('#discussion1-status').html('<span class="login-error">' + data['message'] + '</span>');
+						var x = parseInt($('#discussion1-box').css("height"));
+						if(x<221)
+						$('#discussion1-box').animate({"height": x + 20}, 'fast');
+					}
+				}
+			});
+		}
+	});
+
 
 
 

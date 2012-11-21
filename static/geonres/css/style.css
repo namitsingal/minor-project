@@ -545,6 +545,70 @@ div.dialogue1 {
 
 
 
+#discussion1-box {
+  height: 220px;
+  top: 30%;
+  left: 35%;
+  padding: 10px 40px 20px 40px;
+  background-color: white;
+  border-radius: 2px;
+  z-index: 101;
+}
+
+
+#discussion1-box  input {
+  border: 1px solid #888;
+  padding: 5px 5px 5px 5px;
+  color: #444;
+  font-size: 14px;
+}
+
+
+
+#discussion1-box .input {
+  border: 1px solid #888;
+  padding: 5px 5px 5px 5px;
+  color: #444;
+  font-size: 14px;
+  width: 220px;
+}
+
+#discussion1-box p {
+  font-size: 13px;
+
+}
+
+
+#discussion1-box #btn-discussion {
+  width: 100px;
+  border: 1px solid #999;
+  box-shadow: none;
+  font-size: 14px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+#discussion1-box .spinner {
+  display: none;
+  margin: auto;
+  height: 24px;
+}
+
+.discussion1-error {
+  border: 1px solid #F66;
+  background-color: rgba(100%, 20%, 20%, 0.1);
+  padding: 5px;
+  display: block;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
 #add-song-box {
   height: 200px;
   top: 30%;

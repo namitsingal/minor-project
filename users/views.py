@@ -240,6 +240,24 @@ def create_topic():
         result = {'status': 'success', 'message': 'topic created'}
     return Response(json.dumps(result), mimetype='applications/json')
 
+
+@app.route('/create_genre',methods=['POST'])
+def create_genre():
+    k1 = request.form['name'].lower()
+    k2 = Discussion.query.filter_by(genre=k1).first()
+    if(k2):
+        result = {'status': 'error', 'message': 'Genre Already exists'}
+    else:
+        playlist = Discussion(k1)
+        db.session.add(playlist)
+        db.session.commit()
+        result = {'status': 'success', 'message': 'Discussion created'}
+    return Response(json.dumps(result), mimetype='applications/json')
+
+
+
+
+
 @app.route('/show_topics1',methods=['POST'])
 def show_topics1():
     k=request.form['name'].lower()
