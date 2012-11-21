@@ -286,7 +286,7 @@ def show_profile():
     profile_user = User.query.filter_by(username=user1).first()
     profile = UserProfile.query.filter_by(user=user1).first()
     friends = Friends.query.filter_by(user=user1).distinct().all()
-    playlists = Playlist.query.filter_by(user=user1).distinct().all()
+    playlists = Playlist.query.filter_by(user=user1,id='default').distinct().all()
 
     ctx['friends'] = friends
     ctx['profile'] = profile

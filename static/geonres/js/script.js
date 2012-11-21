@@ -72,13 +72,14 @@ function getplaylist(){
 	$('#playlist1').html('');
 
 	$.get(url,function(data){
+		markup="";
 		for (i in data.player){
 			var playlist_name = data.player[i].playlist;
 			//alert(playlist_name);
-			markup = "=
-			$('#playlist1').append(markup);
-
+			markup += "<div id='list-container'><a href='#' id='"+playlist_name+"' class='lists'>"+ playlist_name + "</a></div>";
+			
 			}
+			$('#playlist1').html(markup);
 
 			$('.lists').click(function(){
 				//alert('I am here');
@@ -90,11 +91,17 @@ function getplaylist(){
 				type: 'POST',
 				data: {name: kk},
 				success: function(data) {
-					
+					var k=0;
 					for(ii in data.player){
+						k++;
 						markup = '<a class="vid-links1" name="'+kk+'" href="#" id="'+data.player[ii].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
 						$('#playlist1').append(markup);
-					}		
+					}	
+					if(k==0)
+					{
+						markup="<div id='list-container1'><p>No Songs in Playlist</p></div>";
+						$('#playlist1').html(markup);
+					}	
 				$('.vid-links1').click(function() {		
 							loadTracks1(this.name,this.id);
 							$('#browse').click();
@@ -268,7 +275,7 @@ function getfriends(){
 				var kk=this.id;
 				//alert(kk);
 				$.ajax({
-				url: '/users/show_profile?id=',
+				url: '/users/show_profile?id='+kk,
 				type: 'GET',
 				success: function(data) {
 					
@@ -439,7 +446,7 @@ function getfind(){
 		getfind();
 	});
 
-	$('#found').append("<p>Enter Name: <input type='text' id='search_name'></input>")
+	$('#playlist1').append("<p>Enter Name: <input type='text' id='search_name'></input><div id = 'found1'></div>")
 	markup = "<div id='list-container1'><p>(Please Enter Name)</p></div>";
 	$('#found1').html(markup);
 	$('#search_name').keyup(function(){
@@ -500,9 +507,9 @@ function getfind(){
 				var kk=this.id;
 				//alert(kk);
 				$.ajax({
-				url: '/users/show_profile',
-				type: 'POST',
-				data: {name: kk},
+				url: '/users/show_profile?id='+kk,
+				type: 'GET',
+				
 				success: function(data) {
 										//for(ii in data.player){
 					//	markup = '<a class="vid-links1" name="'+kk+'" href="#" id="'+data.player[ii].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
