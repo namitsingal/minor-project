@@ -304,6 +304,27 @@ function getfriends(){
 					//	markup = '<a class="vid-links1" name="'+kk+'" href="#" id="'+data.player[ii].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
 					//	$('#playlist1').append(markup);
 					$('#playlist1').html(data);
+
+					$('#btn-add-friend').click(function(){
+						k=this.name;
+						kk=this;
+						//alert($(this).html());
+						//alert(k);
+						requestStart();
+						$.ajax({
+							url:'/users/add_as_friend',
+							type: 'POST',
+							data: {name:k},
+							success: function(data){
+								requestComplete();
+								$(kk).html('Request sent');
+								$('#btn-add-friend').unbind('click');
+								alert('friend request sent');
+							}
+
+							});	
+						});
+
 					$('.lists').click(function(){
 
 				//alert('I am here');
@@ -315,7 +336,7 @@ function getfriends(){
 				type: 'POST',
 				data: {name: kk.id, user1:kk.name},
 				success: function(data) {
-					$("#hideall").html('');
+					$(".hideall").html('');
 					var k=0;
 					for(ii in data.player){
 						k++;
@@ -442,6 +463,61 @@ function getrequests(){
 					//	markup = '<a class="vid-links1" name="'+kk+'" href="#" id="'+data.player[ii].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
 					//	$('#playlist1').append(markup);
 					$('#playlist1').html(data);
+
+
+					$('#btn-add-friend').click(function(){
+						k=this.name;
+						kk=this;
+						//alert($(this).html());
+						//alert(k);
+						requestStart();
+						$.ajax({
+							url:'/users/add_as_friend',
+							type: 'POST',
+							data: {name:k},
+							success: function(data){
+								requestComplete();
+								$(kk).html('Request sent');
+								$('#btn-add-friend').unbind('click');
+								alert('friend request sent');
+							}
+
+							});	
+						});
+					$('.lists').click(function(){
+
+				//alert('I am here');
+				//$('#playlist1').html('');
+				var kk=this;
+				//alert(kk);
+				$.ajax({
+				url: '/users/show_songs',
+				type: 'POST',
+				data: {name: kk.id},
+				success: function(data) {
+					$(".hideall").html('');
+					var k=0;
+					for(ii in data.player){
+						k++;
+						markup = '<a class="vid-links1" name="'+kk.id+'" href="#" id="'+data.player[ii].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
+						$('.'+ kk.id).append(markup);
+					}	
+					//alert(kk.id);
+					if(k==0)
+					{
+						markup="<div id='list-container1'><p>No Songs in Playlist</p></div>";
+						$('.'+kk.name).html(markup);
+					}	
+				$('.vid-links1').click(function() {		
+							loadTracks1(this.name,this.id);
+							$('#browse').click();
+						});
+				//alert('link added');
+				}//loadTracks1
+			});
+				
+			});
+
 					//}		
 				/*$('.vid-links1').click(function() {		
 							loadTracks1(this.name,this.id);
@@ -557,6 +633,7 @@ function getfind(){
 							success: function(data){
 								requestComplete();
 								$(kk).html('Request sent');
+								$(kk).unbind('click');
 								alert('friend request sent');
 							}
 
@@ -582,6 +659,28 @@ function getfind(){
 					//	markup = '<a class="vid-links1" name="'+kk+'" href="#" id="'+data.player[ii].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
 					//	$('#playlist1').append(markup);
 					$('#playlist1').html(data);
+
+					$('#btn-add-friend').click(function(){
+						k=this.name;
+						kk=this;
+						//alert($(this).html());
+						//alert(k);
+						requestStart();
+						$.ajax({
+							url:'/users/add_as_friend',
+							type: 'POST',
+							data: {name:k},
+							success: function(data){
+								requestComplete();
+								$(kk).html('Request sent');
+								$('#btn-add-friend').unbind('click');
+
+								alert('friend request sent');
+							}
+
+							});	
+						});
+
 						$('.lists').click(function(){
 
 				//alert('I am here');
@@ -593,7 +692,7 @@ function getfind(){
 				type: 'POST',
 				data: {name: kk.id, user1:kk.name},
 				success: function(data) {
-					$("#hideall").html('');
+					$(".hideall").html('');
 					var k=0;
 					for(ii in data.player){
 						k++;
@@ -641,6 +740,28 @@ function getprofile(){
 	$.get('/users/show_profile?id=',function(data){
 		requestComplete();
 		$('#playlist1').html(data);
+
+		$('#btn-add-friend').click(function(){
+						k=this.name;
+						kk=this;
+						//alert($(this).html());
+						//alert(k);
+						requestStart();
+						$.ajax({
+							url:'/users/add_as_friend',
+							type: 'POST',
+							data: {name:k},
+							success: function(data){
+								requestComplete();
+								$(kk).html('Request sent');
+								$('#btn-add-friend').unbind('click');
+								alert('friend request sent');
+							}
+
+							});	
+						});
+
+
 		$('.lists').click(function(){
 
 				//alert('I am here');
@@ -652,7 +773,7 @@ function getprofile(){
 				type: 'POST',
 				data: {name: kk.id},
 				success: function(data) {
-					$("#hideall").html('');
+					$(".hideall").html('');
 					var k=0;
 					for(ii in data.player){
 						k++;

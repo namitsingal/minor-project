@@ -289,25 +289,47 @@ def add_comment():
 def show_profile():
     ctx = {'STATIC': '/static/'}
     user1 = request.args['id'];
-
+    tempp=0
     if 'username' in session:
         ctx['user'] = User.query.filter_by(username=session['username']).first()
 
     if user1 == None:
         user1 = session['username']
+        ctx['own'] = 1
 
     elif len(user1) == 0:
         user1 = session['username']
-
+        ctx['own'] = 1
+        tempp=2
+    if(tempp!=2):
+        ctx['user1']=user1
+    ff=session['username']
     profile_user = User.query.filter_by(username=user1).first()
     profile = UserProfile.query.filter_by(user=user1).first()
     friends = Friends.query.filter_by(user=user1).distinct().all()
     playlists = Playlist.query.filter_by(user=user1,id='default').distinct().all()
-
+    if(user1!=ff):
+        fr = Request.query.filter_by(user=session['username'],friend_name=user1).first()
+        fr11 = Request.query.filter_by(user=user1,friend_name=session['username']).first()
+        if fr:
+            request1 = 1
+        else:
+            request1 = 0
+        if(fr11):
+            request1 = 1
+        fr1 = Friends.query.filter_by(user=session['username'],friend_name=user1).first()
+        if fr1:
+            friend = 1
+        else:
+            friend = 0
+        ctx['request'] = request1
+        ctx['friend'] = friend
     ctx['friends'] = friends
     ctx['profile'] = profile
     ctx['profile_user'] = profile_user
     ctx['playlists'] = playlists
+    
+    
 
     template = env.get_template('profile.html')
     rendered = template.render(ctx)

@@ -456,6 +456,12 @@ a.tab-link.pressed {
 	margin: 20px 150px 0 0;
 }
 
+.profile-container #btn-add-friend1 {
+	float: right;
+	margin: 20px 150px 0 0;
+}
+
+
 .profile-container .legend {
 	color: #888;
 	font-size: 13px;
