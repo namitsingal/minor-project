@@ -122,6 +122,9 @@ $(document).ready(function() {
 			$('#discussion-box').animate({opacity: 0}, 'fast', function() {
 				$('#discussion-box').hide();
 			});
+			$('#discussion1-box').animate({opacity: 0}, 'fast', function() {
+				$('#discussion1-box').hide();
+			});
 			$('#add-song-box').animate({opacity: 0}, 'fast', function() {
 				$('#add-song-box').hide();
 			});
