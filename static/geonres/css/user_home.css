@@ -8,8 +8,6 @@ header {
 
 }
 
-
-
 .tab-options {
 	margin-top: 30px;
 	padding: 1px 0px 0px 20px;
@@ -108,7 +106,6 @@ a.tab-link {
 
 }
 
-
 #topic-width {
 	display: inline;
 }
@@ -132,7 +129,6 @@ a.tab-link {
 	line-height: 10px;
 
 }
-
 
 .lists_discussions111 {
 	display: block;
@@ -469,4 +465,13 @@ a.tab-link.pressed {
 
 .clearfix {
 	clear: both;
+}
+
+.input {
+	font-size: 14px;
+	padding: 5px;
+}
+
+.profile-details > div > p {
+	display: inline;
 }

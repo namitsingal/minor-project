@@ -9,18 +9,18 @@
 			</div>
 			{% endif %}
 			{% if profile_user.email %}
-			<div><span class="legend">Email:</span> {{ profile_user.email }}</div>
+			<div><span class="legend">Email </span> {{ profile_user.email }}</div>
 			{% endif %}
 			{% if profile.about %}
 			<div>
-				<span class="legend">About:</span>
+				<span class="legend">About </span>
 				<p>{{ profile.about }}</p>
 			</div>
 			{% endif %}
-			{% if profile.interests %}
+			{% if profile.interest %}
 			<div>
-				<span class="legend">Interests:</span>
-				<p>{{ profile.interests }}</p>
+				<span class="legend">Interests </span>
+				<p>{{ profile.interest }}</p>
 			</div>
 			{% endif %}
 		</div>
