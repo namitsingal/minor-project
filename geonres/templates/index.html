@@ -42,8 +42,8 @@
     <p><img class="spinner" id="login-spinner" src="{{ STATIC }}geonres/img/spinner.gif"/></p>
     <div id="login-status"></div>
     <p>Don't have an account? <a href="#" id="signup">Signup now</a></p>
-    <p>Username<br><input class="input" type="text" size="30" name="username" id="login-email"/></p>
-    <p>Password<br><input class="input" type="password" size="30" name="password" id="login-passwd"/></p>
+    <p><input placeholder="Username" class="input" type="text" size="30" name="username" id="login-email"/></p>
+    <p><input placeholder="Password" class="input" type="password" size="30" name="password" id="login-passwd"/></p>
     <p><a id="btn-login" href="#" class="homepage-button">Login</a></p>
   </div>
 
@@ -51,10 +51,10 @@
 <h2>Register Here</h2>
 <div id="registration-status"></div>
 <form class="registration-form" action="users/register" method="POST" name="registers">
-  <p>Username: <input class="input" type="text" name="username" id="register-uname"></p>
-  <p>Password: <input class="input" type="password" name="passwords" id="register-passwd"></p>
-  <p>Confirm Password: <input class="input" type="password" name="cpassword"></p>
-  <p>Email id: <input type="text" class="input" name="email" id="register-email"></p>
+  <p><input placeholder="Username" class="input" type="text" name="username" id="register-uname"></p>
+  <p><input placeholder="Password(min 8 characters)" class="input" type="password" name="passwords" id="register-passwd"></p>
+  <p><input placeholder="Retype Password" class="input" type="password" name="cpassword"></p>
+  <p><input placeholder="Email Address" type="text" class="input" name="email" id="register-email"></p>
   <p><a id="newbu" href='#' class="buttons" onclick="check()" >Register</a></p>
 </form>
 </div>

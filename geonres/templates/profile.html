@@ -1,0 +1,52 @@
+<div class="profile-container" data-id="{{ profile_user.id }}">
+	<a id="btn-add-friend" href="#" class="homepage-button">Add as Friend</a>
+	<div class="profile">
+		<img class="profile-image" src="{{ profile.photo }}">
+		<div class="profile-details">
+			{% if profile.name %}
+			<div class="profile-name">
+				<a href="#" id="link-profile-name">{{ profile.name }}</a>
+			</div>
+			{% endif %}
+			{% if profile_user.email %}
+			<div><span class="legend">Email:</span> {{ profile_user.email }}</div>
+			{% endif %}
+			{% if profile.about %}
+			<div>
+				<span class="legend">About:</span>
+				<p>{{ profile.about }}</p>
+			</div>
+			{% endif %}
+			{% if profile.interests %}
+			<div>
+				<span class="legend">Interests:</span>
+				<p>{{ profile.interests }}</p>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="friends-container">
+		<h2>Friends</h2>
+		<div class="friends-list list">
+			{% for friend in friends %}
+			{% else %}
+			<div>User has no friends.</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="playlists-container">
+		<h2>Playlists</h2>
+		<div class="playlists-list list">
+			{% for playlist in playlists %}
+				<div id='list-container'>
+					<a href="#" id="{{ playlist.name }}" class="lists">
+						{{ playlist.name }}
+					</a>
+				</div>
+			{% else %}
+			<div>User has no playlists.</div>
+			{% endfor %}
+		</div>
+	</div>
+</div

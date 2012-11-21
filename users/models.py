@@ -41,7 +41,7 @@ class UserProfile(db.Model):
     interest=db.Column(db.String(200))
     name=db.Column(db.String(200))
     about=db.Column(db.String(200))
-    def __init__(self,user,photo,interest,name,about):
+    def __init__(self,user,name,about=None,photo=None,interest=None):
         self.user = user
         self.photo = photo
         self.interest = interest

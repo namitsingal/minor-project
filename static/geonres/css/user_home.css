@@ -46,7 +46,6 @@ a.tab-link {
 
 #list-container {
 	border-bottom: 1px;
-	border-bottom-style: dotted;
 	padding-bottom: 10px;
 	margin-top: 30px;
 	
@@ -55,10 +54,8 @@ a.tab-link {
 #list-container1 {
 	float: left;
 	border-bottom: 1px;
-	border-bottom-style: dotted;
 	padding-bottom: 0px;
-	margin-top: 30px;
-	
+	margin-top: 30px;	
 }
 
 .lists {
@@ -421,4 +418,55 @@ a.tab-link.pressed {
 #header-friend ul li {
 	list-style: none;
 	margin-bottom: 15px;
+}
+
+.profile-image {
+	height: 128px;
+	width: 128px;
+	float: left;
+	border: 2px solid white;
+	box-shadow: 0px 0px 3px #888;
+	margin-right: 10px;
+}
+
+.profile-details {
+	float: left;
+}
+
+.profile-details div, p{
+	margin-bottom: 5px;
+}
+
+.profile-container h2 {
+	padding-bottom: 5px;
+	border-bottom: 1px solid #ccc;
+}
+
+.profile-details .profile-name {
+	font-size: 21px;
+}
+
+.profile-container .list {
+	margin-left: 10px;
+}
+
+.profile-container #btn-add-friend {
+	float: right;
+	margin: 20px 150px 0 0;
+}
+
+.profile-container .legend {
+	color: #888;
+	font-size: 13px;
+}
+
+.profile {
+	float: left;
+	width: 60%;
+	font-size: 16px;
+	color: #444;
+}
+
+.clearfix {
+	clear: both;
 }

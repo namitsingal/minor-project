@@ -75,7 +75,7 @@ function getplaylist(){
 		for (i in data.player){
 			var playlist_name = data.player[i].playlist;
 			//alert(playlist_name);
-			markup = "<div id='list-container'><a href='#' id='"+playlist_name+"' class='lists'>"+ playlist_name + "</a></div>";
+			markup = "=
 			$('#playlist1').append(markup);
 
 			}
@@ -268,9 +268,8 @@ function getfriends(){
 				var kk=this.id;
 				//alert(kk);
 				$.ajax({
-				url: '/users/show_profile',
-				type: 'POST',
-				data: {name: kk},
+				url: '/users/show_profile?id=',
+				type: 'GET',
 				success: function(data) {
 					
 					//for(ii in data.player){
@@ -526,15 +525,11 @@ function getfind(){
 });
 }
 
-
-
 function getprofile(){
-	$.get('/users/show_profile',function(data){
+	$.get('/users/show_profile?id=',function(data){
 		$('#playlist1').html(data);
 	});
 }
-
-
 
 /* Document Init */
 $(document).ready(function() {
@@ -543,7 +538,6 @@ $(document).ready(function() {
 		window.location.replace('/users/logout1');
 	})*/
 
-	
 
 	$('#btn-playlist').click(function(){
 		$('#playlist-spinner').css({display: 'block'});
@@ -581,8 +575,6 @@ $(document).ready(function() {
 			});
 		}
 	});
-
-
 
 $('#btn-discussion').click(function(){
 		//$('#discussion-spinner').css({display: 'block'});
@@ -739,7 +731,6 @@ function loadArtists(callback) {
 	});
 }
 
-
 function getplaylist1() {
 	var url='/users/show_playlist';
 	$('#add-song-box').html('');
@@ -784,7 +775,6 @@ function getplaylist1() {
 		});
 });
 }
-
 
 function loadTracks(callback) {
 	var markup = '';
@@ -866,8 +856,6 @@ function loadTracks(callback) {
 		if(callback) callback();
 	});
 }
-
-
 
 function loadTracks1(name11,idd) {
 	var markup = '';
@@ -956,11 +944,6 @@ function loadTracks1(name11,idd) {
 	}
 });
 }
-
-
-
-
-
 
 function loadMoreTracks() {
 	currentTracksPage++;

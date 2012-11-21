@@ -14,8 +14,6 @@ UPLOAD_FOLDER = '/home/namit/.repo/minor1/static/dp'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-
-
 env = Environment(loader=FileSystemLoader(['users/templates', 'geonres/templates']))
 
 @app.route('/login')
@@ -85,7 +83,6 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 
-
 @app.route('/save_profile',methods=['POST'])
 def save_profile():
     #return 'aaaaa'
@@ -107,7 +104,6 @@ def save_profile():
     db.session.add(k)
     db.session.commit()
     return redirect('/')
-
 
 @app.route('/logout')
 def logout():
@@ -161,7 +157,6 @@ def register_user():
             return Response(json.dumps(result), mimetype='applications/json')
     return Response(json.dumps(result), mimetype='applications/json')
 
-
 @app.route('/add_song' , methods=['POST'])
 def add_song():
     user1 = session['username']
@@ -206,8 +201,6 @@ def show_playlist():
     response_obj = {'player': play}
     return Response(json.dumps(response_obj),mimetype='json')
 
-
-
 @app.route('/show_discussion')
 def show_discussion():
     playlist = Discussion.query.filter_by(name='default').distinct()
@@ -221,8 +214,6 @@ def show_discussion():
     response_obj = {'player': play}
     return Response(json.dumps(response_obj),mimetype='json')
 
-
-
 @app.route('/show_topics',methods=['POST'])
 def show_topics():
     k=request.form['name'].lower()
@@ -234,8 +225,7 @@ def show_topics():
             #play.append({'thumb_url':lists.thumb_url})
             #play.append({'title':lists.title})
     response_obj = {'player': play}
-    return Response(json.dumps(response_obj),mimetype='json')    
-
+    return Response(json.dumps(response_obj),mimetype='json')
 
 @app.route('/create_topic',methods=['POST'])
 def create_topic():
@@ -250,9 +240,7 @@ def create_topic():
         db.session.add(playlist)
         db.session.commit()
         result = {'status': 'success', 'message': 'topic created'}
-    return Response(json.dumps(result), mimetype='applications/json')     
-
-
+    return Response(json.dumps(result), mimetype='applications/json')
 
 @app.route('/show_topics1',methods=['POST'])
 def show_topics1():
@@ -267,9 +255,7 @@ def show_topics1():
             #play.append({'thumb_url':lists.thumb_url})
             #play.append({'title':lists.title})
     response_obj = {'player': play}
-    return Response(json.dumps(response_obj),mimetype='json')    
-
-
+    return Response(json.dumps(response_obj),mimetype='json')
 
 @app.route('/add_comment',methods=['POST'])
 def add_comment():
@@ -283,22 +269,33 @@ def add_comment():
     response_obj = {'user': {'name':user1}}
     return Response(json.dumps(response_obj),mimetype='json')    
 
-
-@app.route('/show_profile',methods=['POST'])
-def show_profile():
-    user1=request.form['name'];
-    s=UserProfile.query.filter_by(user=user1).first()
-    return '<image src="'+s.photo+'">';
-
 @app.route('/show_profile')
-def show_my_profile():
-    user1=   session['username'];
-    s=UserProfile.query.filter_by(user=user1).first()
-    response = '<image src="'+s.photo+'" height = "350px" width="266px"> '
-    response = response + '<p> Name: ' + s.name + '</p>'
-    response = response + '<p> Interest: ' + s.interest + '</p>'
-    response = response + '<p> About Me: ' + s.about + '</p>'
-    return response;
+def show_profile():
+    ctx = {'STATIC': '/static/'}
+    user1 = request.args['id'];
+
+    if 'username' in session:
+        ctx['user'] = User.query.filter_by(username=session['username']).first()
+
+    if user1 == None:
+        user1 = session['username']
+
+    elif len(user1) == 0:
+        user1 = session['username']
+
+    profile_user = User.query.filter_by(username=user1).first()
+    profile = UserProfile.query.filter_by(user=user1).first()
+    friends = Friends.query.filter_by(user=user1).distinct().all()
+    playlists = Playlist.query.filter_by(user=user1).distinct().all()
+
+    ctx['friends'] = friends
+    ctx['profile'] = profile
+    ctx['profile_user'] = profile_user
+    ctx['playlists'] = playlists
+
+    template = env.get_template('profile.html')
+    rendered = template.render(ctx)
+    return rendered
 
 @app.route('/show_friends')
 def show_friends():
@@ -312,8 +309,6 @@ def show_friends():
         play.append({'playlist':lists})
     response_obj = {'player': play}
     return Response(json.dumps(response_obj),mimetype='json')
-
-
 
 @app.route('/show_people',methods=['POST'])
 def show_people():
@@ -343,7 +338,6 @@ def show_people():
     response_obj = {'player': play}
     return Response(json.dumps(response_obj),mimetype='json')
 
-
 @app.route('/show_requests')
 def show_requests():
     playlist = Request.query.filter_by(user=session['username']).distinct()
@@ -357,8 +351,6 @@ def show_requests():
     response_obj = {'player': play}
     return Response(json.dumps(response_obj),mimetype='json')
 
-
-
 @app.route('/show_songs',methods=['POST'])
 def show_songs():
     k=request.form['name'].lower()
@@ -370,12 +362,7 @@ def show_songs():
             #play.append({'thumb_url':lists.thumb_url})
             #play.append({'title':lists.title})
     response_obj = {'player': play}
-    return Response(json.dumps(response_obj),mimetype='json')    
-
-
-
-
-
+    return Response(json.dumps(response_obj),mimetype='json')
 
 @app.route('/add_as_friend',methods=['POST'])
 def add_as_friend():
@@ -389,7 +376,6 @@ def add_as_friend():
     db.session.commit()
     result = {'status': 'success', 'message': 'friend request sent'}
     return Response(json.dumps(result),mimetype='json')    
-
 
 @app.route('/addfriend',methods=['POST'])
 def addfriend():
@@ -407,8 +393,6 @@ def addfriend():
     result = {'status': 'success', 'message': 'friend request rejected'}
     return Response(json.dumps(result),mimetype='json')    
 
-
-
 @app.route('/rejectfriend',methods=['POST'])
 def rejectfriend():
     k = request.form['name'].lower()
@@ -417,10 +401,6 @@ def rejectfriend():
     db.session.delete(ss)
     db.session.commit()
     result = {'status': 'success', 'message': 'friend request rejected'}
-    return Response(json.dumps(result),mimetype='json')    
-
-
-
-
+    return Response(json.dumps(result),mimetype='json')
 
 app.secret_key='\xe6m\x897\xeec\x88\x9e\xc8\xdd\x99\xd2\xec\xf0\x0f\x88\x00\x00psb\x10'

@@ -7,12 +7,13 @@
 
 {% block content %}
 <div id="main">
+	<h2>Login</h2>
 	{% if error %}
 	<p><span class="login-error">{{ error }}</span></p>
 	{% endif %}
 	<form action="login" method="POST" class="registration-form">
-		<p>Email: <input class="input" type="text" name="username"></input></p>
-		<p>Password: <input class="input" type="password" name="password"></input></p>
+		<p><input placeholder="Username" class="input" type="text" name="username"></input></p>
+		<p><input placeholder="Password" class="input" type="password" name="password"></input></p>
 		<p><input class="button" type="submit" name="submit" /></p>
 	</form>
 </div>
