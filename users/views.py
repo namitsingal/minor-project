@@ -382,6 +382,42 @@ def show_songs():
     response_obj = {'player': play}
     return Response(json.dumps(response_obj),mimetype='json')
 
+@app.route('/show_songs1',methods=['POST'])
+def show_songs1():
+    k=request.form['name'].lower()
+    user1=request.form['user1'].lower()
+    playlist = Playlist.query.filter_by(user=user1,name=k).distinct()
+    play=[]
+    for lists in playlist:
+        if(lists.id!='default'):
+            play.append({'id':lists.id,'thumb_url':lists.thumb_url,'title':lists.title})
+            #play.append({'thumb_url':lists.thumb_url})
+            #play.append({'title':lists.title})
+    response_obj = {'player': play}
+    return Response(json.dumps(response_obj),mimetype='json')
+
+
+
+
+
+
+@app.route('/show_songs1',methods=['POST'])
+def show_songs1():
+    k=request.form['name'].lower()
+    user1=request.form['user1'].lower()
+    playlist = Playlist.query.filter_by(user=user1,name=k).distinct()
+    play=[]
+    for lists in playlist:
+        if(lists.id!='default'):
+            play.append({'id':lists.id,'thumb_url':lists.thumb_url,'title':lists.title})
+            #play.append({'thumb_url':lists.thumb_url})
+            #play.append({'title':lists.title})
+    response_obj = {'player': play}
+    return Response(json.dumps(response_obj),mimetype='json')
+
+
+
+
 @app.route('/add_as_friend',methods=['POST'])
 def add_as_friend():
     k = request.form['name'].lower()

@@ -40,9 +40,9 @@
 		<div class="playlists-list list">
 			{% for playlist in playlists %}
 				<div id='list-container'>
-					<a href="#" id="{{ playlist.name }}" class="lists">
+					<a href="#" id="{{ playlist.name }}" class="lists" name="{{ profile.user }}">
 						{{ playlist.name }}
-					</a>
+					</a><div class="{{ playlist.name }}" id="hideall"></div>
 				</div>
 			{% else %}
 			<div>User has no playlists.</div>

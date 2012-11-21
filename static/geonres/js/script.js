@@ -288,6 +288,40 @@ function getfriends(){
 					//	markup = '<a class="vid-links1" name="'+kk+'" href="#" id="'+data.player[ii].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
 					//	$('#playlist1').append(markup);
 					$('#playlist1').html(data);
+					$('.lists').click(function(){
+
+				//alert('I am here');
+				//$('#playlist1').html('');
+				var kk=this;
+				//alert(kk);
+				$.ajax({
+				url: '/users/show_songs1',
+				type: 'POST',
+				data: {name: kk.id, user1:kk.name},
+				success: function(data) {
+					$("#hideall").html('');
+					var k=0;
+					for(ii in data.player){
+						k++;
+						markup = '<a class="vid-links1" name="'+kk.id+'" href="#" id="'+data.player[ii].id+'" data-url="'+kk.name+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
+						$('.'+ kk.id).append(markup);
+					}	
+					//alert(kk.id);
+					if(k==0)
+					{
+						markup="<div id='list-container1'><p>No Songs in Playlist</p></div>";
+						$('.'+kk.name).html(markup);
+					}	
+				$('.vid-links1').click(function() {		
+							//alert(this.getAttribute('data-url'));
+							loadTracks111(this.name,this.id,this.getAttribute('data-url'));
+							$('#browse').click();
+						});
+				//alert('link added');
+				}//loadTracks1
+			});
+				
+			});
 					//}		
 				/*$('.vid-links1').click(function() {		
 							loadTracks1(this.name,this.id);
@@ -520,6 +554,43 @@ function getfind(){
 					//	markup = '<a class="vid-links1" name="'+kk+'" href="#" id="'+data.player[ii].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
 					//	$('#playlist1').append(markup);
 					$('#playlist1').html(data);
+						$('.lists').click(function(){
+
+				//alert('I am here');
+				//$('#playlist1').html('');
+				var kk=this;
+				//alert(kk);
+				$.ajax({
+				url: '/users/show_songs1',
+				type: 'POST',
+				data: {name: kk.id, user1:kk.name},
+				success: function(data) {
+					$("#hideall").html('');
+					var k=0;
+					for(ii in data.player){
+						k++;
+						markup = '<a class="vid-links1" name="'+kk.id+'" href="#" id="'+data.player[ii].id+'" data-url="'+kk.name+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
+						$('.'+ kk.id).append(markup);
+					}	
+					//alert(kk.id);
+					if(k==0)
+					{
+						markup="<div id='list-container1'><p>No Songs in Playlist</p></div>";
+						$('.'+kk.name).html(markup);
+					}	
+				$('.vid-links1').click(function() {		
+							//alert(this.getAttribute('data-url'));
+							loadTracks111(this.name,this.id,this.getAttribute('data-url'));
+							$('#browse').click();
+						});
+				//alert('link added');
+				}//loadTracks1
+			});
+				
+			});	
+
+
+
 					//}		
 				/*$('.vid-links1').click(function() {		
 							loadTracks1(this.name,this.id);
@@ -540,6 +611,39 @@ function getfind(){
 function getprofile(){
 	$.get('/users/show_profile?id=',function(data){
 		$('#playlist1').html(data);
+		$('.lists').click(function(){
+
+				//alert('I am here');
+				//$('#playlist1').html('');
+				var kk=this;
+				//alert(kk);
+				$.ajax({
+				url: '/users/show_songs',
+				type: 'POST',
+				data: {name: kk.id},
+				success: function(data) {
+					$("#hideall").html('');
+					var k=0;
+					for(ii in data.player){
+						k++;
+						markup = '<a class="vid-links1" name="'+kk.id+'" href="#" id="'+data.player[ii].id+'"><div class="vid-item"><img class="vid-thumb" src="'+data.player[ii].thumb_url+'"><p class="vid-title">'+data.player[ii].title+'</p><img class="play-icon" src="/static/geonres/img/play.png"></div></a>';
+						$('.'+ kk.id).append(markup);
+					}	
+					//alert(kk.id);
+					if(k==0)
+					{
+						markup="<div id='list-container1'><p>No Songs in Playlist</p></div>";
+						$('.'+kk.name).html(markup);
+					}	
+				$('.vid-links1').click(function() {		
+							loadTracks1(this.name,this.id);
+							$('#browse').click();
+						});
+				//alert('link added');
+				}//loadTracks1
+			});
+				
+			});
 	});
 }
 
@@ -1001,6 +1105,97 @@ function loadTracks1(name11,idd) {
 	}
 });
 }
+
+function loadTracks111(name11,idd,user) {
+	var markup = '';
+	var markup1 = '';
+	
+	$.ajax({
+				url: '/users/show_songs1',
+				type: 'POST',
+				data: {name: name11, user1:user},
+				success: function(data) {
+					$('#videolist').html('');
+		for(i in data.player) {
+			var item = data.player[i];
+			markup1 = '<div style="border: 1px solid rgb(0, 0, 0); padding: 10px; display: none; position: absolute; background-color: rgb(238, 238, 238);" class="menu" id="' + item.id + '">Add to playlist</div>';
+			markup = '<a class="vid-links" href="#" id="' + item.id + '">' +
+				'<div class="vid-item">' +
+					'<img class="vid-thumb" src="'+ item.thumb_url + '" id="'+item.id+'" />' + 
+					'<p class="vid-title" id="'+item.id+'">' + item.title+ '</p>' + 
+					'<img class="play-icon play-icon-hidden" src="' + staticUrl + 'img/play.png"/>' +
+				'</div>' +
+			'</a>';
+
+					$('#videolist').append(markup);
+		$('#videolist').append(markup1);
+
+		$('#'+item.id+'.menu').click(function(){
+
+
+
+			var k = this;
+			//alert(k.id);
+			$.get('/users/check', function(data) {
+				if(data=='true')
+					{	
+						console.log('logged in');
+						add_url = $('#'+k.id+'.vid-thumb').attr("src");
+						add_title  = $('#'+k.id +'.vid-title').html();
+						add_id = k.id;
+						$('#add-song-box').html('');
+						$('#overlay').css({opacity: 0}).show().animate({opacity: 0.8}, 'fast');
+						
+						$('#add-song-box').css({opacity: 0}).show().animate({opacity: 1}, 'fast');
+						getplaylist1();
+						
+						//alert(title);
+						//alert(this.id);
+						//alert($("#"+this.id+".vid-links").children('.vid-item').children('.vid-thumb')['src']);
+					}
+				else
+				{
+					$('#btn-homepage-login').click();
+				}
+			});
+
+
+		});
+
+		}
+		$('#videolist .spinner-icon').addClass('spinner-icon-hidden');
+		document.getElementById('videolist').scrollTop = 0;
+		$('.vid-links').bind("contextmenu", function(e) {
+			$('.menu').hide();
+			add_id=this.id;
+			$('#add-song-box').animate({"height": parseInt(250)}, 'fast');
+		
+    	$('#'+this.id+'.menu').css({
+        	top: e.pageY+'px',
+        	left: e.pageX+'px'
+    	}).show();
+
+    	return false;
+
+	});
+
+
+		$('.vid-links').click(function() {
+			$('#videolist .play-icon').addClass('play-icon-hidden');
+			$(this).children('.vid-item').children('.play-icon').removeClass('play-icon-hidden');
+			nowplayingid = this.id;
+			ytplayer.loadVideoById(nowplayingid);
+			$('#watch-video').click();
+		});
+
+		//if(callback) callback();
+		$('#'+idd+'.vid-links').click()
+	}
+});
+}
+
+
+
 
 function loadMoreTracks() {
 	currentTracksPage++;
