@@ -1,9 +1,9 @@
 <div class="profile-container" data-id="{{ profile_user.id }}">
 	{% if is_self %}
-	<a id="btn-edit-profile" class="profile-button homepage-button">Edit</a>
+	<a id="btn-edit-profile" class="profile-button homepage-button">Edit Profile</a>
 	{% else %}
 		{% if request %}
-		<a id="btn-add-friend1"  class="homepage-button">request sent</a>
+		<a id="btn-add-friend1"  class="homepage-button">Request Sent</a>
 		{% elif friend %}
 		{% else %}
 		<a id="btn-add-friend" name="{{ user1 }}"  class="profile-button homepage-button">Add as Friend</a>
@@ -43,6 +43,7 @@
 		<h2>Friends</h2>
 		<div class="friends-list list">
 			{% for friend in friends %}
+			<a id="{{ friend.friend_name }}" class="lists1">{{ friend.friend_name }}</a>
 			{% else %}
 			<div>User has no friends.</div>
 			{% endfor %}

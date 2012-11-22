@@ -12,7 +12,8 @@ class api_response(Response):
         super(api_response, self).__init__(*args, **kwargs)
 
         if format == 'xml':
-        	self.data = encode_xml(response_obj)
+        	self.data = '<?xml version="1.0" encoding="UTF-8"?>' + (
+        		encode_xml(response_obj))
         	self.mimetype = 'text/xml'
     	else:
         	self.data = encode_json(response_obj)

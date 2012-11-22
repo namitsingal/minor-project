@@ -246,12 +246,12 @@ function getdiscussions(){
 
 }
 
-function getfriends(){
+function getfriends(element){
 	var url='/users/show_friends';
 	$('#playlist1').html(friendHeader);
 
 	$('#friend-container').click(function(){
-		getfriends();
+		getfriends($('#playlist1'));
 	});
 	
 	$('#request-container').click(function(){
@@ -271,15 +271,15 @@ function getfriends(){
 			var playlist_name = data.player[i].playlist;
 			//alert(playlist_name);
 			markup = "<div id='list-container'><a href='#' id='"+playlist_name+"' class='lists1'>"+ playlist_name + "</a></div>";
-			$('#playlist1').append(markup);
+			element.append(markup);
 
 			}
 			if(j==1){
 			markup = "<div id='list-container1'><p>No Friends</p></div>";
-			$('#playlist1').append(markup);
+			element.append(markup);
 			}
 
-			$('.lists1').click(function(){
+			$('body').delegate('.lists1', 'click', function(){
 				//alert('I am here');
 				$('#playlist1').html('');
 				var kk=this.id;
@@ -375,7 +375,7 @@ function getrequests(){
 	$('#playlist1').html(friendHeader);
 
 	$('#friend-container').click(function(){
-		getfriends();
+		getfriends($('#playlist1'));
 	});
 	
 	$('#request-container').click(function(){
@@ -558,7 +558,7 @@ function getfind(){
 	$('#playlist1').html(friendHeader);
 
 	$('#friend-container').click(function(){
-		getfriends();
+		getfriends($('#playlist1'));
 	});
 	
 	$('#request-container').click(function(){
@@ -931,7 +931,7 @@ $('#btn-discussion').click(function(){
 		$('#tab-browse').css({visibility: 'hidden'});
 		$('#playlist1').animate({opacity:1},1);
 		$('#playlist1').show();
-		getfriends();
+		getfriends($('#playlist1'));
 	});
 
 	$('#browse').click(function(){
@@ -940,7 +940,6 @@ $('#btn-discussion').click(function(){
 		$('#playlist1').hide();
 
 	});
-
 
 	$('#profile').click(function(){
 		$('#tab-browse').css({visibility: 'hidden'});
@@ -987,10 +986,12 @@ $('#btn-discussion').click(function(){
 
 function loadArtists(callback) {
 	var markup = '';
-	var url = '/api/artists/' + encodeURI(country) + '/' + currentArtistsPage + '?format=json';
+	var url = '/api/artists/' + encodeURI(country) + '/' + currentArtistsPage + '?format=xml';
 	$.get(url, function(data) {
-		for(i in data.artists) {
-			var artist_name = data.artists[i].name;
+		var elements = data.getElementsByTagName('item');
+		for(var i=0, j=elements.length; i<j; i++) {
+			var element = elements[i];
+			var artist_name = element.getElementsByTagName('name')[0].childNodes[0].nodeValue;
 			markup += '<a href=#" id="' + artist_name +'" class="artist-link">' +
 				'<div class="artist-item">' +
 					'<p class="artist-title">' + artist_name + '</p>' +
@@ -1006,9 +1007,12 @@ function loadArtists(callback) {
 	
 		$('.artist-link').click(function() {
 			artist = this.id;
-			$.get('/api/details/artist/' + encodeURI(artist) + '?format=json', function(data) {
-				$('#artist-bio').html(('<img class="artist-bio-image vid-thumb" src="' + data['details']['image_large'] + '">' +
-					'<p>' + data['details']['bio'] + '</p>'));
+			$.get('/api/details/artist/' + encodeURI(artist) + '?format=xml', function(data) {
+				var large_image = data.getElementsByTagName('image_large')[0].childNodes[0].nodeValue;
+				var small_image = data.getElementsByTagName('image_small')[0].childNodes[0].nodeValue;
+				var bio = data.getElementsByTagName('bio')[0].childNodes[0].nodeValue;
+				$('#artist-bio').html(('<img class="artist-bio-image vid-thumb" src="' + large_image + '">' +
+					'<p>' + bio + '</p>'));
 			});
 		
 			$('#videolist').html('<img src="' + staticUrl + 'img/spinner.gif" class="spinner-icon spinner-icon-hidden"/>');
@@ -1077,15 +1081,21 @@ function getplaylist1() {
 function loadTracks(callback) {
 	var markup = '';
 	var markup1 = '';
-	var url = '/api/videos/' + encodeURI(artist) + '/' + currentTracksPage + '?format=json';
+	var url = '/api/videos/' + encodeURI(artist) + '/' + currentTracksPage + '?format=xml';
 	$.get(url, function(data) {
-		for(i in data.videos) {
-			var item = data.videos[i];
-			markup1 = '<div style="border: 1px solid rgb(0, 0, 0); padding: 10px; display: none; position: absolute; background-color: rgb(238, 238, 238);" class="menu" id="' + item.id + '">Add to playlist</div>';
-			markup = '<a class="vid-links" href="#" id="' + item.id + '">' +
+		var elements = data.getElementsByTagName('item');
+		for(var i=0, j=elements.length; i<j; i++) {
+
+			var element = elements[i];
+			var title = element.getElementsByTagName('title')[0].childNodes[0].nodeValue;
+			var id = element.getElementsByTagName('id')[0].childNodes[0].nodeValue;
+			var thumb_url = element.getElementsByTagName('thumb_url')[0].childNodes[0].nodeValue;
+
+			markup1 = '<div style="border: 1px solid rgb(0, 0, 0); padding: 10px; display: none; position: absolute; background-color: rgb(238, 238, 238);" class="menu" id="' + id + '">Add to playlist</div>';
+			markup = '<a class="vid-links" href="#" id="' + id + '">' +
 				'<div class="vid-item">' +
-					'<img class="vid-thumb" src="'+ item.thumb_url + '" id="'+item.id+'" />' + 
-					'<p class="vid-title" id="'+item.id+'">' + item.title+ '</p>' + 
+					'<img class="vid-thumb" src="'+ thumb_url + '" id="' + id + '" />' + 
+					'<p class="vid-title" id="'+ id + '">' + title+ '</p>' + 
 					'<img class="play-icon play-icon-hidden" src="' + staticUrl + 'img/play.png"/>' +
 				'</div>' +
 			'</a>';
@@ -1093,7 +1103,7 @@ function loadTracks(callback) {
 					$('#videolist').append(markup);
 		$('#videolist').append(markup1);
 
-		$('#'+item.id+'.menu').click(function(){
+		$('#'+ id + '.menu').click(function(){
 
 			var k = this;
 			//alert(k.id);

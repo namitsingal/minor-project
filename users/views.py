@@ -309,6 +309,22 @@ def show_profile():
     profile_user = User.query.filter_by(username=user1).first()
     profile = UserProfile.query.filter_by(user=user1).first()
     friends = Friends.query.filter_by(user=user1).distinct().all()
+
+    """ for friend in friends:
+        profile = UserProfile.query.filter_by(user=user1).first()
+
+        if profile == None:
+            name = friend.username
+            picture = '/static/dp/unknown.jpg'
+
+        elif profile.name == None:
+            name = friend.username
+
+        else:
+            name = profile.name
+
+        friends.append({'name': })
+    """
     playlists = Playlist.query.filter_by(user=user1,id='default').distinct().all()
     if(user1!=ff):
         fr = Request.query.filter_by(user=session['username'],friend_name=user1).first()
@@ -331,8 +347,6 @@ def show_profile():
     ctx['profile_user'] = profile_user
     ctx['playlists'] = playlists
     
-    
-
     template = env.get_template('profile.html')
     rendered = template.render(ctx)
     return rendered
