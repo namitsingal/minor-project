@@ -13,9 +13,10 @@
 {% endif %}
 <div id="registration-status"></div>
 <form class="registration-form" enctype='multipart/form-data' action="save_profile" method="POST">
-	<p><input {% if profile.name %}value="{{ profile.name }}"{% endif %} type="text"  class="input" name="name" placeholder="Full name"/></input></p>
-	<p class='interest'><textarea placeholder="Something brief about you" name = "aboutme" class='input'>{% if profile.about %}{{ profile.about }}{% endif %}</textarea></p>
-	<p class='interest'><textarea placeholder="Your interests(like Rock, Pop, etc)" name = "interest" class='input'>{% if profile.interest %}{{ profile.interest }}{% endif %}</textarea></p>
+	{% if profile %}
+	<p>Full Name:<input {% if profile.name %}value="{{ profile.name }}"{% endif %} type="text"  class="input pro naa" name="name" placeholder="Full name"/></input></p>
+	<p class='interest'>About you: <textarea placeholder="Something brief about you" name = "aboutme" class='input pro'>{% if profile.about %}{{ profile.about }}{% endif %}</textarea></p>
+	<p class='interest'>Interest<textarea placeholder="Your interests(like Rock, Pop, etc)" name = "interest" class='input pro'>{% if profile.interest %}{{ profile.interest }}{% endif %}</textarea></p>
 	<div class="profile-edit-form">Profile Pic <br>
 		{% if profile.photo %}
 		<img class="profile-image" src="{{ profile.photo }}">
@@ -24,6 +25,18 @@
 		{% endif %}
 		<br>
 		<input type="file" name="photo"/>
+	{% else %}
+	<p>Full Name:<input type="text"  class="input pro naa" name="name" placeholder="Full name"/></input></p>
+	<p class='interest'>Something about you<textarea placeholder="Something brief about you" name = "aboutme" class='input pro'>
+	</textarea></p>
+	<p class='interest'>Interest<textarea placeholder="Your interests(like Rock, Pop, etc)" name = "interest" class='input pro'>
+	</textarea></p>
+	<div class="profile-edit-form">Profile Pic <br>
+	<img class="profile-image" src="{{ STATIC }}dp/unknown.jpg">
+    <br>
+		<input type="file" name="photo"/>
+	{% endif %}
+
 	<p><input type="submit" class="button" name="submit" value="Save"/></p>
 </form>
 {% endblock %}

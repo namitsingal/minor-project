@@ -86,12 +86,13 @@
             <p><input id="newbu" value="Register" type= "submit" class="buttons" name="submit" onclick="return check();" ></input></p>
           </form>
         </div>
-
+        {% if imp %}
+        {% else %}
         <div id="user-panel">
           <a href="#" id="btn-homepage-login" class="homepage-button" style="z-index:90;">Login/Register</a>
 
         </div>
-
+        {% endif %}
       {% endif %}
     </header>
     <div id="container">

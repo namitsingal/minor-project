@@ -122,6 +122,7 @@ def registration_page():
 
     if profile != None:
         ctx['profile'] = profile
+        ctx['imp'] = 1
 
     rendered = template.render(ctx)
     return rendered
