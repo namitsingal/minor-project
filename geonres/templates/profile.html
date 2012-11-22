@@ -10,6 +10,7 @@
 		{% endif %}
 	{% endif %}
 	<div class="profile">
+	{% if profile %}
 		{% if profile.photo %}
 		<img class="profile-image" src="{{ profile.photo }}">
 		{% else %}
@@ -37,6 +38,9 @@
 			</div>
 			{% endif %}
 		</div>
+	{% else %}
+		<div>Profile Information is not set.</div>
+	{% endif %}
 	</div>
 	<div class="clearfix"></div>
 	<div class="friends-container">
