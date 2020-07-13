@@ -1,3 +1,7 @@
+Description
+-----------
+This tool allows user to create playlist out of youtube videos. At the time of building this, youtube did not allow us to create playlists and add songs. You can browse through different youtube videos as the songs play in background.
+
 Instructions
 ------------
 
